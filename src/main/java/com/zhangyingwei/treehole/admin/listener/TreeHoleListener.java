@@ -1,6 +1,6 @@
 package com.zhangyingwei.treehole.admin.listener;
 
-import com.zhangyingwei.treehole.admin.log.LogHandler;
+import com.zhangyingwei.treehole.log.LogHandler;
 import com.zhangyingwei.treehole.common.ApplicationContextProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

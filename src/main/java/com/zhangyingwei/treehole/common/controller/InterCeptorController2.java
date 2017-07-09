@@ -1,7 +1,7 @@
 package com.zhangyingwei.treehole.common.controller;
 
-import com.zhangyingwei.treehole.admin.log.LogHandler;
-import com.zhangyingwei.treehole.admin.log.model.LogModel;
+import com.zhangyingwei.treehole.log.LogHandler;
+import com.zhangyingwei.treehole.log.model.LogModel;
 import com.zhangyingwei.treehole.common.ApplicationContextProvider;
 import com.zhangyingwei.treehole.common.TreeHoleEnum;
 import com.zhangyingwei.treehole.common.annotation.TreeHoleAtcion;

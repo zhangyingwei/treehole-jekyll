@@ -1,6 +1,5 @@
-package com.zhangyingwei.treehole.admin.log.model;
+package com.zhangyingwei.treehole.log.model;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 

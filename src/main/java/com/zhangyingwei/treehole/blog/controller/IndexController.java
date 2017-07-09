@@ -4,11 +4,13 @@ import com.zhangyingwei.treehole.admin.model.Article;
 import com.zhangyingwei.treehole.admin.service.ArticleService;
 import com.zhangyingwei.treehole.admin.service.BlogManagerService;
 import com.zhangyingwei.treehole.blog.model.BlogPage;
+import com.zhangyingwei.treehole.blog.model.Page;
+import com.zhangyingwei.treehole.blog.model.Site;
 import com.zhangyingwei.treehole.common.Pages;
-import com.zhangyingwei.treehole.common.TreeHoleEnum;
 import com.zhangyingwei.treehole.common.annotation.TreeHoleAtcion;
 import com.zhangyingwei.treehole.common.config.TreeHoleConfig;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
+import com.zhangyingwei.treehole.common.utils.DateUtils;
 import com.zhangyingwei.treehole.common.utils.TreeHoleConfigUtils;
 import com.zhangyingwei.treehole.install.model.BlogConf;
 import org.slf4j.Logger;
@@ -48,14 +50,14 @@ public class IndexController {
     @GetMapping("/articles")
     @TreeHoleAtcion("打开博客首页")
     public String indexArticles(Map<String, Object> model) throws TreeHoleException {
-        //加载配置信息
+        //加载site信息
         model.put("site", this.getSiteConfig());
+        //加载page信息
+        model.put("pages", this.getPages());
         //加载博客信息
         model.put("blog", this.getBlogInfo());
         //加载主题信息
         model.put("theme", this.getThemeInfo());
-        //加载page信息
-        model.put("page", this.getPageInfo());
         //加载文章信息
         model.put("posts", this.getPosts());
         return Pages.blog(treeHoleConfig, Pages.BLOG_THEME_INDEX);
@@ -123,14 +125,22 @@ public class IndexController {
      * @throws TreeHoleException
      */
     public Map<String,Object> getSiteConfig() throws TreeHoleException {
-        Map<String, Object> siteConfig = new HashMap<String,Object>();
+        Site site = new Site();
         try {
-            siteConfig = TreeHoleConfigUtils.readThremeYmlConfig(treeHoleConfig);
+            List<Article> posts = this.articleService.getPosts();
+            site.setTime(DateUtils.now());
+            site.setPosts(posts);
+            site.setPages(posts);
+            site.setRelatedPosts(new ArrayList());//这里是首页，所以不会有相关文章
+            site.setCategories(new ArrayList()); //这里假设只有在分类页面才会有这个属性
+            site.setTags(new ArrayList()); //这里假设在标签页面才有这个属性
+            Map siteConfig = TreeHoleConfigUtils.readThremeYmlConfig(treeHoleConfig);
+            site.setConfigs(siteConfig);
         } catch (FileNotFoundException e) {
             logger.error(e.getLocalizedMessage());
             throw new TreeHoleException("主题配置文件未找到");
         }
-        return siteConfig;
+        return site.bulid();
     }
 
     /**
@@ -156,8 +166,16 @@ public class IndexController {
      * 构造page信息
      * @return
      */
-    public BlogPage getPageInfo() {
-        return new BlogPage();
+    public Page getPageInfo() {
+        Page page = new Page();
+        return page;
+    }
+
+    private List<Page> getPages() throws TreeHoleException {
+        List<Page> pages = new ArrayList<Page>();
+        List<Article> posts = this.articleService.getPosts();
+        posts.stream().map(post -> post.toPage())
+        return null;
     }
 
     /**

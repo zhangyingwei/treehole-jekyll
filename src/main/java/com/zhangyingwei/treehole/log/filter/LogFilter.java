@@ -1,6 +1,6 @@
-package com.zhangyingwei.treehole.admin.log.filter;
+package com.zhangyingwei.treehole.log.filter;
 
-import com.zhangyingwei.treehole.admin.log.model.LogModel;
+import com.zhangyingwei.treehole.log.model.LogModel;
 
 /**
  * Created by zhangyw on 2017/6/16.

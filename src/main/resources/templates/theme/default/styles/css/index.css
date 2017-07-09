@@ -5392,7 +5392,7 @@ button.close {
  * Footer
  * Social buttons
  * Homepage
- * Page headers
+ * BlogPage headers
  * Old docs callout
  * Ads
  * Side navigation
@@ -6318,7 +6318,7 @@ hr {
   color: #b9c8e0;
   background-color: #1d365d;
 }
-/* Page headers */
+/* BlogPage headers */
 .docs-header {
   padding: 30px 15px 50px;
   /* side padding builds on .container 15px, so 30px */

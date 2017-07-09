@@ -1,6 +1,6 @@
-package com.zhangyingwei.treehole.admin.log.executer;
+package com.zhangyingwei.treehole.log.executer;
 
-import com.zhangyingwei.treehole.admin.log.model.LogModel;
+import com.zhangyingwei.treehole.log.model.LogModel;
 import com.zhangyingwei.treehole.common.exception.TreeHoleLogException;
 import com.zhangyingwei.treehole.common.utils.TreeHoleUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * 日志处理类
  */
 @Component
-public class DefaultLogExecuter implements LogExecuter {
+public class ArticleIdLogExecuter implements LogExecuter {
 
     /**
      * 处理日志的方法
@@ -23,13 +23,9 @@ public class DefaultLogExecuter implements LogExecuter {
         //获取ip地址的位置信息
         if(StringUtils.isNotEmpty(log.getIp())){
             try {
-                if (log.getUri().startsWith("/articles/")) {
-                    String[] uris = log.getUri().split("/");
-                    String id = uris[uris.length - 1];
-                    log.setAction(log.getAction() + "[" + id + "]");
-                }
+                log.setIp_location(TreeHoleUtils.ipLocal(log.getIp()));
             } catch (Exception e) {
-                throw new TreeHoleLogException("获取文章编号错误");
+                throw new TreeHoleLogException("获取 ip 物理位置错误: " + log.getIp());
             }
         }
         return log;

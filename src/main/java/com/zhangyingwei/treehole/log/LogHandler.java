@@ -1,6 +1,6 @@
-package com.zhangyingwei.treehole.admin.log;
+package com.zhangyingwei.treehole.log;
 
-import com.zhangyingwei.treehole.admin.log.model.LogModel;
+import com.zhangyingwei.treehole.log.model.LogModel;
 import com.zhangyingwei.treehole.common.ApplicationContextProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

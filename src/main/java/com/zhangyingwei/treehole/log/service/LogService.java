@@ -1,9 +1,9 @@
-package com.zhangyingwei.treehole.admin.log.service;
+package com.zhangyingwei.treehole.log.service;
 
-import com.zhangyingwei.treehole.admin.log.dao.LogDao;
-import com.zhangyingwei.treehole.admin.log.model.LogModel;
-import com.zhangyingwei.treehole.admin.log.model.PageVisitView;
-import com.zhangyingwei.treehole.admin.log.model.PieView;
+import com.zhangyingwei.treehole.log.dao.LogDao;
+import com.zhangyingwei.treehole.log.model.LogModel;
+import com.zhangyingwei.treehole.log.model.PageVisitView;
+import com.zhangyingwei.treehole.log.model.PieView;
 import com.zhangyingwei.treehole.common.PageInfo;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import com.zhangyingwei.treehole.common.utils.DateUtils;

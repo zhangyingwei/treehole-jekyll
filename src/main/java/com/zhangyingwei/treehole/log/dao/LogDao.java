@@ -1,7 +1,7 @@
-package com.zhangyingwei.treehole.admin.log.dao;
+package com.zhangyingwei.treehole.log.dao;
 
-import com.zhangyingwei.treehole.admin.log.model.LogModel;
-import com.zhangyingwei.treehole.admin.log.model.PieView;
+import com.zhangyingwei.treehole.log.model.LogModel;
+import com.zhangyingwei.treehole.log.model.PieView;
 import com.zhangyingwei.treehole.common.PageInfo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;

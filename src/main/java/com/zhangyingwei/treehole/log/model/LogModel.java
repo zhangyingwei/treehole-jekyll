@@ -1,4 +1,4 @@
-package com.zhangyingwei.treehole.admin.log.model;
+package com.zhangyingwei.treehole.log.model;
 
 /**
  * Created by zhangyw on 2017/6/14.

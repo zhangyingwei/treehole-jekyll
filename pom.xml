@@ -45,12 +45,6 @@
 			<artifactId>commons-lang3</artifactId>
 			<version>3.4</version>
 		</dependency>
-		<!-- mysql -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<scope>6.0.6</scope>
-		</dependency>
 		<!-- datasource -->
         <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
         <dependency>
@@ -101,6 +95,12 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
             <version>2.8.7</version>
+        </dependency>
+        <!-- markdown -->
+        <dependency>
+            <groupId>org.pegdown</groupId>
+            <artifactId>pegdown</artifactId>
+            <version>1.6.0</version>
         </dependency>
     </dependencies>
 

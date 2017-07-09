@@ -1,4 +1,4 @@
-package com.zhangyingwei.treehole.admin.log.filter;
+package com.zhangyingwei.treehole.log.filter;
 
 /**
  * Created by zhangyw on 2017/6/16.

@@ -1,8 +1,8 @@
-package com.zhangyingwei.treehole.admin.log.controller;
+package com.zhangyingwei.treehole.log.controller;
 
-import com.zhangyingwei.treehole.admin.log.model.PageVisitView;
-import com.zhangyingwei.treehole.admin.log.model.PieView;
-import com.zhangyingwei.treehole.admin.log.service.LogService;
+import com.zhangyingwei.treehole.log.model.PageVisitView;
+import com.zhangyingwei.treehole.log.model.PieView;
+import com.zhangyingwei.treehole.log.service.LogService;
 import com.zhangyingwei.treehole.common.Ajax;
 import com.zhangyingwei.treehole.common.PageInfo;
 import com.zhangyingwei.treehole.common.annotation.TreeHoleAtcion;

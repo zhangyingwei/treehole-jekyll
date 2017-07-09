@@ -3,6 +3,7 @@ package com.zhangyingwei.treehole.blog.model;
 /**
  * Created by zhangyw on 2017/6/1.
  * 博客页面对象
+ * 页面专属的信息 + YAML 头文件信息。通过 YAML 头文件自定义的信息都可以在这里被获取。
  */
 public class BlogPage {
     private String title;

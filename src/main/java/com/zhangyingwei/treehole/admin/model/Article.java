@@ -1,8 +1,11 @@
 package com.zhangyingwei.treehole.admin.model;
 
+import com.zhangyingwei.treehole.blog.model.Page;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * @author: zhangyw
@@ -198,5 +201,21 @@ public class Article {
                 ", flag=" + flag +
                 ", type='" + type + '\'' +
                 '}';
+    }
+
+    /**
+     * 转换对象为 page
+     * @return
+     */
+    public Page toPage() {
+        Page page = new Page();
+        page.setId(this.getId());
+        page.setTitle(this.getTitle());
+        page.setCategories(this.getKind() == null?new ArrayList(): Arrays.asList(this.getKind().split(",")));
+        page.setTags(this.getTags() == null?new ArrayList(): Arrays.asList(this.getTags().split(",")));
+        page.setContent(this.getArticle());
+        page.setExcerpt(this.getIntro());
+        page.setDate(this.getDate());
+        return page;
     }
 }

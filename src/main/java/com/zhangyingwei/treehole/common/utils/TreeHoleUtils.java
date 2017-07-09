@@ -1,8 +1,8 @@
 package com.zhangyingwei.treehole.common.utils;
 
-import com.zhangyingwei.treehole.admin.log.filter.LogFilter;
-import com.zhangyingwei.treehole.admin.log.model.Agent;
-import com.zhangyingwei.treehole.admin.log.model.LogModel;
+import com.zhangyingwei.treehole.log.filter.LogFilter;
+import com.zhangyingwei.treehole.log.model.Agent;
+import com.zhangyingwei.treehole.log.model.LogModel;
 import com.zhangyingwei.treehole.admin.model.Article;
 import com.zhangyingwei.treehole.admin.model.Menu;
 import com.zhangyingwei.treehole.admin.model.User;
@@ -12,6 +12,8 @@ import com.zhangyingwei.treehole.install.model.BlogConf;
 import com.zhangyingwei.treehole.install.model.DbConf;
 import org.apache.commons.lang3.StringUtils;
 import org.dom4j.*;
+import org.pegdown.Extensions;
+import org.pegdown.PegDownProcessor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,6 +33,7 @@ public class TreeHoleUtils {
 
     private static Logger logger = LoggerFactory.getLogger(TreeHoleUtils.class);
     private static final int LOGIN_TIMEOUT = 1000*60*60*2;//登录状态保存时间 2个小时
+    private static  PegDownProcessor pegDownProcessor = new PegDownProcessor(Extensions.ALL_WITH_OPTIONALS);
 
     /**
      * 判断是否已经安装
@@ -511,5 +514,13 @@ public class TreeHoleUtils {
         }
         Agent agentObj = new Agent(agent);
         return agentObj.getBrowser();
+    }
+
+    /**
+     * 解析 markdown
+     * @return
+     */
+    public static String markdown(String markdown){
+        return pegDownProcessor.markdownToHtml(markdown);
     }
 }

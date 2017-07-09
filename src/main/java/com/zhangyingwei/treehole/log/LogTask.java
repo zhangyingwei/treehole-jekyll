@@ -1,8 +1,8 @@
-package com.zhangyingwei.treehole.admin.log;
+package com.zhangyingwei.treehole.log;
 
-import com.zhangyingwei.treehole.admin.log.executer.LogExecuter;
-import com.zhangyingwei.treehole.admin.log.model.LogModel;
-import com.zhangyingwei.treehole.admin.log.service.LogService;
+import com.zhangyingwei.treehole.log.executer.LogExecuter;
+import com.zhangyingwei.treehole.log.model.LogModel;
+import com.zhangyingwei.treehole.log.service.LogService;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import com.zhangyingwei.treehole.common.exception.TreeHoleLogException;
 import org.slf4j.Logger;
