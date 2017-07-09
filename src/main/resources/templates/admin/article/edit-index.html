@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"/>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" />
+<head>
+    <% include("/templates/lib/head-meta.html",{title:'编辑文章'}){} %>
+    <% include("/templates/lib/head-style.html"){} %>
+    <link href="/dist/iCheck/skins/flat/green.css" rel="stylesheet"/>
+    <link href="/dist/simplemde/simplemde.min.css" rel="stylesheet" />
+    <link href="/dist/switchery/dist/switchery.css" rel="stylesheet" />
+</head>
+
+<body class="nav-md footer_fixed">
+<div class="container body">
+    <div class="main_container">
+        <% include("/templates/lib/menu.html"){} %>
+        <% include("/templates/lib/top-navigation.html"){} %>
+        <% include("/templates/lib/page-content.html",{page:"/admin/article/edit-content.html"}){} %>
+        <% include("/templates/lib/footer-content.html"){} %>
+    </div>
+</div>
+<% include("/templates/lib/foot-script.html"){} %>
+<script src="/dist/simplemde/simplemde.min.js"></script>
+<script src="/dist/jquery/tagsinput/jquery.tagsinput.js"></script>
+<script src="/dist/iCheck/icheck.js"></script>
+<script src="/dist/switchery/dist/switchery.js"></script>
+<script src="/js/admin/article/edit-index.js"></script>
+</body>
+</html>

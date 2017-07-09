@@ -1,0 +1,46 @@
+<%
+var sourceBasePath = blog.url! + + '/theme/' + theme;
+%>
+<% include("../_layouts/default.html",{"sourceBasePath":sourceBasePath}){} %>
+<div class="container docs-container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="sidebar hidden-print" role="complementary">
+        <div id="navigation">
+        	<h1>目录</h1>
+      		<ul class="nav sidenav">
+				<%
+                var map = {};
+                for(var post in posts){
+                    if(map[post.kind]!=null){
+                        map[post.kind] = array.add(map[post.kind],post);
+                    }else{
+                        map[post.kind] = [post];
+                    }
+                }
+                %>
+                <% for (entity in map){ %>
+                    <li><a href="#${entity.key}-ref">
+                        ${ entity.key } <span style="color: #999999;" >(${ entity.value.~size })</span>
+                    </a></li>
+                <% } %>
+          	</ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9" role="main">
+      <div class="panel docs-content">
+        <div class="wrapper">
+          <div class="home">
+              <% for (entity in map){ %>
+                  <h2 id="${ entity.key }-ref">${ entity.key }</h2>
+                  <ul>
+                      <% include("../_includes/pages_list.html",{"pages_list":entity.value,"blog":blog}){} %>
+                  </ul>
+              <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

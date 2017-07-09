@@ -1,0 +1,68 @@
+/*
+Error: Undefined variable: "$grey-color-dark".
+        on line 5 of _layout.scss
+
+1: /**
+2:  * Site header
+3:  *\/
+4: .site-header {
+5:     border-top: 5px solid $grey-color-dark;
+6:     border-bottom: 1px solid $grey-color-light;
+7:     min-height: 56px;
+8: 
+9:     // Positioning context for the mobile navigation icon
+10:     position: relative;
+
+Backtrace:
+_layout.scss:5
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/script/tree/variable.rb:49:in `_perform'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/script/tree/node.rb:58:in `perform'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/script/tree/list_literal.rb:63:in `block in _perform'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/script/tree/list_literal.rb:63:in `map'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/script/tree/list_literal.rb:63:in `_perform'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/script/tree/node.rb:58:in `perform'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/tree/visitors/perform.rb:397:in `visit_prop'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/tree/visitors/base.rb:36:in `visit'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/tree/visitors/perform.rb:160:in `block in visit'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/stack.rb:79:in `block in with_base'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/stack.rb:115:in `with_frame'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/stack.rb:79:in `with_base'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/tree/visitors/perform.rb:160:in `visit'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/tree/visitors/perform.rb:433:in `block (2 levels) in visit_rule'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/tree/visitors/perform.rb:433:in `map'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/tree/visitors/perform.rb:433:in `block in visit_rule'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/tree/visitors/perform.rb:181:in `with_environment'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/tree/visitors/perform.rb:431:in `visit_rule'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/tree/visitors/base.rb:36:in `visit'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/tree/visitors/perform.rb:160:in `block in visit'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/stack.rb:79:in `block in with_base'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/stack.rb:115:in `with_frame'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/stack.rb:79:in `with_base'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/tree/visitors/perform.rb:160:in `visit'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/tree/visitors/base.rb:52:in `block in visit_children'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/tree/visitors/base.rb:52:in `map'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/tree/visitors/base.rb:52:in `visit_children'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/tree/visitors/perform.rb:169:in `block in visit_children'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/tree/visitors/perform.rb:181:in `with_environment'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/tree/visitors/perform.rb:168:in `visit_children'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/tree/visitors/base.rb:36:in `block in visit'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/tree/visitors/perform.rb:188:in `visit_root'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/tree/visitors/base.rb:36:in `visit'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/tree/visitors/perform.rb:159:in `visit'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/tree/visitors/perform.rb:8:in `visit'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/tree/root_node.rb:36:in `css_tree'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/engine.rb:381:in `_render_with_sourcemap'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/engine.rb:298:in `render_with_sourcemap'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/exec/sass_scss.rb:391:in `run'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/exec/sass_scss.rb:63:in `process_result'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/exec/base.rb:52:in `parse'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/exec/base.rb:19:in `parse!'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/bin/sass:13:in `<top (required)>'
+D:/dev/Ruby23-x64/bin/sass:22:in `load'
+D:/dev/Ruby23-x64/bin/sass:22:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Error: Undefined variable: \"$grey-color-dark\".\A         on line 5 of _layout.scss\A \A 1: /**\A 2:  * Site header\A 3:  */\A 4: .site-header {\A 5:     border-top: 5px solid $grey-color-dark;\A 6:     border-bottom: 1px solid $grey-color-light;\A 7:     min-height: 56px;\A 8: \A 9:     // Positioning context for the mobile navigation icon\A 10:     position: relative;"; }

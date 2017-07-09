@@ -1,0 +1,76 @@
+<!-- 统计 -->
+<script id="dsq-count-scr" src="https://zhang-ying-wei-de-bo-ke-1.disqus.com/count.js"></script>
+<div class="row top_tiles">
+    <div class="postcount animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+            <div class="icon"><i class="glyphicon glyphicon-duplicate"></i></div>
+            <div class="count">0</div>
+            <h3>文章总数</h3>
+            <p>当前所发表文章总数</p>
+        </div>
+    </div>
+    <div class="commontcount animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+            <div class="icon"><i class="glyphicon glyphicon-comment"></i></div>
+            <div class="count">0</div>
+            <h3>评论总数</h3>
+            <p>当前收到的评论总数</p>
+        </div>
+    </div>
+    <script>
+        DISQUSWIDGETS.getCount({reset: true});
+    </script>
+    <div class="filecount animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+            <div class="icon"><i class="glyphicon glyphicon-hdd"></i></div>
+            <div class="count">0</div>
+            <h3>素材总数</h3>
+            <p>当前所上传素材总数</p>
+        </div>
+    </div>
+    <div class="visitcount animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <div class="tile-stats">
+            <div class="icon"><i class="glyphicon glyphicon-user"></i></div>
+            <div class="count">0</div>
+            <h3>访问统计</h3>
+            <p>来访问总人数</p>
+        </div>
+    </div>
+</div>
+
+<!-- 统计图表 -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="col-md-8 col-sm-8 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>来访统计<small>点击量统计</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <!-- 来访折线图 -->
+                    <div id="chart-line-visit" style="width: 100%;height:300px;"></div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-8 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h2>来访统计<small>访客来源统计饼图</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                    <!-- 来访饼图 -->
+                    <div id="chart-pie-visit" style="width: 100%;height:300px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

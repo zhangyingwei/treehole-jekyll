@@ -1,0 +1,109 @@
+<style>
+    .user_data li{
+        padding: 10px;
+    }
+    #blog-desc{
+        font-size: 13px;
+        border:0;
+        background-color: #fff;
+    }
+</style>
+<div class="row">
+    <!-- 基础信息 -->
+    <div class="col-md-5">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>基础信息</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <ul class="list-unstyled user_data">
+                    <li class="row">
+                        <div class="col-md-3">名称：</div>
+                        <div class="col-md-9" id="blog-name">${bloginfo.name}</div>
+                    </li>
+                    <li class="row">
+                        <a href="${bloginfo.url!}" target="_blank">
+                            <div class="col-md-3">地址:</div>
+                            <div class="col-md-9" id="blog-url">${bloginfo.url!}</div>
+                        </a>
+                    </li>
+                    <li class="row">
+                        <div class="col-md-3">简介:</div>
+                        <div class="col-md-9" id="blog-desc">${bloginfo.desc!}</div>
+                    </li>
+                </ul>
+                <a class="btn btn-success" id="edit-profile"><i class="fa fa-edit m-right-xs"></i>修改</a>
+                <br/>
+                <!-- end of skills -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 安装信息 -->
+    <div class="col-md-7">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>安装信息</h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <ul class="list-unstyled user_data">
+                    <li class="row">
+                        <div class="col-md-3">时间：</div>
+                        <div class="col-md-9">${installinfo.idate!}</div>
+                    </li>
+                    <li class="row">
+                        <a href="${bloginfo.url!}" target="_blank">
+                            <div class="col-md-3">地址:</div>
+                            <div class="col-md-9">${installinfo.ilocal}</div>
+                        </a>
+                    </li>
+                    <li class="row">
+                        <div class="col-md-3">浏览器:</div>
+                        <div class="col-md-9">${installinfo.ibower!}</div>
+                    </li>
+                    <li class="row">
+                        <div class="col-md-3">java版本:</div>
+                        <div class="col-md-9">${installinfo.ijdkversion!}</div>
+                    </li>
+                    <li class="row">
+                        <div class="col-md-3">系统类型:</div>
+                        <div class="col-md-9">${installinfo.iosdesktop!}</div>
+                    </li>
+                    <li class="row">
+                        <div class="col-md-3">系统型号:</div>
+                        <div class="col-md-9">${installinfo.iosname!}</div>
+                    </li>
+                    <li class="row">
+                        <div class="col-md-3">CPU:</div>
+                        <div class="col-md-9">${installinfo.ioscpu!}</div>
+                    </li>
+                </ul>
+                <!-- end of skills -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 基础信息编辑弹出框 -->
+<div class="th-window" title="基础信息编辑" id="bloginfo-profile-edit">
+    <div class="row">
+        <div class="col-md-2">博客名称</div>
+        <div class="col-md-10">
+            <input type="text" class="form-control" id="blogname" placeholder="博客名称" >
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">博客地址</div>
+        <div class="col-md-10">
+            <input type="text" class="form-control" id="blogurl" placeholder="博客地址" >
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">博客简介</div>
+        <div class="col-md-10">
+            <textarea class="form-control" id="blogdesc" placeholder="博客简介"></textarea>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"/>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" />
+<head>
+    <% include("/templates/lib/head-meta.html",{title:'基础信息管理'}){} %>
+    <% include("/templates/lib/head-style.html"){} %>
+</head>
+
+<body class="nav-md footer_fixed">
+<div class="container body">
+    <div class="main_container">
+        <% include("/templates/lib/menu.html"){} %>
+        <% include("/templates/lib/top-navigation.html"){} %>
+        <% include("/templates/lib/page-content.html",{page:"/admin/blog/basic-content.html"}){} %>
+        <% include("/templates/lib/footer-content.html"){} %>
+    </div>
+</div>
+<% include("/templates/lib/foot-script.html"){} %>
+<script src="/js/admin/blog/basic-index.js"></script>
+</body>
+</html>

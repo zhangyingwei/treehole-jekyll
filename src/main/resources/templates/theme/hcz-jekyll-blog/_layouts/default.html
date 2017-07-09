@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <% include("../_includes/meta.html",{"sourceBasePath":sourceBasePath}){} %>
+      <link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml">
+      <script type="text/javascript">window.baseurl = '${ blog.url }';</script>
+      <% include("../_includes/css.html",{"sourceBasePath":sourceBasePath}){} %>
+  </head>
+
+  <body class="home overflow-hidden">
+    <% include("../_includes/header.html",{}){} %>
+    {% include main.html %}
+    {% include js.html %}
+    {% include analytics.html %}
+

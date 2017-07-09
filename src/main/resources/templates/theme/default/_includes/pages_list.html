@@ -1,0 +1,6 @@
+<% for (post in pages_list){ %>
+<ol class="breadcrumb">
+    <li><a href="${ blog.url+'/articles/'+post.id }">${ post.title }</a></li>
+    <li style="float:right;"><span>${ post.date }</span></li>
+</ol>
+<% } %>

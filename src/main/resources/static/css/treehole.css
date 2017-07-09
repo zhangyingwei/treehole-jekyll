@@ -1,0 +1,16 @@
+.th-window{
+    display: none;
+    padding: 20px;
+}
+.th-window .row{
+    padding-bottom: 10px
+}
+.layui-layer-content .th-window{
+    display: block !important;
+}
+.red{
+    color: red;
+}
+.label{
+    color: #F1F6F7 !important;
+}

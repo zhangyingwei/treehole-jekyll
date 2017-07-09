@@ -1,0 +1,72 @@
+<style>
+    .danger{
+        background: #d9534f !important;
+    }
+    .kind-edit-form{
+        padding: 20px;
+    }
+</style>
+<h3>分类管理</h3>
+<div id="kind_container" >
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>文章分类列表</h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li>
+                    <button type="button" id="addKindBtn" class="btn btn-sm btn-success">添加</button>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>名称</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% for(kind in kinds) {%>
+                    <tr>
+                        <td> ${kind.id!} </td>
+                        <td> ${kind.name!} </td>
+                        <td class="kind-flag" value="${kind.flag!}"> ${kind.flag!} </td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-primary handEdit" index ="${kind.id}">编辑</button>
+                            <button type="button" class="btn btn-sm btn-danger handDelete" index = "${kind.id}">删除</button>
+                        </td>
+                    </tr>
+                <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="hidden" id="kind-edit-form-panel">
+    <div class="kind-edit-form" id="kind-edit-form">
+        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+            <input name="id" id="id" hidden/>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">名称 <span class="required red">*</span>
+                </label>
+                <div class="col-md-7 col-sm-7 col-xs-12">
+                    <input type="text" id="name" required="required" class="form-control col-md-9 col-xs-12">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3 col-sm-3 col-xs-12">状态<span class="required red">*</span></label>
+                <div  class="col-md-7 col-sm-7 col-xs-12">
+                    <select id="status" class="form-control">
+                        <option value="-1">请选择...</option>
+                        <option value="0">正常</option>
+                        <option value="9">删除</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

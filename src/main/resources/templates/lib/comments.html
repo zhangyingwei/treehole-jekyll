@@ -1,0 +1,277 @@
+<!--<style>-->
+    <!--#comments{-->
+        <!--margin-top: 50px;-->
+    <!--}-->
+    <!--.edit label{-->
+        <!--font-family: "黑体", Roboto, Arial, "Droid Sans", sans-serif;-->
+        <!--font-size: 15px;-->
+        <!--width: 50px;-->
+        <!--color: rgba(96, 125, 139, 0.93);-->
+    <!--}-->
+    <!--.edit:after{display:block;clear:both;content:"";visibility:hidden;height:0}-->
+    <!--.edit .item{-->
+        <!--margin: 20px auto;-->
+    <!--}-->
+    <!--.edit .submit {-->
+        <!--float: right;-->
+        <!--margin-right: 30px;-->
+        <!--border: 2px solid rgba(96, 125, 139, 0.45);-->
+        <!--padding: 5px 10px;-->
+        <!-- -webkit-border-radius:5px;-->
+        <!-- -moz-border-radius:5px;-->
+        <!--border-radius:5px;-->
+        <!--outline:none;-->
+    <!--}-->
+    <!--.edit .submit:hover {-->
+        <!--background-color: rgba(96, 125, 139, 0.75);-->
+        <!--color: #fff;-->
+    <!--}-->
+    <!--.edit .submit:active {-->
+        <!--background-color: #9E9E9E;-->
+        <!--color: #fff;-->
+    <!--}-->
+    <!--.edit input{-->
+        <!--width:90%;-->
+        <!--border: 2px solid rgba(96, 125, 139, 0.45);-->
+        <!--height: 30px;-->
+        <!-- -webkit-border-radius:5px;-->
+        <!-- -moz-border-radius:5px;-->
+        <!--border-radius: 5px;-->
+        <!--outline: none;-->
+        <!--padding:5px;-->
+    <!--}-->
+    <!--.edit #textarea{-->
+        <!--width:90%;-->
+        <!--min-height: 100px;-->
+        <!--border: 2px solid rgba(96, 125, 139, 0.45);-->
+        <!-- -webkit-border-radius:5px;-->
+        <!-- -moz-border-radius:5px;-->
+        <!--border-radius: 5px;-->
+        <!--outline: none;-->
+        <!--padding:5px;-->
+        <!--display: inline-block;-->
+    <!--}-->
+    <!--#comments #show{-->
+        <!--margin-top: 50px;-->
+    <!--}-->
+    <!--#comments #show .item{-->
+        <!--margin: 20px 0;-->
+        <!--border-bottom: 1px solid rgba(158, 158, 158, 0.29);-->
+        <!--padding: 10px 0;-->
+    <!--}-->
+    <!--#comments #show .item .item{-->
+        <!--margin: 20px 0;-->
+        <!--border-bottom: 0;-->
+        <!--padding: 10px 0;-->
+    <!--}-->
+    <!--#comments #show .item .edit{-->
+        <!--margin-top: 10px;-->
+        <!--background-color: rgba(96, 125, 139, 0.1);-->
+        <!--padding:20px;-->
+        <!--border-radius: 5px;-->
+        <!--border: 1px solid #9d9d9d;-->
+    <!--}-->
+    <!--#comments #show .item .edit #textarea{-->
+        <!--background-color: #fff;-->
+    <!--}-->
+    <!--#comments #show .item img{-->
+        <!--width:8%;-->
+        <!--max-height: 60px;-->
+        <!--border: 2px solid rgba(96, 125, 139, 0.45);-->
+        <!--border-radius: 5px;-->
+        <!--vertical-align:top;-->
+    <!--}-->
+    <!--#comments #show .item .content{-->
+        <!--display: inline-block;-->
+        <!--padding-left: 10px;-->
+        <!--max-width: 90%;-->
+    <!--}-->
+    <!--#comments #show .item .content .head{-->
+
+    <!--}-->
+    <!--#comments #show .item .content .head .name{-->
+        <!--color: #00aeef;-->
+        <!--font-weight: bolder;-->
+    <!--}-->
+    <!--#comments #show .item .content .head .tag{-->
+        <!--background-color: rgba(96, 125, 139,1);-->
+        <!--margin: 0 5px;-->
+        <!--color: #fff;-->
+        <!--padding: 1px 5px;-->
+        <!--border-radius: 3px;-->
+    <!--}-->
+    <!--#comments #show .item .content .head .time{-->
+        <!--background-color: rgba(96, 125, 139,1);-->
+        <!--margin: 0 5px;-->
+        <!--color: #fff;-->
+        <!--padding: 1px 5px;-->
+        <!--border-radius: 3px;-->
+    <!--}-->
+    <!--#comments #show .item .content .body{-->
+        <!--font-size:13px;-->
+        <!--padding: 3px 0;-->
+    <!--}-->
+<!--</style>-->
+<!--<script src="/dist/is/is.min.js"></script>-->
+<!--<div id="comments">-->
+    <!--<div class="edit">-->
+        <!--<div class="item">-->
+            <!--<label>昵称 </label><input type="text" id="name" name="name">-->
+        <!--</div>-->
+        <!--<div class="item">-->
+            <!--<label>邮箱 </label><input type="email" id="email" name="email">-->
+        <!--</div>-->
+        <!--<div class="item">-->
+            <!--<label>网站 </label><input type="url" id="site" name="site">-->
+        <!--</div>-->
+        <!--<div class="item">-->
+            <!--<label style="vertical-align:top;">内容 </label><div contentEditable="true" id="textarea" name="content"></div>-->
+        <!--</div>-->
+        <!--<div class="item">-->
+            <!--<button class="submit">提交评论</button>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div id="show">-->
+        <!--<div class="item">-->
+            <!--<img src="/theme/default/styles/images/freud.jpg"/>-->
+            <!--<div class="content">-->
+                <!--<div class="head"><span class="name">zhangsan</span><span class="tag">游客</span><span class="time">2017-00-00 00:00:00</span></div>-->
+                <!--<div class="body">博主这篇文章写的有点水</div>-->
+                <!--<div class="action">-->
+                    <!--<a class="backclick" href="#">回复</a>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="item">-->
+            <!--<img src="/theme/default/styles/images/freud.jpg"/>-->
+            <!--<div class="content">-->
+                <!--<div class="head"><span class="name">lisi</span><span class="tag">游客</span><span class="time">2017-00-00 00:00:00</span></div>-->
+                <!--<div class="body">很棒！！！</div>-->
+                <!--<div class="action">-->
+                    <!--<a class="backclick" href="#">回复</a>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="item">-->
+            <!--<img src="/theme/default/styles/images/freud.jpg"/>-->
+            <!--<div class="content">-->
+                <!--<div class="head"><span class="name">zhangsan@lisi</span><span class="tag">游客</span><span class="time">2017-00-00 00:00:00</span></div>-->
+                <!--<div class="body">放屁，明明水的一比</div>-->
+                <!--<div class="action">-->
+                    <!--<a class="backclick" href="#">回复</a>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="item">-->
+            <!--<img src="/theme/default/styles/images/freud.jpg"/>-->
+            <!--<div class="content">-->
+                <!--<div class="head"><span class="name">lisi@zhangsan</span><span class="tag">游客</span><span class="time">2017-00-00 00:00:00</span></div>-->
+                <!--<div class="body">你有本事你来写啊，sb</div>-->
+                <!--<div class="action">-->
+                    <!--<a class="backclick" href="#">回复</a>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+<!--<script>-->
+    <!--$(function () {-->
+        <!--var valid = function (name,email,site,content) {-->
+            <!--if(is.empty($.trim(name))){-->
+                <!--alert("昵称不能为空");-->
+                <!--return false;-->
+            <!--}-->
+            <!--if(!is.email(email)){-->
+                <!--alert("请输入正确格式的邮箱");-->
+                <!--return false;-->
+            <!--}-->
+            <!--if(!is.empty(site) && !is.startWith(site,"http://")){-->
+                <!--alert("网站地址格式不正确");-->
+                <!--return false;-->
+            <!--}-->
+            <!--if(is.empty($.trim(content))){-->
+                <!--alert("内容不能为空");-->
+                <!--return false;-->
+            <!--}-->
+            <!--return true;-->
+        <!--};-->
+        <!--var clear = function (obj) {-->
+            <!--$(obj).parent().parent().find("#name").val("");-->
+            <!--$(obj).parent().parent().find("#email").val("");-->
+            <!--$(obj).parent().parent().find("#site").val("");-->
+            <!--$(obj).parent().parent().find("#textarea").text("");-->
+        <!--};-->
+        <!--var submitFun = function (){-->
+            <!--var name = $(this).parent().parent().find("#name").val();-->
+            <!--var email = $(this).parent().parent().find("#email").val();-->
+            <!--var site = $(this).parent().parent().find("#site").val();-->
+            <!--var content = $(this).parent().parent().find("#textarea").text();-->
+            <!--if(!valid(name,email,site,content)){-->
+                <!--return;-->
+            <!--}-->
+            <!--if(window.backUser){-->
+                <!--name = name + "@" + window.backUser;-->
+                <!--console.log(name);-->
+                <!--window.backUser = undefined;-->
+                <!--$(".backclick").unbind("click");-->
+                <!--$(".backclick").click(backFun);-->
+            <!--}-->
+            <!--var html = '<div class="item"><img src="/theme/default/styles/images/freud.jpg"/><div class="content"><div class="head"><span class="name">' + name + '</span><span class="tag">游客</span><span class="time">刚刚</span></div><div class="body">' + content + '</div><div class="action"><a class="backclick" style="cursor: pointer">回复</a></div></div></div>';-->
+            <!--$(html).hide().prependTo("#show").slideDown(300);-->
+            <!--if(window.showComment){-->
+                <!--window.showComment.slideToggle(300);-->
+            <!--}-->
+            <!--clear(this);-->
+        <!--}-->
+        <!--$(".submit").click(submitFun);-->
+
+        <!--var backFun = function () {-->
+            <!--var commdom = window.showComment;-->
+            <!--if (!commdom) {-->
+                <!--var dom = $(".edit").clone();-->
+                <!--dom.hide();-->
+                <!--commdom = window.showComment = dom;-->
+            <!--}-->
+            <!--var this_dom = $(this).parent().parent().parent().find(".edit");-->
+            <!--var user = $(this).parent().parent().find(".head").find(".name").text();-->
+            <!--window.backUser = user.indexOf("@")>=0?user.split("@")[0]:user;-->
+            <!--if (this_dom.length == 0) {-->
+                <!--commdom.slideUp(0);-->
+                <!--$(this).parent().parent().parent().append(commdom);-->
+                <!--$(".submit").unbind("click");-->
+                <!--$(".submit").click(submitFun);-->
+            <!--}-->
+            <!--commdom.slideToggle(300);-->
+        <!--};-->
+        <!--window.backFun = function () {-->
+            <!--return backFun();-->
+        <!--};-->
+
+        <!--/**-->
+         <!--* 回复-->
+         <!--*/-->
+        <!--$(".backclick").click(backFun);-->
+    <!--})-->
+<!--</script>-->
+
+
+<div id="disqus_thread"></div>
+<script>
+
+    /**
+     *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+     *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+    /*
+     var disqus_config = function () {
+     this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+     this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+     };
+     */
+    (function() { // DON'T EDIT BELOW THIS LINE
+        var d = document, s = d.createElement('script');
+        s.src = 'https://zhang-ying-wei-de-bo-ke-1.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>

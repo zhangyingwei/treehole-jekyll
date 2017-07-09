@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html>
+  <% include("../_includes/head.html",{sourceBasePath:sourceBasePath}){} %>
+  <body class="index">
+    <% include("../_includes/header.html",{sourceBasePath:sourceBasePath}){} %>
+    <% include("../_includes/docs_header.html",{sourceBasePath:sourceBasePath}){} %>
+    <% if(page.title!=null){ %>
+        <% include("../_includes/banner.html"){} %>
+    <% } %>

@@ -1,0 +1,16 @@
+<div class="banner">
+  <div class="container">
+    <% var showBanner = true; %>
+  	<% if (page.tags != null){%>
+        <% for(var tag in page.tags){ %>
+            <% if(strutil.length(tag)>0){ %>
+                <span class="tag">${tag}</span>
+                <% showBanner = false; %>
+            <% } %>
+        <% } %>
+    <% } %>
+    <% if(showBanner){ %>
+        ${ site.banner }
+    <% } %>
+  </div>
+</div>

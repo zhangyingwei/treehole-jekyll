@@ -1,0 +1,54 @@
+<%
+var sourceBasePath = blog.url! + + '/theme/' + theme;
+%>
+<% include("default.html",{"sourceBasePath":sourceBasePath}){} %>
+<div class="container docs-container">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="sidebar hidden-print" role="complementary">
+        <% include("../_includes/lefttree.html"){} %>
+      </div>
+    </div>
+    <div class="col-md-9" role="main">
+      <div class="panel docs-content">
+        <div class="wrapper">
+            <header class="post-header">
+              <!--<h1 class="post-title">${ page.title }</h1>-->
+              <!--
+                <p class="post-meta">{{ page.date | date: "%b %-d, %Y" }}{% if page.author %} • {{ page.author }}{% endif %}{% if page.meta %} • {{ page.meta }}{% endif %}</p>
+              -->
+              <!--<div class="meta">Posted on <span class="postdate">${ page.date }</span> By <a target="_blank" href="${blog.url}">${ site.author }</a></div>-->
+              <br />
+            </header>
+            <article class="post-content">
+              ${ page.content }
+            </article>
+        </div>
+      </div>
+
+        <!--分享-->
+      <div class="panel docs-content" style="overflow: inherit !important;">
+          <div class="post-content">
+              <div class="wrapper" style="padding-top: 60px;">
+                  <% include("../../../lib/share.html"){} %>
+              </div>
+          </div>
+      </div>
+
+      <div class="panel docs-content">
+        <div class="post-content">
+          <div class="wrapper">
+              <% if(page.useCommont){ %>
+                <% include("../../../lib/comments.html",{"page":page}){} %>
+              <% }else{ %>
+              <span style="margin-top: 70px; text-align: center; font-size: 13px;color: #F44336; display: block">评论关闭</span>
+              <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% include("../_includes/footer.html",{sourceBasePath:sourceBasePath}){} %>
+</body>
+</html>

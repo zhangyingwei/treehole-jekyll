@@ -1,0 +1,30 @@
+/*
+Sass::SyntaxError: ".highlight" failed to @extend "%vertical-rhythm".
+The selector "%vertical-rhythm" was not found.
+Use "@extend %vertical-rhythm !optional" if the extend should be able to fail.
+
+
+Backtrace:
+_syntax-highlighting.scss:6
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/tree/visitors/extend.rb:62:in `block in check_extends_fired!'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/util/subset_map.rb:105:in `block in each_value'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/util/subset_map.rb:105:in `each'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/util/subset_map.rb:105:in `each_value'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/tree/visitors/extend.rb:51:in `check_extends_fired!'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/tree/visitors/extend.rb:16:in `visit'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/tree/root_node.rb:39:in `css_tree'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/tree/root_node.rb:29:in `render_with_sourcemap'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/engine.rb:381:in `_render_with_sourcemap'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/engine.rb:298:in `render_with_sourcemap'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/exec/sass_scss.rb:391:in `run'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/exec/sass_scss.rb:63:in `process_result'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/exec/base.rb:52:in `parse'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/lib/sass/exec/base.rb:19:in `parse!'
+D:/dev/Ruby23-x64/lib/ruby/gems/2.3.0/gems/sass-3.4.24/bin/sass:13:in `<top (required)>'
+D:/dev/Ruby23-x64/bin/sass:22:in `load'
+D:/dev/Ruby23-x64/bin/sass:22:in `<main>'
+*/
+body:before {
+  white-space: pre;
+  font-family: monospace;
+  content: "Sass::SyntaxError: \".highlight\" failed to @extend \"%vertical-rhythm\".\A The selector \"%vertical-rhythm\" was not found.\A Use \"@extend %vertical-rhythm !optional\" if the extend should be able to fail.\A "; }
