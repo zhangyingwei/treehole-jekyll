@@ -76,13 +76,13 @@ public class IndexController {
         model.put("theme", this.getThemeInfo());
         //加载page信息
         model.put("page", this.getPageInfo()
-                .setTitle(article.getTitle())
-                .setDate(article.getDate())
-                .setCategories(article.getKind())
-                .setContent(article.getArticleHtml())
-                .setIntroduction(article.getIntroHtml())
-                .setTags(article.getTags()==null?new String[0]:article.getTags().split(","))
-                .setUseCommont(article.getUsecommont())
+//                .setTitle(article.getTitle())
+//                .setDate(article.getDate())
+//                .setCategories(article.getKind())
+//                .setContent(article.getArticleHtml())
+//                .setIntroduction(article.getIntroHtml())
+//                .setTags(article.getTags()==null?new String[0]:article.getTags().split(","))
+//                .setUseCommont(article.getUsecommont())
         );
         return Pages.blog(treeHoleConfig, Pages.BLOG_THEME_ARTICLE);
     }
@@ -174,7 +174,7 @@ public class IndexController {
     private List<Page> getPages() throws TreeHoleException {
         List<Page> pages = new ArrayList<Page>();
         List<Article> posts = this.articleService.getPosts();
-        posts.stream().map(post -> post.toPage())
+        posts.stream().map(post -> post.toPage());
         return null;
     }
 
