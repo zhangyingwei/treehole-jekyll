@@ -26,12 +26,12 @@ public class Site {
     /**
      * 一个按照时间倒叙的所有 Posts 的清单。
      */
-    private List<Post> posts;
+    private List<Page> posts;
 
     /**
      * 如果当前被处理的页面是一个 Post，这个变量就会包含最多10个相关的 Post。默认的情况下， 相关性是低质量的，但是能被很快的计算出来。
      */
-    private List<Post> relatedPosts;
+    private List<Page> relatedPosts;
 
     /**
      * 所有的在 CATEGORY 类别下的帖子。
@@ -101,7 +101,8 @@ public class Site {
     }
 
     public void setConfigs(Map configs) {
-        this.configs = configs;
+        this.configs = this.configs == null ? new HashMap() : this.configs;
+        this.configs.putAll(configs);
     }
 
     /**

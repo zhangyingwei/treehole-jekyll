@@ -48,7 +48,7 @@ public class Page {
     /**
      * 这个帖子所属的 Categories。
      */
-    private List categories;
+    private String categories;
 
     /**
      * 这个 Post 所属的所有 tags。
@@ -60,6 +60,11 @@ public class Page {
      * 在这里就是前边补齐域名或者ip信息的地址
      */
     private String path;
+
+    /**
+     * 是否允许评论
+     */
+    private boolean comment;
 
     public String getContent() {
         return content;
@@ -109,11 +114,11 @@ public class Page {
         this.id = id;
     }
 
-    public List getCategories() {
+    public String getCategories() {
         return categories;
     }
 
-    public void setCategories(List categories) {
+    public void setCategories(String categories) {
         this.categories = categories;
     }
 
@@ -131,6 +136,14 @@ public class Page {
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public boolean isComment() {
+        return comment;
+    }
+
+    public void setComment(boolean comment) {
+        this.comment = comment;
     }
 
     @Override

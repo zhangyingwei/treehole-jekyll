@@ -1,7 +1,7 @@
-<%
-var sourceBasePath = blog.url! + + '/theme/' + theme;
-%>
-<% include("_layouts/default.html",{"sourceBasePath":sourceBasePath}){} %>
+---
+layout: default
+title: Blog
+---
 <div class="well">
     <div class="list-group">
       {% for post in paginator.posts %}
@@ -12,7 +12,6 @@ var sourceBasePath = blog.url! + + '/theme/' + theme;
         <div class="row-content">
           <div class="least-content">{{ post.date | date_to_string }}</div>
           <h4 class="list-group-item-heading"><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h4>
-
           <p class="list-group-item-text">{{ post.content | strip_html | truncatewords: 20 }}</p>
         </div>
       </div>
@@ -60,6 +59,3 @@ var sourceBasePath = blog.url! + + '/theme/' + theme;
     </ul>
     {% endif %}
 </div><!-- end #home -->
-
-</body>
-</html>

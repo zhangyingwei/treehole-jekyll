@@ -23,6 +23,7 @@ import java.io.*;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -377,7 +378,7 @@ public class TreeHoleUtils {
      * 生成feed文件
      * @return
      */
-    public static String createFeed(BlogConf blog, List<Article> posts, Map<String,Object> site) throws TreeHoleException, IOException {
+    public static String createFeed(BlogConf blog, List<Article> posts, Map<String,Object> site) throws TreeHoleException, IOException, ParseException {
         Document feed = createDocument();
         Element root = createRootElement();
         Element channel = createChannel(blog,posts,site);
@@ -394,7 +395,7 @@ public class TreeHoleUtils {
      * @param site
      * @return
      */
-    private static Element createChannel(BlogConf blog, List<Article> posts, Map<String, Object> site) {
+    private static Element createChannel(BlogConf blog, List<Article> posts, Map<String, Object> site) throws ParseException {
         Date date = new Date();
         Element channel = DocumentHelper.createElement("channel");
         //title
@@ -427,28 +428,26 @@ public class TreeHoleUtils {
         channel.add(generator);
         //items
         List<Element> items = createItems(blog, posts);
-        for (Element item : items) {
-            channel.add(item);
-        }
+        items.stream().forEach(item -> channel.add(item));
         return channel;
     }
 
-    private static List<Element> createItems(BlogConf blog, List<Article> posts) {
+    private static List<Element> createItems(BlogConf blog, List<Article> posts) throws ParseException {
         List<Element> items = new ArrayList<Element>();
         for (Article post : posts) {
             Element item = DocumentHelper.createElement("item");
             Element title = DocumentHelper.createElement("title");
             title.setText(post.getTitle());
             Element description = DocumentHelper.createElement("description");
-            description.addCDATA(post.getArticleHtml());
+            description.addCDATA(post.getContentHtml());
             Element pubDate = DocumentHelper.createElement("pubDate");
-            pubDate.setText(post.getDate());
+            pubDate.setText(DateUtils.toRFC822(DateUtils.formate(post.getDate())));
             Element link = DocumentHelper.createElement("link");
             link.setText(blog.getUrl() + "/articles/" + post.getId());
             Element guid = DocumentHelper.createElement("guid");
             guid.setText(blog.getUrl() + "/articles/" + post.getId());
             Element category = DocumentHelper.createElement("category");
-            category.setText(post.getKind());
+            category.setText(post.getCategories());
             String tags = post.getTags();
             item.add(title);
             item.add(description);
@@ -457,11 +456,11 @@ public class TreeHoleUtils {
             item.add(guid);
             item.add(category);
             if(StringUtils.isNoneEmpty(tags)){
-                for (String tag : tags.split(",")) {
+                Arrays.stream(tags.split(",")).forEach(tag -> {
                     Element tagEl = DocumentHelper.createElement("category");
                     tagEl.setText(tag);
                     item.add(tagEl);
-                }
+                });
             }
             items.add(item);
         }

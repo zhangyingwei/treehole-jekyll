@@ -2,6 +2,9 @@ package com.zhangyingwei.treehole.install.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by zhangyw on 2017/4/26.
  * 博客配置信息
@@ -54,5 +57,17 @@ public class BlogConf {
                 ", url='" + url + '\'' +
                 ", desc='" + desc + '\'' +
                 '}';
+    }
+
+    /**
+     * 构造配置信息为Map
+     * @return
+     */
+    public Map bulid(){
+        Map map = new HashMap();
+        map.put("name", name);
+        map.put("url", url);
+        map.put("desc", desc);
+        return map;
     }
 }

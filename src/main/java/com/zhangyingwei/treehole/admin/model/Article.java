@@ -18,14 +18,15 @@ public class Article {
     @NotNull(message = "文章标题不能为空")
     private String title;
     private String subpath;
+    private String path;
     private String tags;
     @NotNull(message = "文章类别不能为空")
-    private String kind;
+    private String categories;
     @NotNull(message = "文章内容不能为空")
-    private String article;
-    private String articleHtml;
-    private String intro;
-    private String introHtml;
+    private String content;
+    private String contentHtml;
+    private String excerpt;
+    private String excerptHtml;
     private String usecommont;
     private String date;
     /**
@@ -68,43 +69,51 @@ public class Article {
         this.tags = tags;
     }
 
-    public String getKind() {
-        return kind;
+    public String getCategories() {
+        return categories;
     }
 
-    public void setKind(String kind) {
-        this.kind = kind;
+    public void setCategories(String categories) {
+        this.categories = categories;
     }
 
-    public String getArticle() {
-        return article;
+    public String getContent() {
+        return content;
     }
 
-    public void setArticle(String article) {
-        this.article = article;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public String getIntro() {
+    public String getExcerpt() {
         this.bulidIntro();//构造 文章简介
-        return intro;
+        return excerpt;
     }
 
-    public void setIntro(String intro) {
-        this.intro = intro;
+    public void setExcerpt(String excerpt) {
+        this.excerpt = excerpt;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 
     private void bulidIntro(){
-        if(StringUtils.isNotEmpty(this.article)){
-            if(this.article.contains("<!-- more -->")){
-                this.intro = this.article.split("<!-- more -->")[0].trim();
+        if(StringUtils.isNotEmpty(this.content)){
+            if(this.content.contains("<!-- more -->")){
+                this.excerpt = this.content.split("<!-- more -->")[0].trim();
             }
         }
     }
 
     private void bulidIntroHtml(){
-        if(StringUtils.isNotEmpty(this.articleHtml)){
-            if(this.articleHtml.contains("<!-- more -->")){
-                this.introHtml = this.articleHtml.split("<!-- more -->")[0].trim();
+        if(StringUtils.isNotEmpty(this.contentHtml)){
+            if(this.contentHtml.contains("<!-- more -->")){
+                this.excerptHtml = this.contentHtml.split("<!-- more -->")[0].trim();
             }
         }
     }
@@ -169,21 +178,21 @@ public class Article {
         this.date = date;
     }
 
-    public String getArticleHtml() {
-        return articleHtml;
+    public String getContentHtml() {
+        return contentHtml;
     }
 
-    public void setArticleHtml(String articleHtml) {
-        this.articleHtml = articleHtml;
+    public void setContentHtml(String contentHtml) {
+        this.contentHtml = contentHtml;
     }
 
-    public String getIntroHtml() {
+    public String getExcerptHtml() {
         this.bulidIntroHtml();
-        return introHtml;
+        return excerptHtml;
     }
 
     public void setIntroHtml(String introHtml) {
-        this.introHtml = introHtml;
+        this.excerptHtml = introHtml;
     }
 
     @Override
@@ -192,10 +201,11 @@ public class Article {
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
                 ", subpath='" + subpath + '\'' +
+                ", path='" + path + '\'' +
                 ", tags='" + tags + '\'' +
-                ", kind='" + kind + '\'' +
-                ", article='" + article + '\'' +
-                ", intro='" + intro + '\'' +
+                ", categories='" + categories + '\'' +
+                ", content='" + content + '\'' +
+                ", intro='" + excerpt + '\'' +
                 ", usecommont='" + usecommont + '\'' +
                 ", date='" + date + '\'' +
                 ", flag=" + flag +
@@ -211,11 +221,13 @@ public class Article {
         Page page = new Page();
         page.setId(this.getId());
         page.setTitle(this.getTitle());
-        page.setCategories(this.getKind() == null?new ArrayList(): Arrays.asList(this.getKind().split(",")));
+        page.setPath(this.getPath());
+        page.setCategories(this.getCategories());
         page.setTags(this.getTags() == null?new ArrayList(): Arrays.asList(this.getTags().split(",")));
-        page.setContent(this.getArticle());
-        page.setExcerpt(this.getIntro());
+        page.setContent(this.getContentHtml());
+        page.setExcerpt(this.excerptHtml);
         page.setDate(this.getDate());
+        page.setComment("on".equals(this.getUsecommont()));
         return page;
     }
 }

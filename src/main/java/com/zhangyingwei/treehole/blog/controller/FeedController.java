@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -54,6 +55,10 @@ public class FeedController {
             writer.write(feed);
             writer.close();
         } catch (IOException e) {
+            logger.debug(e.getMessage());
+            e.printStackTrace();
+        } catch (ParseException e) {
+            logger.debug(e.getMessage());
             e.printStackTrace();
         }
     }
