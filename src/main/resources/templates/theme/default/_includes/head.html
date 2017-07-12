@@ -2,16 +2,16 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>${ page.title! +" - " + blog.name }</title>
+	<title>${ page.title! +" - " + site.name }</title>
 	<link rel="shortcut icon" href="${ sourceBasePath + '/styles/images/favicon.jpg' }">
 	<link rel="icon" href="${ sourceBasePath + '/styles/images/favicon.jpg'}">
 	<link rel="stylesheet" href="${ sourceBasePath + '/styles/css/index.css'}">
 	<link rel="stylesheet" href="${ sourceBasePath + '/styles/css/fontawesome/css/font-awesome.min.css'}">
 	<link rel="stylesheet" href="${ sourceBasePath + '/styles/css/syntax.css'}">
 	<link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl }}">
-	<link rel="alternate" type="application/rss+xml" title="${ blog.name }" href="${ blog.url+ '/feed.xml' }">
+	<link rel="alternate" type="application/rss+xml" title="${ site.name }" href="/feed">
 	<meta name="keywords" content="${ page.title! + ', ' + blog.name! + ', ' + blog.desc!site.meta_description }">
-	<meta name="description" content="${blog.desc}">
+	<meta name="description" content="${site.desc}">
 
 	<script src="${ sourceBasePath + '/styles/js/jquery.min.js'}"></script>
 	<!--[if lt IE 9]>

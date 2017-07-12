@@ -15,10 +15,7 @@ public class Paginator {
      * 每一页Posts的数量。
      */
     private int perPage = 10;
-    /**
-     * 这一页可用的Posts。
-     */
-    private List<Page> posts;
+
     /**
      * Posts 的总数。
      */
@@ -67,14 +64,6 @@ public class Paginator {
         this.perPage = perPage;
     }
 
-    public List<Page> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(List<Page> posts) {
-        this.posts = posts;
-    }
-
     public int getTotalPosts() {
         return totalPosts;
     }
@@ -105,9 +94,7 @@ public class Paginator {
     }
 
     public int getPreviousPage() {
-        if(this.page > 1){
-            this.previousPage = this.page - 1;
-        }
+        this.previousPage = this.page - 1;
         return previousPage;
     }
 
@@ -123,13 +110,11 @@ public class Paginator {
      * @return
      */
     private String getPath(int currentPage) {
-        return "/articles/page/" + currentPage + "/";
+        return "/articles/pages/" + currentPage + "/";
     }
 
     public int getNextPage() {
-        if(this.page < this.getTotalPages()){
-            this.nextPage = this.page + 1;
-        }
+        this.nextPage = this.page + 1;
         return nextPage;
     }
 
@@ -150,7 +135,6 @@ public class Paginator {
     public Map bulid(){
         Map map = new HashMap();
         map.put("per_page", this.getPerPage());
-        map.put("posts", this.getPosts());
         map.put("total_posts", this.getTotalPages());
         map.put("total_pages", this.getTotalPages());
         map.put("page", this.getPage());

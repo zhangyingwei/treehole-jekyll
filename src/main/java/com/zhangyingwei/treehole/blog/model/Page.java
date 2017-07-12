@@ -1,78 +1,29 @@
 package com.zhangyingwei.treehole.blog.model;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
- * @author: zhangyw
- * @date: 2017/7/9
- * @time: 下午2:54
- * @desc: 打开博客的时候实际显示的对象
+ * Created by zhangyw on 2017/7/12.
+ * 当前页面对象
+ * 主要包含页面信息
  */
 public class Page {
     /**
-     * 页面内容的源码。
-     */
-    private String content;
-
-    /**
-     * 页面的标题
+     * 当前页的标题
      */
     private String title;
-
     /**
-     * 页面摘要的源码
-     */
-    private String excerpt;
-
-    /**
-     * 帖子以斜线打头的相对路径，例子： /2008/12/14/my-post.html。
+     * 当前页的 url
      */
     private String url;
-
     /**
-     * 帖子的日期。
-     * 日期的可以在帖子的头信息中通过用以下格式 YYYY-MM-DD HH:MM:SS (假设是 UTC),
-     * 或者 YYYY-MM-DD HH:MM:SS +/-TTTT ( 用于声明不同于 UTC 的时区， 比如 2008-12-14 10:30:00 +0900) 来显示声明其他 日期/时间 的方式被改写，
+     * 当前页的 description
      */
-    private String date;
-
+    private String description;
     /**
-     * 帖子的唯一标识码（在RSS源里非常有用），比如 /2008/12/14/my-post
-     * 这里使用数据库里的唯一标识
-     * 使用 UUID 应该可以吧
+     * 如果当前被处理的页面是一个 Post，这个变量就会包含最多10个相关的 Post。默认的情况下， 相关性是低质量的，但是能被很快的计算出来。
      */
-    private String id;
-
-    /**
-     * 这个帖子所属的 Categories。
-     */
-    private String categories;
-
-    /**
-     * 这个 Post 所属的所有 tags。
-     */
-    private List tags;
-
-    /**
-     * Post 或者 Page 的源文件地址,
-     * 在这里就是前边补齐域名或者ip信息的地址
-     */
-    private String path;
-
-    /**
-     * 是否允许评论
-     */
-    private boolean comment;
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
+    private List<Post> relatedPosts;
 
     public String getTitle() {
         return title;
@@ -80,14 +31,6 @@ public class Page {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getExcerpt() {
-        return excerpt;
-    }
-
-    public void setExcerpt(String excerpt) {
-        this.excerpt = excerpt;
     }
 
     public String getUrl() {
@@ -98,70 +41,29 @@ public class Page {
         this.url = url;
     }
 
-    public String getDate() {
-        return date;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getId() {
-        return id;
+    public List<Post> getRelatedPosts() {
+        return relatedPosts;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getCategories() {
-        return categories;
-    }
-
-    public void setCategories(String categories) {
-        this.categories = categories;
-    }
-
-    public List getTags() {
-        return tags;
-    }
-
-    public void setTags(List tags) {
-        this.tags = tags;
-    }
-
-    public String getPath() {
-        return path;
-    }
-
-    public void setPath(String path) {
-        this.path = path;
-    }
-
-    public boolean isComment() {
-        return comment;
-    }
-
-    public void setComment(boolean comment) {
-        this.comment = comment;
+    public void setRelatedPosts(List<Post> relatedPosts) {
+        this.relatedPosts = relatedPosts;
     }
 
     @Override
     public String toString() {
         return "Page{" +
-                "content='" + content + '\'' +
-                ", title='" + title + '\'' +
-                ", excerpt='" + excerpt + '\'' +
+                "title='" + title + '\'' +
                 ", url='" + url + '\'' +
-                ", date='" + date + '\'' +
-                ", id='" + id + '\'' +
-                ", categories=" + categories +
-                ", tags=" + tags +
-                ", path='" + path + '\'' +
+                ", description='" + description + '\'' +
+                ", relatedPosts=" + relatedPosts +
                 '}';
-    }
-
-    public Page bulid(){
-        return this;
     }
 }

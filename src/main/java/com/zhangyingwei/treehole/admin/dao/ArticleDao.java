@@ -23,7 +23,7 @@ public interface ArticleDao {
     @Select("select * from article where flag = 0 order by date desc")
     List<Article> selectActiveArticles() throws Exception;
 
-    @Select("select a.id,a.title,a.subpath,a.tags,a.intro,a.introhtml,a.article,a.articlehtml,k.name as kind,a.usecommont,a.flag,a.date from article as a left join kind k on a.kind = k.id where a.flag=1 order by a.date desc")
+    @Select("select a.id,a.title,a.subpath,a.tags,a.excerpt,a.excerpthtml,a.content,a.contenthtml,k.name as kind,a.usecommont,a.flag,a.date from article as a left join kind k on a.categories = k.id where a.flag=1 order by a.date desc")
     List<Article> selectPosts() throws Exception;
 
     @Insert("insert into article(title,subpath,tags,intro,introhtml,article,articlehtml,kind,usecommont,flag) values(#{article.title},#{article.subpath},#{article.tags},#{article.intro},#{article.introHtml},#{article.article},#{article.articleHtml},#{article.kind},#{article.usecommont},#{article.flag})")

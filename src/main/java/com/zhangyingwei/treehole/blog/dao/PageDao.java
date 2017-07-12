@@ -25,7 +25,7 @@ public interface PageDao {
      * 查询一个按照时间倒叙排列的 post 集合
      * @return
      */
-    @Select("select a.id,a.title,a.subpath,a.tags,a.excerpt,a.excerpthtml,a.content,a.contenthtml,k.name as kind,a.usecommont,a.flag,a.date from article as a left join kind k on a.categories = k.id where a.flag=1 order by date desc")
+    @Select("select a.id,a.title,a.path,a.subpath,a.tags,a.excerpt,a.excerpthtml,a.content,a.contenthtml,k.name as categories,a.usecommont,a.flag,a.date from article as a left join kind k on a.categories = k.id where a.flag=1 order by date desc")
     List<Article> listPostsOrderByDate() throws Exception;
 
     /**
@@ -33,7 +33,7 @@ public interface PageDao {
      * @param paginator 分页参数
      * @return
      */
-    @Select("select a.id,a.title,a.subpath,a.tags,a.excerpt,a.excerpthtml,a.content,a.contenthtml,k.name as kind,a.usecommont,a.flag,a.date from article as a left join kind k on a.categories = k.id where a.flag=1 order by date desc limit #{paginator.start},#{paginator.perPage} ")
+    @Select("select a.id,a.title,a.path,a.subpath,a.tags,a.excerpt,a.excerpthtml,a.content,a.contenthtml,k.name as categories,a.usecommont,a.flag,a.date from article as a left join kind k on a.categories = k.id where a.flag=1 order by date desc limit #{paginator.start},#{paginator.perPage} ")
     List<Article> listPostsOrderByDateWithPaginator(@Param("paginator") Paginator paginator) throws Exception;
 
     /**
@@ -42,7 +42,7 @@ public interface PageDao {
      * @param id
      * @return
      */
-    @Select("select a.id,a.title,a.subpath,a.tags,a.excerpt,a.excerpthtml,a.content,a.contenthtml,k.name as kind,a.usecommont,a.flag,a.date from article as a left join kind k on a.categories = k.id where a.flag=1 and id=#{id}")
+    @Select("select a.id,a.title,a.path,a.subpath,a.tags,a.excerpt,a.excerpthtml,a.content,a.contenthtml,k.name as categories,a.usecommont,a.flag,a.date from article as a left join kind k on a.categories = k.id where a.id=#{id} and a.flag=1")
     Article getArticleById(@Param("id") Integer id) throws Exception;
 
     /**
@@ -51,10 +51,13 @@ public interface PageDao {
      * @param subpath
      * @return
      */
-    @Select("select a.id,a.title,a.subpath,a.tags,a.excerpt,a.excerpthtml,a.content,a.contenthtml,k.name as kind,a.usecommont,a.flag,a.date from article as a left join kind k on a.categories = k.id where a.flag=1 and subpath=#{subpath}")
+    @Select("select a.id,a.title,a.path,a.subpath,a.tags,a.excerpt,a.excerpthtml,a.content,a.contenthtml,k.name as categories,a.usecommont,a.flag,a.date from article as a left join kind k on a.categories = k.id where a.flag=1 and a.subpath=#{subpath}")
     Article getArticleBySubpath(@Param("subpath") String subpath) throws Exception;
 
-    @Select("select a.id,a.title,a.subpath,a.tags,a.excerpt,a.excerpthtml,a.content,a.contenthtml,k.name as kind,a.usecommont,a.flag,a.date from article as a left join kind k on a.categories = k.id where a.flag=1 and kind=#{categories} order by a.date desc")
+    @Select("select a.id,a.title,a.path,a.subpath,a.tags,a.excerpt,a.excerpthtml,a.content,a.contenthtml,k.name as categories,a.usecommont,a.flag,a.date from article as a left join kind k on a.categories = k.id where a.flag=1 and a.categories=#{categories} order by a.date desc")
     List<Article> listPostsByCategories(@Param("categories") String categories) throws Exception;
+
+    @Select("select a.id,a.title,a.path,a.subpath,a.tags,a.excerpt,a.excerpthtml,a.content,a.contenthtml,k.name as categories,a.usecommont,a.flag,a.date from article as a left join kind k on a.categories = k.id where a.flag=1 order by a.categories")
+    List<Article> listPostsOrderByCategories() throws Exception;
 }
 

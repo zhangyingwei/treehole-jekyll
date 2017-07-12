@@ -446,15 +446,17 @@ public class TreeHoleUtils {
             link.setText(blog.getUrl() + "/articles/" + post.getId());
             Element guid = DocumentHelper.createElement("guid");
             guid.setText(blog.getUrl() + "/articles/" + post.getId());
-            Element category = DocumentHelper.createElement("category");
-            category.setText(post.getCategories());
             String tags = post.getTags();
             item.add(title);
             item.add(description);
             item.add(pubDate);
             item.add(link);
             item.add(guid);
-            item.add(category);
+            if(post.getCategories()!=null){
+                Element category = DocumentHelper.createElement("category");
+                category.setText(post.getCategories());
+                item.add(category);
+            }
             if(StringUtils.isNoneEmpty(tags)){
                 Arrays.stream(tags.split(",")).forEach(tag -> {
                     Element tagEl = DocumentHelper.createElement("category");

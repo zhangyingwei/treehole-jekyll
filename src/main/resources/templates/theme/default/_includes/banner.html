@@ -1,8 +1,8 @@
 <div class="banner">
   <div class="container">
     <% var showBanner = true; %>
-  	<% if (page.tags != null){%>
-        <% for(var tag in page.tags){ %>
+  	<% if (post.tags! != null){%>
+        <% for(var tag in post.tags){ %>
             <% if(strutil.length(tag)>0){ %>
                 <span class="tag">${tag}</span>
                 <% showBanner = false; %>

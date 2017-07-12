@@ -1,0 +1,62 @@
+<% include("default.html",{}){} %>
+<!-- Page Header -->
+<header class="intro-header" style="background-image: url('${ site.header_img }')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="site-heading">
+                    <h1><% if(page.title!=null){ %>${ page.title }<% } else { %>${ site.title }<%  }  %></h1>
+                    <hr class="small">
+                    <span class="subheading">${ page.description }</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <% for( post in posts){ %>
+            <div class="post-preview">
+                <a href="${ post.path }">
+                    <h2 class="post-title">
+                        ${ post.title }
+                    </h2>
+                    <h3 class="post-subtitle">
+                        ${ post.excerpt }
+                    </h3>
+                </a>
+                <p class="post-meta">Posted by ${ site.title } on ${post.date}</p>
+            </div>
+            <hr>
+            <%  }  %>
+
+            <!-- Pager -->
+            <% if(paginator.total_pages > 1){ %>
+            <ul class="pager">
+                <% if(paginator.previous_page>0){ %>
+                <li class="previous">
+                    <a href="${paginator.previous_page_path}">&larr; Newer Posts</a>
+                </li>
+                <%  }  %>
+                <% if(paginator.next_page <= paginator.total_pages){ %>
+                <li class="next">
+                    <a href="${paginator.next_page_path}">Older Posts &rarr;</a>
+                </li>
+                <%  }  %>
+            </ul>
+            <%  }  %>
+        </div>
+    </div>
+</div>
+
+<hr>
+<% include("../_includes/footer.html",{}){}%>
+
+<% include("../_includes/ga.html",{}){}%>
+
+</body>
+
+</html>

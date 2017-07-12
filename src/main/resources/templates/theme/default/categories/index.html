@@ -1,5 +1,5 @@
 <%
-var sourceBasePath = blog.url! + + '/theme/' + theme;
+var sourceBasePath = site.baseurl;
 %>
 <% include("../_layouts/default.html",{"sourceBasePath":sourceBasePath}){} %>
 <div class="container docs-container">
@@ -12,10 +12,10 @@ var sourceBasePath = blog.url! + + '/theme/' + theme;
 				<%
                 var map = {};
                 for(var post in posts){
-                    if(map[post.kind]!=null){
-                        map[post.kind] = array.add(map[post.kind],post);
+                    if(map[post.categories]!=null){
+                        map[post.categories] = array.add(map[post.categories],post);
                     }else{
-                        map[post.kind] = [post];
+                        map[post.categories] = [post];
                     }
                 }
                 %>
@@ -35,7 +35,7 @@ var sourceBasePath = blog.url! + + '/theme/' + theme;
               <% for (entity in map){ %>
                   <h2 id="${ entity.key }-ref">${ entity.key }</h2>
                   <ul>
-                      <% include("../_includes/pages_list.html",{"pages_list":entity.value,"blog":blog}){} %>
+                      <% include("../_includes/pages_list.html",{"pages_list":entity.value,"site":site}){} %>
                   </ul>
               <% } %>
           </div>

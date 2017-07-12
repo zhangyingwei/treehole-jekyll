@@ -1,95 +1,41 @@
 <%
-    var sourceBasePath = blog.url! + + '/theme/' + theme;
+    var sourceBasePath = site.baseurl;
 %>
 <% include("_layouts/default.html",{"sourceBasePath":sourceBasePath}){} %>
  <div class="container docs-container">
     <div class="row">
-      <div class="col-md-3">
-        <div class="sidebar hidden-print" role="complementary">
-          <div id="navigation">
-            <h1>目录</h1>
-            <ul class="nav sidenav">
-              <%
-                var before_year = "";
-                var before_month = "";
-              %>
-              <% for( post in posts) { %>
-                <%
-                  var this_year =  yearFromString(post.date,"yyyy-MM-dd HH:mm:ss");
-                  var this_month =  monthFromString(post.date,"yyyy-MM-dd HH:mm:ss");
-                %>
-                <% if(postLP.first){ %>
-                    <li>
-                        <a href="#year_${this_year}">${this_year}</a>
-                        <ul>
-                            <li><a href="#month_${this_year}_${this_month}">${this_month}</a></li>
-                <% }else{ %>
-                    <% if(this_year!=before_year){ %>
-                            </ul>
-                        </li>
-                        <li>
-                            <a href="#year_${this_year}">${this_year}</a>
-                            <ul>
-                                <li><a href="#month_${this_year}_${this_month}">${this_month}</a></li>
-                    <% }else if(this_month!=before_month){ %>
-                                <li><a href="#month_${this_year}_${this_month}">${this_month}</a></li>
-                    <% } %>
-                <% } %>
-                <% if(postLP.last){ %>
-                        </ul>
-                    </li>
-                <% } %>
-                <%
-                  before_year = this_year;
-                  before_month = this_month;
-                %>
-              <% } %>
-            </ul>
-          </div>
+        <div class="col-md-3" role="main">
+            <div class="sidebar hidden-print" role="complementary">
+                <div id="navigation">
+                    <div><strong>关于我</strong></div>
+                    ${site.about}
+                </div>
+            </div>
         </div>
-      </div>
       <div class="col-md-9" role="main">
         <div class="panel docs-content">
           <div class="wrapper">
             <div class="home">
-              <%
-                var before_year2 = "";
-                var before_month2 = "";
-              %>
               <% for( post in posts!) { %>
-                <%
-                    var this_year =  yearFromString(post.date,"yyyy-MM-dd HH:mm:ss");
-                    var this_month =  monthFromString(post.date,"yyyy-MM-dd HH:mm:ss");
-                %>
-                <% if(postLP.first){ %>
-                  <h1 id="year_${this_year}">${this_year}</h1>
-                  <h2 id="month_${this_year}_${this_month}">${this_month}</h2>
-                  <ul>
-                <% }else{ %>
-                    <% if (this_year != before_year2){ %>
-                          </ul>
-                        <h1 id="year_${this_year}">${this_year}</h1>
-                        <h2 id="month_${this_year}_${this_month}">${this_month}</h2>
-                        <ul>
-                    <% }else{ %>
-                        <% if (this_month != before_month2){ %>
-                            </ul>
-                            <h2 id="month_${this_year}_${this_month}">${this_month}</h2>
-                            <ul>
-                        <% } %>
-                    <% } %>
-                <% } %>
-                <ol class="breadcrumb">
-                    <li><span>${ post.date }</span> &raquo; <a href="${ blog.url +'/articles/'+ post.id }">${ post.title }</a></li>
-                </ol>
-                <% if(postLP.last){ %>
-                    </ul>
-                <% } %>
-                <%
-                  before_year2 = this_year;
-                  before_month2 = this_month;
-                %>
+                <div class="item-list">
+                    <h2>${post.title}</h2>
+                    <h6>发表于 ${post.date}</h6>
+                    <p>${post.excerpt}</p>
+                    <a href="${post.path}"><div class="read-more">阅读全文</div></a>
+                </div>
               <% } %>
+                <div class="pageinfo row">
+                    <div class="col-md-6">
+                        <% if(paginator.previous_page > 0){  %>
+                        <a href="${paginator.previous_page_path}"><div class="left-page">上一页</div></a>
+                        <% } %>
+                    </div>
+                    <div class="col-md-6">
+                        <% if(paginator.next_page <= paginator.total_pages){ %>
+                        <a href="${paginator.next_page_path}"><div class="right-page">下一页</div></a>
+                        <% } %>
+                    </div>
+                </div>
             </div>
           </div>
         </div>

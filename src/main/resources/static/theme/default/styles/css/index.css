@@ -7151,3 +7151,19 @@ article img {
 body{
     line-height: 25px;
 }
+
+.item-list {
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(158, 158, 158, 0.31);
+}
+
+.item-list p {
+    font-size: 15px;
+    color: rgba(0, 0, 0, 0.58);
+}
+.pageinfo{
+    padding-top: 50px;
+}
+.pageinfo div{
+    text-align: center;
+}

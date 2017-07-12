@@ -1,6 +1,6 @@
 package com.zhangyingwei.treehole.admin.model;
 
-import com.zhangyingwei.treehole.blog.model.Page;
+import com.zhangyingwei.treehole.blog.model.Post;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.validation.constraints.NotNull;
@@ -217,8 +217,8 @@ public class Article {
      * 转换对象为 page
      * @return
      */
-    public Page toPage() {
-        Page page = new Page();
+    public Post toPage() {
+        Post page = new Post();
         page.setId(this.getId());
         page.setTitle(this.getTitle());
         page.setPath(this.getPath());
