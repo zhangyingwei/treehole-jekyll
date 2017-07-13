@@ -25,6 +25,7 @@ public class Pages {
     public static final String BLOG_THEME_CATEGORIES = "categories/index";
     public static final String ADMIN_COMMONTS = "admin/article/commont-index";
     public static final String BLOG_THEME_ABOUT = "about/index";
+    public static final String BLOG_THEME_TAGS = "tags/index";
 
     public static String blog(TreeHoleConfig config,String themePage){
         return TreeHoleEnum.THEME_BASEPATH.getValue() + "/" + config.getTheme() + "/" + themePage;

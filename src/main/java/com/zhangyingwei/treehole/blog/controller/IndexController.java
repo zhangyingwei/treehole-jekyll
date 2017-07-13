@@ -3,10 +3,7 @@ package com.zhangyingwei.treehole.blog.controller;
 import com.zhangyingwei.treehole.admin.model.Link;
 import com.zhangyingwei.treehole.admin.service.BlogManagerService;
 import com.zhangyingwei.treehole.admin.service.LinkService;
-import com.zhangyingwei.treehole.blog.model.Page;
-import com.zhangyingwei.treehole.blog.model.Post;
-import com.zhangyingwei.treehole.blog.model.Paginator;
-import com.zhangyingwei.treehole.blog.model.Site;
+import com.zhangyingwei.treehole.blog.model.*;
 import com.zhangyingwei.treehole.blog.service.IPageService;
 import com.zhangyingwei.treehole.common.Pages;
 import com.zhangyingwei.treehole.common.annotation.TreeHoleAtcion;
@@ -142,8 +139,30 @@ public class IndexController {
 
     @GetMapping("/about")
     @TreeHoleAtcion("打开关于我页面")
-    public String indexAbout(){
+    public String indexAbout(Map<String, Object> model) throws TreeHoleException {
+        Site site = this.getSiteConfig();
+        Page pageInfo = new Page();
+        pageInfo.setTitle(site.getConfig("name"));
+        pageInfo.setUrl("/about");
+        pageInfo.setDescription(site.getConfig("desc"));
+        model.put("site", site.bulid());
+        model.put("page", pageInfo);
         return Pages.blog(treeHoleConfig, Pages.BLOG_THEME_ABOUT);
+    }
+
+    @GetMapping("/tag")
+    @TreeHoleAtcion("打开标签页面")
+    public String tags(Map<String, Object> model) throws TreeHoleException {
+        Site site = this.getSiteConfig();
+        Page pageInfo = new Page();
+        pageInfo.setTitle(site.getConfig("name"));
+        pageInfo.setUrl("/about");
+        pageInfo.setDescription(site.getConfig("desc"));
+        List<Tag> tags = this.pageService.listPostOrderByTags();
+        model.put("site", site.bulid());
+        model.put("page", pageInfo);
+        model.put("tags", tags);
+        return Pages.blog(treeHoleConfig, Pages.BLOG_THEME_TAGS);
     }
 
 

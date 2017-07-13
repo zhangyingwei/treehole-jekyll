@@ -2,6 +2,7 @@ package com.zhangyingwei.treehole.blog.service;
 
 import com.zhangyingwei.treehole.blog.model.Post;
 import com.zhangyingwei.treehole.blog.model.Paginator;
+import com.zhangyingwei.treehole.blog.model.Tag;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 
 import java.util.List;
@@ -66,4 +67,12 @@ public interface IPageService {
      * @return
      */
     List<Post> listRelatedPosts(String categories) throws TreeHoleException;
+
+    /**
+     * 查询 Post
+     * 通过 tag 排序
+     * @return
+     * @throws TreeHoleException
+     */
+    List<Tag> listPostOrderByTags() throws TreeHoleException;
 }
