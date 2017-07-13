@@ -19,7 +19,7 @@ public class DateToString implements Function {
         String timeStr = paras[0]+"";
         try {
             Date date = DateUtils.formate(timeStr);
-            return DateUtils.formate("MMM d",date).getBytes();
+            return DateUtils.formate("MMM d",date);
         } catch (ParseException e) {
             e.printStackTrace();
         }

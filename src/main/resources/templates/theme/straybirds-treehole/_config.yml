@@ -1,0 +1,41 @@
+######################### theme kunka condigure ##############################################
+#Site config
+title: 张英伟的博客
+keywords: 张英伟的博客
+favicon: http://jekyllrb.com/favicon.png
+
+#Nav config
+nav:
+  - text: 首页
+    url: /
+  - text: 分类目录 
+    url: /categories
+  - text: 友情链接
+    url: /links
+
+#Author config
+author_name: 张英伟
+author_email: zhangyw001@gmail.com
+author_detailIntro: Jekyll 是一个简洁的、特别针对博客平台的 静态网站 生成器
+#Follow me, you can choose your icon by http://fortawesome.github.io/Font-Awesome/icons/#brand
+
+follow:
+  - class: icon-rss
+    url: feed
+  - class: icon-weibo
+    url: http://weibo.com
+  - class: icon-renren
+    url: http://renren.com
+  - class: icon-github-alt
+    url: http://github.com
+  - class: icon-twitter
+    url: http://twitter.com
+  - class: icon-google-plus
+    url: http://google.com
+
+#Links
+customLinks:
+  掌心 : http://www.zhanxin.info
+  Jekyll: http://jekyllrb.com
+  Jekyll Theme : http://www.zhanxin.info/themes.html
+  message: Friends

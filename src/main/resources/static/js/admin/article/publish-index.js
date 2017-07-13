@@ -57,7 +57,7 @@ $(function(){
             var title = $("#title").val();
             var subpath = $("#subpath").val();
             var tags = $("#a-tags").val();
-            var kind = $("#a-kind").val();
+            var kind = $("#a-categories").val();
             var article = this.formateArticle(this.getContext())
             article.title = title;
             article.subpath = subpath;

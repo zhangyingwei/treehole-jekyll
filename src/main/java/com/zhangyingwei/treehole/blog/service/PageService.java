@@ -1,5 +1,6 @@
 package com.zhangyingwei.treehole.blog.service;
 
+import com.zhangyingwei.treehole.TreeholeApplication;
 import com.zhangyingwei.treehole.admin.model.Article;
 import com.zhangyingwei.treehole.blog.dao.PageDao;
 import com.zhangyingwei.treehole.blog.model.Post;
@@ -63,6 +64,7 @@ public class PageService implements IPageService {
     @Override
     public List<Post> listPostsByCategories(String categories) throws TreeHoleException {
         try {
+            categories = "%" + categories + "%";
             List<Article> articles = this.pageDao.listPostsByCategories(categories);
             return articles.stream().map(article -> article.toPage()).collect(Collectors.toList());
         } catch (Exception e) {
@@ -85,6 +87,16 @@ public class PageService implements IPageService {
         try {
             Article articie = this.pageDao.getArticleBySubpath(subpath);
             return articie.toPage();
+        } catch (Exception e) {
+            throw new TreeHoleException(e);
+        }
+    }
+
+    @Override
+    public List<Post> listRelatedPosts(String categories) throws TreeHoleException {
+        try {
+            List<Article> articles = this.pageDao.listRelatedPosts(categories);
+            return articles.stream().map(article -> article.toPage()).collect(Collectors.toList());
         } catch (Exception e) {
             throw new TreeHoleException(e);
         }

@@ -42,6 +42,7 @@ public class BeetlConf {
                 put("array_to_sentence_string", new ArrayToSentenceString());
                 put("markdownify", new MarkDownify());
                 put("replace", new Replace());
+                put("limit", new Limit());
             }
         });
         //读取配置文件信息

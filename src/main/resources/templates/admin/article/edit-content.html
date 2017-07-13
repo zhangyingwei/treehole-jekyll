@@ -40,7 +40,7 @@
                             <div id="suggestions-container" style="position: relative; float: left; width: 250px; "></div>
                         </div>
                         <div class="col-md-4">
-                            <select id="a-kind" name="kind" type="text" class="kind form-control col-xs-12">
+                            <select id="a-categories" name="categories" type="text" class="kind form-control col-xs-12">
                                 <% for(kind in kinds){%>
                                     <option value="${kind.id!}">${kind.name!}</option>
                                 <%}%>
@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 <div id="a-center">
-                    <textarea name="article" id="editor">${article.article!}</textarea>
+                    <textarea name="article" id="editor">${article.content!}</textarea>
                     <textarea name="articleHtml" hidden id="editorHtml"></textarea>
                 </div>
                 <div id="a-bottom">

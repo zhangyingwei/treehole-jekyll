@@ -1,0 +1,29 @@
+<% for( post in posts){ %>
+    <div class="article">
+        <h3 class="title"><a href="${ post.path }" title="${ post.title }">${ post.title }</a></h3>
+        <article class="rexp">
+            <p>${ post.excerpt }</p>
+        </article>
+        <a href="${ post.path }" class="more"><i class="icon-link"></i></a>
+        <div class="info">
+            <span class="info-title"><i class="icon-calendar"></i> Published: </span>
+            <span class="info-date">${date_to_string(post.date)}</span>
+             <span class="info-title"><i class="icon-folder-open"></i> Category: </span>
+            <span class="info-link"><a href="${ site.url }/categories/${post.categories}" >${ post.categories }</a></span>
+        </div>
+    </div>
+<%  }  %>
+<% if(paginator.total_pages > 1!=null){ %>
+    <nav class="pagination fn-clear">
+        <span class="pagination-icon"><i class=" icon-copy"></i></span>
+        <ul class="pagination-list">
+            <% for( p in range(1,paginator.total_pages+1)){ %>
+                <% if(p! == paginator.page){ %>
+                    <li class="current"><a href="javascript:void(0);">${ p }</a></li>
+                <% } else { %>
+                    <li><a href="${ site.url }/articles/pages/${p}">${ p }</a></li>
+                <%  }  %>
+            <%  }  %>
+        </ul>
+    </nav>
+<%  }  %>

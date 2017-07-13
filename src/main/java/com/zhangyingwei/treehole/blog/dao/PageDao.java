@@ -54,10 +54,13 @@ public interface PageDao {
     @Select("select a.id,a.title,a.path,a.subpath,a.tags,a.excerpt,a.excerpthtml,a.content,a.contenthtml,k.name as categories,a.usecommont,a.flag,a.date from article as a left join kind k on a.categories = k.id where a.flag=1 and a.subpath=#{subpath}")
     Article getArticleBySubpath(@Param("subpath") String subpath) throws Exception;
 
-    @Select("select a.id,a.title,a.path,a.subpath,a.tags,a.excerpt,a.excerpthtml,a.content,a.contenthtml,k.name as categories,a.usecommont,a.flag,a.date from article as a left join kind k on a.categories = k.id where a.flag=1 and a.categories=#{categories} order by a.date desc")
+    @Select("select a.id,a.title,a.path,a.subpath,a.tags,a.excerpt,a.excerpthtml,a.content,a.contenthtml,k.name as categories,a.usecommont,a.flag,a.date from article as a left join kind k on a.categories = k.id where a.flag=1 and k.name like #{categories} order by a.date desc")
     List<Article> listPostsByCategories(@Param("categories") String categories) throws Exception;
 
     @Select("select a.id,a.title,a.path,a.subpath,a.tags,a.excerpt,a.excerpthtml,a.content,a.contenthtml,k.name as categories,a.usecommont,a.flag,a.date from article as a left join kind k on a.categories = k.id where a.flag=1 order by a.categories")
     List<Article> listPostsOrderByCategories() throws Exception;
+
+    @Select("select a.id,a.title,a.path,a.subpath,a.tags,a.excerpt,a.excerpthtml,a.content,a.contenthtml,k.name as categories,a.usecommont,a.flag,a.date from article as a left join kind k on a.categories = k.id where a.flag=1 and k.name like #{categories} order by a.date desc limit 6")
+    List<Article> listRelatedPosts(String categories) throws Exception;
 }
 

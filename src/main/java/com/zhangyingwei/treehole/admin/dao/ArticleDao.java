@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Mapper
 public interface ArticleDao {
-    @Select("select a.id,a.title,a.subpath,a.tags,a.intro,a.introhtml,a.article,a.articlehtml,k.name as kind,a.usecommont,a.flag,a.date from article as a left join kind k on a.kind = k.id order by a.date desc")
+    @Select("select a.id,a.title,a.subpath,a.tags,a.excerpt,a.excerpthtml,a.content,a.contenthtml,k.name as categories,a.usecommont,a.flag,a.date from article as a left join kind k on a.categories = k.id order by a.date desc")
     List<Article> selectArticles() throws Exception;
 
     @Select("select * from article where flag = 0 order by date desc")
@@ -26,7 +26,7 @@ public interface ArticleDao {
     @Select("select a.id,a.title,a.subpath,a.tags,a.excerpt,a.excerpthtml,a.content,a.contenthtml,k.name as kind,a.usecommont,a.flag,a.date from article as a left join kind k on a.categories = k.id where a.flag=1 order by a.date desc")
     List<Article> selectPosts() throws Exception;
 
-    @Insert("insert into article(title,subpath,tags,intro,introhtml,article,articlehtml,kind,usecommont,flag) values(#{article.title},#{article.subpath},#{article.tags},#{article.intro},#{article.introHtml},#{article.article},#{article.articleHtml},#{article.kind},#{article.usecommont},#{article.flag})")
+    @Insert("insert into article(title,subpath,tags,excerpt,excerpthtml,content,contenthtml,categories,usecommont,flag) values(#{article.title},#{article.subpath},#{article.tags},#{article.excerpt},#{article.excerptHtml},#{article.content},#{article.contentHtml},#{article.categories},#{article.usecommont},#{article.flag})")
     void insertArticle(@Param("article") Article article) throws Exception;
 
     @Select("select * from article where subpath=#{subpath}")
@@ -41,13 +41,13 @@ public interface ArticleDao {
     @Select("select * from article where id=#{id}")
     Article selectArticleById(String id) throws Exception;
 
-    @Select("select a.id,a.title,a.subpath,a.tags,a.intro,a.introhtml,a.article,a.articlehtml,k.name as kind,a.usecommont,a.flag,a.date from article as a left join kind k on a.kind = k.id where a.id=#{id} and a.flag=1 order by a.date desc")
+    @Select("select a.id,a.title,a.subpath,a.tags,a.excerpt,a.excerpthtml,a.content,a.contenthtml,k.name as categories,a.usecommont,a.flag,a.date from article as a left join kind k on a.categories = k.id where a.id=#{id} and a.flag=1 order by a.date desc")
     Article selectPostById(String id) throws Exception;
 
-    @Select("select * from article where kind=#{id}")
+    @Select("select * from article where categories=#{id}")
     List<Article> selectArticleByKind(String id) throws Exception;
 
-    @Select("select * from article where kind=#{id} and id=1")
+    @Select("select * from article where categories=#{id} and id=1")
     List<Article> selectPostByKind(String id) throws Exception;
 
     @Update("update article set flag=1,date=datetime('now','localtime') where id=#{id}")
@@ -59,7 +59,7 @@ public interface ArticleDao {
     @Update("update article set flag=9 where id=#{id}")
     void deleteStateById(String id) throws Exception;
 
-    @Update("update article set title=#{article.title},subpath=#{article.subpath},tags=#{article.tags},intro=#{article.intro},introHtml=#{article.introHtml},article=#{article.article},articleHtml=#{article.articleHtml},usecommont=#{article.usecommont},flag=#{article.flag},date=datetime('now','localtime') where id=#{article.id}")
+    @Update("update article set title=#{article.title},subpath=#{article.subpath},tags=#{article.tags},excerpt=#{article.excerpt},excerptHtml=#{article.excerptHtml},content=#{article.content},contentHtml=#{article.contentHtml},usecommont=#{article.usecommont},flag=#{article.flag},date=datetime('now','localtime') where id=#{article.id}")
     void updateArticleById(@Param("article") Article article) throws  Exception;
 
     @Select("select count(*) from article")

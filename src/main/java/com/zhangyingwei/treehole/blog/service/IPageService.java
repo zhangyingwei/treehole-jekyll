@@ -60,4 +60,10 @@ public interface IPageService {
     Post getPageBySubpath(String subpath) throws TreeHoleException;
 
 
+    /**
+     * 根据文章的 类型 推荐相关文章
+     * @param categories
+     * @return
+     */
+    List<Post> listRelatedPosts(String categories) throws TreeHoleException;
 }

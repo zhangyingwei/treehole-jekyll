@@ -72,10 +72,13 @@ public class IndexController {
         pageInfo.setDescription(site.getConfig("desc"));
         //查询文章信息
         Post post = this.pageService.getPageById(id);
+        //查询相关文章
+        List<Post> relatedPosts = this.pageService.listRelatedPosts(post.getCategories());
         //加载配置信息
         model.put("site", site.bulid());
         //加载page信息
         model.put("page", pageInfo);
+        model.put("related", relatedPosts);
         //加载page信息
         model.put("post", post);
         return Pages.blog(treeHoleConfig, Pages.BLOG_THEME_ARTICLE);
@@ -91,16 +94,19 @@ public class IndexController {
         pageInfo.setDescription(site.getConfig("desc"));
         //查询文章信息
         Post post = this.pageService.getPageBySubpath(alias);
+        //查询相关文章
+        List<Post> relatedPosts = this.pageService.listRelatedPosts(post.getCategories());
         //加载配置信息
         model.put("site", site.bulid());
         //加载page信息
         model.put("page", post);
+        model.put("related", relatedPosts);
         //加载page信息
         model.put("post", post);
         return Pages.blog(treeHoleConfig, Pages.BLOG_THEME_ARTICLE);
     }
 
-    @GetMapping("/categories/")
+    @GetMapping("/categories")
     @TreeHoleAtcion("按分类打开文章")
     public String categories(Map<String, Object> model) throws TreeHoleException {
         Site site = this.getSiteConfig();
