@@ -1,6 +1,8 @@
 package com.zhangyingwei.treehole.blog.controller;
 
+import com.zhangyingwei.treehole.admin.model.Link;
 import com.zhangyingwei.treehole.admin.service.BlogManagerService;
+import com.zhangyingwei.treehole.admin.service.LinkService;
 import com.zhangyingwei.treehole.blog.model.Page;
 import com.zhangyingwei.treehole.blog.model.Post;
 import com.zhangyingwei.treehole.blog.model.Paginator;
@@ -39,6 +41,8 @@ public class IndexController {
     private BlogManagerService blogManagerService;
     @Autowired
     private IPageService pageService;
+    @Autowired
+    private LinkService linkService;
 
     @GetMapping
     public String index(){
@@ -136,6 +140,13 @@ public class IndexController {
         return Pages.blog(treeHoleConfig, Pages.BLOG_THEME_CATEGORIES);
     }
 
+    @GetMapping("/about")
+    @TreeHoleAtcion("打开关于我页面")
+    public String indexAbout(){
+        return Pages.blog(treeHoleConfig, Pages.BLOG_THEME_ABOUT);
+    }
+
+
     /**
      * 获取主题配置文件中的信息
      * @return
@@ -152,6 +163,8 @@ public class IndexController {
             //读取界面中配置的博客信息
             Map blogConf = this.blogManagerService.getBlogConf().bulid();
             site.setConfigs(blogConf);
+            List<Link> links = this.linkService.listLinks();
+            site.setLinks(links);
         } catch (FileNotFoundException e) {
             logger.error(e.getLocalizedMessage());
             throw new TreeHoleException("主题配置文件未找到");

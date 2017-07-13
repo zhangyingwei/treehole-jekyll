@@ -33,8 +33,8 @@ var sourceBasePath = site.baseurl;
       <div class="panel docs-content">
         <div class="post-content">
           <div class="wrapper">
-              <% if(page.useCommont){ %>
-                <% include("../../../lib/comments.html",{"page":page}){} %>
+              <% if(post.comment){ %>
+                <% include("../../../lib/comments.html",{"page":post}){} %>
               <% }else{ %>
               <span style="margin-top: 70px; text-align: center; font-size: 13px;color: #F44336; display: block">评论关闭</span>
               <% } %>

@@ -1,5 +1,6 @@
 package com.zhangyingwei.treehole.blog.model;
 
+import com.zhangyingwei.treehole.admin.model.Link;
 import com.zhangyingwei.treehole.common.utils.DateUtils;
 
 import java.util.HashMap;
@@ -27,6 +28,11 @@ public class Site {
      * 所有的通过命令行和 _config.yml 设置的变量都会存到这个 site 里面。 举例来说，如果你设置了 url: http://mysite.com 在你的配置文件中，那么在你的 Posts 和 Pages 里面，这个变量就被存储在了 site.url。
      */
     private Map configs;
+
+    /**
+     * 友链
+     */
+    private List<Link> links;
 
     public String getTime() {
         return time;
@@ -57,6 +63,14 @@ public class Site {
         this.configs.putAll(configs);
     }
 
+    public List<Link> getLinks() {
+        return links;
+    }
+
+    public void setLinks(List<Link> links) {
+        this.links = links;
+    }
+
     /**
      * 生成最终结果
      * @return
@@ -65,6 +79,7 @@ public class Site {
         Map map = new HashMap();
         map.put("time", this.getTime());
         map.put("theme", this.getTheme());
+        map.put("links", this.getLinks());
         map.put("baseurl", this.getConfig("url") + "/theme/" + this.getTheme() + "/");
         map.putAll(this.getConfigs());
         return map;
