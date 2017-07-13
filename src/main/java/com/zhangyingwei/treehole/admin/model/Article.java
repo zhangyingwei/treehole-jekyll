@@ -95,6 +95,7 @@ public class Article {
     }
 
     public String getPath() {
+        this.path = "/articles/" + this.id;
         return path;
     }
 

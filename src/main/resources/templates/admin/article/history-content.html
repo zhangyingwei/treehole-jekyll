@@ -46,9 +46,9 @@
                             <th scope="row">${ articleLP.index! }</th>
                             <th hidden>${ article.id! }</th>
                             <td class="art-title">${ article.title!}</td>
-                            <td style="max-width: 300px;">${ article.intro! }</td>
+                            <td style="max-width: 300px;">${ article.excerpt! }</td>
                             <td>${ article.subpath! }</td>
-                            <td><span class="tag">${ article.kind! }</span></td>
+                            <td><span class="tag">${ article.categories! }</span></td>
                             <%
                             if(strutil.length(article.tags)>0){
                             article.tags = strutil.replace(article.tags,",","</span><span class='tag tag-org'>");

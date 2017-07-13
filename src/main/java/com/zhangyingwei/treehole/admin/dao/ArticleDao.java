@@ -59,7 +59,7 @@ public interface ArticleDao {
     @Update("update article set flag=9 where id=#{id}")
     void deleteStateById(String id) throws Exception;
 
-    @Update("update article set title=#{article.title},subpath=#{article.subpath},tags=#{article.tags},excerpt=#{article.excerpt},excerptHtml=#{article.excerptHtml},content=#{article.content},contentHtml=#{article.contentHtml},usecommont=#{article.usecommont},flag=#{article.flag},date=datetime('now','localtime') where id=#{article.id}")
+    @Update("update article set title=#{article.title},categories=#{article.categories},subpath=#{article.subpath},tags=#{article.tags},excerpt=#{article.excerpt},excerptHtml=#{article.excerptHtml},content=#{article.content},contentHtml=#{article.contentHtml},usecommont=#{article.usecommont},flag=#{article.flag},date=datetime('now','localtime') where id=#{article.id}")
     void updateArticleById(@Param("article") Article article) throws  Exception;
 
     @Select("select count(*) from article")

@@ -57,12 +57,12 @@ $(function(){
             var title = $("#title").val();
             var subpath = $("#subpath").val();
             var tags = $("#a-tags").val();
-            var kind = $("#a-kind").val();
+            var kind = $("#a-categories").val();
             var article = this.formateArticle(this.getContext())
             article.title = title;
             article.subpath = subpath;
             article.tags = tags;
-            article.kind = kind;
+            article.categories = kind;
             return article;
         },
         validArticle:function (article) {
@@ -70,7 +70,7 @@ $(function(){
                 $("#title").addClass("parsley-error");
                 layer.msg("请填写标题")
                 return false;
-            }else if(!article.kind && article.kind.trim().length===0){
+            }else if(!article.categories && article.categories.trim().length===0){
                 $("#a-kind").addClass("parsley-error");
                 layer.msg("请选择类别")
                 return false;
