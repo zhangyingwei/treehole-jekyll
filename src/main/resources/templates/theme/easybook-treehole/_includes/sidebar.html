@@ -1,0 +1,35 @@
+<div class="col-box col-box-author">
+  <img class="avatar" src="${ site.avatar }" alt="${ site.author }">
+  <div class="col-box-title name">${ site.author }</div>
+  <p>${ site.profile }</p>
+  <p class="contact">
+    <% if(site.github_username!=null){ %>
+    <a href="https://github.com/${ site.github_username }">GitHub</a>
+    <%  }  %>
+    <% if(site.twitter_username!=null){ %>
+    <a href="https://twitter.com/${ site.twitter_username }">Twitter</a>
+    <%  }  %>
+    <% if(site.email!=null){ %>
+    <a href="mailto:${ site.email }">Email</a>
+    <%  }  %>
+  </p>
+</div>
+
+<div class="col-box">
+  <div class="col-box-title">Newest Posts</div>
+  <ul class="post-list">
+    <% if(posts! != null){ %>
+      <% for( post in limit(posts,5)){ %>
+        <li><a class="post-link" href="${post.path}">${ post.title }</a></li>
+      <%  }  %>
+    <%  } else { %>
+      <% for( post in limit(related,5)){ %>
+      <li><a class="post-link" href="${post.path}">${ post.title }</a></li>
+      <%  }  %>
+    <%  }  %>
+  </ul>
+</div>
+
+<div class="col-box post-toc hide">
+  <div class="col-box-title">TOC</div>
+</div>

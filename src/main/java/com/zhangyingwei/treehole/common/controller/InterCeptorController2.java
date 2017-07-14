@@ -47,24 +47,6 @@ public class InterCeptorController2 {
         HttpServletResponse response = attributes.getResponse();
         HttpSession session = request.getSession();
         String uri = request.getRequestURI();
-        if(uri.startsWith("/install")) {
-            if(TreeHoleUtils.isInstalled()){
-                logger.info("已经安装，不能再次安装");
-                response.sendRedirect("/admin");
-            }
-        }else {
-            if(!TreeHoleUtils.isInstalled()){
-                logger.info("没有安装");
-                response.sendRedirect("/install");
-            }else{
-                if (session.getAttribute(TreeHoleEnum.STATE_DIC_KEY.getValue()) == null) {
-                    session.setAttribute(TreeHoleEnum.STATE_DIC_KEY.getValue(),TreeHoleUtils.getGolbleStateDic());
-                }
-                if(uri.startsWith("/admin") && !TreeHoleUtils.isLogin(session)){
-                    response.sendRedirect("/admin/login");
-                }
-            }
-        }
         // 记录下请求内容
         logger.info("URL : " + request.getRequestURL().toString());
         logger.info("HTTP_METHOD : " + request.getMethod());

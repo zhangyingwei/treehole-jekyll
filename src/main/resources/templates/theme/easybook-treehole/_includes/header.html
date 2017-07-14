@@ -1,0 +1,10 @@
+<header class="header">
+  <div class="wrapper">
+    <a class="site-title" href="/">${ site.title }</a>
+    <nav class="site-nav">
+      <% for( n in site.nav) {%>
+        <a class="page-link" href="${n.url}">${ n.text }</a>
+      <% } %>
+    </nav>
+  </div>
+</header>

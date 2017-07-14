@@ -1,6 +1,7 @@
 package com.zhangyingwei.treehole.install.controller;
 
 import com.zhangyingwei.treehole.common.Ajax;
+import com.zhangyingwei.treehole.common.annotation.Auth;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import com.zhangyingwei.treehole.common.utils.DbUtils;
 import com.zhangyingwei.treehole.common.utils.TreeHoleUtils;
@@ -12,6 +13,7 @@ import com.zhangyingwei.treehole.install.service.AdminInitService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -27,10 +29,13 @@ import java.util.Map;
 @Controller
 @Scope("prototype")
 @RequestMapping("/install")
+@Auth
 public class InstallController {
     private Logger logger = LoggerFactory.getLogger(InstallController.class);
     @Autowired
     private AdminInitService adminInitService;
+    @Value("${spring.datasource.url}")
+    private String url;
     @GetMapping
     public String page(Map<String,Object> model){
 //        Boolean installed = TreeHoleUtils.isInstalled();
@@ -63,8 +68,7 @@ public class InstallController {
     @PostMapping("/db/make")
     @ResponseBody
     public Map makeDatabase(@Valid DbConf dbConf) throws TreeHoleException {
-        //创建数据库
-//        TreeHoleUtils.makeDatabase(dbConf);
+        dbConf.setUrl(this.url);
         //创建数据库表
         TreeHoleUtils.makeTables(dbConf);
         return Ajax.success("数据库初始化成功");

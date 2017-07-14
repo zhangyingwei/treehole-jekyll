@@ -3,6 +3,7 @@ package com.zhangyingwei.treehole.admin.controller;
 import com.zhangyingwei.treehole.admin.model.User;
 import com.zhangyingwei.treehole.common.Pages;
 import com.zhangyingwei.treehole.common.TreeHoleEnum;
+import com.zhangyingwei.treehole.common.annotation.Auth;
 import com.zhangyingwei.treehole.common.annotation.TreeHoleAtcion;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import com.zhangyingwei.treehole.common.utils.TreeHoleUtils;
@@ -32,8 +33,9 @@ import java.util.Map;
 @Controller
 @Scope("prototype")
 @RequestMapping("/admin")
-public class LoginHandler {
-    private Logger logger = LoggerFactory.getLogger(LoginHandler.class);
+@Auth
+public class LoginController {
+    private Logger logger = LoggerFactory.getLogger(LoginController.class);
     @Autowired
     private AdminInitService adminInitService;
 

@@ -1,6 +1,7 @@
 package com.zhangyingwei.treehole.install.model;
 
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.beans.factory.annotation.Value;
 
 /**
  * Created by zhangyw on 2017/4/24.
@@ -11,8 +12,7 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 
 public class DbConf {
-    @NotEmpty(message = "url不能为空")
-    private String url = "jdbc:sqlite:treehole.db";
+    private String url;
     private String username;
     private String password;
 

@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -57,8 +56,15 @@ public class PageService implements IPageService {
     }
 
     @Override
-    public List<Post> listPostOrderByTag() {
-        return null;
+    public List<Post> listPostByTag(String tag) throws TreeHoleException {
+        String tagl = "%," + tag + "%";
+        String tagr = "%" + tag + "，%";
+        try {
+            List<Article> posts = this.pageDao.listPostsByTag(tagl, tagr);
+            return posts.stream().map(article -> article.toPage()).collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new TreeHoleException(e);
+        }
     }
 
     @Override
@@ -133,5 +139,15 @@ public class PageService implements IPageService {
             e.printStackTrace();
         }
         return new ArrayList<Tag>();
+    }
+
+    @Override
+    public List<String> listTags() throws TreeHoleException {
+        try {
+            List<String> tags = this.pageDao.listTags();
+            return tags;
+        } catch (Exception e) {
+            throw new TreeHoleException(e);
+        }
     }
 }

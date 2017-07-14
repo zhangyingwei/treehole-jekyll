@@ -1,0 +1,41 @@
+<% include("_layouts/default-up.html",{}){} %>
+<div class="home">
+  <a class="rss-link" href="${site.baseurl + "/feed.xml"}">RSS Feed</a>
+  <h1 class="page-heading">Articles</h1>
+
+  <ul class="post-list">
+    <% for( post in posts){ %>
+      <li>
+        <h2>
+          <a class="post-link" href="${post.path}">${ post.title }</a>
+        </h2>
+        
+        <div class="post-meta">${post.date}</div>
+
+        <div class="post-excerpt">
+          ${ post.excerpt }
+          <p>
+            <a class="post-link" href="${site.baseurl + post.url}">Read More &raquo;</a>
+          </p>
+        </div>
+      </li>
+    <%  }  %>
+  </ul>
+  
+  <!-- Pagination links -->
+<div class="pagination">
+  <% if(paginator.previous_page!=null){ %>
+    <a href="${site.baseurl + paginator.previous_page_path}" class="previous">PREV</a>
+  <% } else { %>
+    <span class="previous">PREV</span>
+  <%  }  %>
+  <span class="page_number ">${ paginator.page } of ${ paginator.total_pages }</span>
+  <% if(paginator.next_page!=null){ %>
+    <a href="${site.baseurl + paginator.next_page_path}" class="next">NEXT</a>
+  <% } else { %>
+    <span class="next ">NEXT</span>
+  <%  }  %>
+</div>
+
+</div>
+<% include("_layouts/default-down.html",{}){} %>

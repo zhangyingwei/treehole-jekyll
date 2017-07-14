@@ -37,7 +37,7 @@ public interface IPageService {
      * 通过 tag 排序
      * @return
      */
-    List<Post> listPostOrderByTag() throws TreeHoleException;
+    List<Post> listPostByTag(String tag) throws TreeHoleException;
 
     /**
      * 查询 指定 categories 的 psot
@@ -75,4 +75,10 @@ public interface IPageService {
      * @throws TreeHoleException
      */
     List<Tag> listPostOrderByTags() throws TreeHoleException;
+
+    /**
+     * 列出所有 tags
+     * @return
+     */
+    List<String> listTags() throws TreeHoleException;
 }

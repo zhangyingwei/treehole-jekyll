@@ -18,9 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -43,12 +41,17 @@ public class IndexController {
 
     @GetMapping
     public String index(){
-        return "redirect:/articles/pages/1";
+        Boolean page = treeHoleConfig.getPage();
+        if(page){
+            return "redirect:/articles/pages/1";
+        }else{
+            return "redirect:/articles";
+        }
     }
 
     @GetMapping("/articles/pages/{page}")
-    @TreeHoleAtcion("打开博客首页")
-    public String indexArticles(Map<String, Object> model,@PathVariable("page")Integer page) throws TreeHoleException {
+    @TreeHoleAtcion("打开博客首页(分页)")
+    public String indexArticlesWithPage(Map<String, Object> model,@PathVariable("page")Integer page) throws TreeHoleException {
         Site site = this.getSiteConfig();
         Paginator paginator = new Paginator().setPage(page);
         List<Post> posts = this.pageService.listPostsOrderByDate(paginator);
@@ -60,6 +63,20 @@ public class IndexController {
         model.put("page", pageInfo);
         model.put("posts", posts);
         model.put("paginator", paginator.bulid());
+        return Pages.blog(treeHoleConfig, Pages.BLOG_THEME_INDEX);
+    }
+    @GetMapping("/articles")
+    @TreeHoleAtcion("打开博客首页(全部文章)")
+    public String indexArticles(Map<String, Object> model) throws TreeHoleException {
+        Site site = this.getSiteConfig();
+        List<Post> posts = this.pageService.listPostsOrderByDate();
+        Page pageInfo = new Page();
+        pageInfo.setTitle(site.getConfig("name"));
+        pageInfo.setUrl("/articles");
+        pageInfo.setDescription(site.getConfig("desc"));
+        model.put("site", site.bulid());
+        model.put("page", pageInfo);
+        model.put("posts", posts);
         return Pages.blog(treeHoleConfig, Pages.BLOG_THEME_INDEX);
     }
 
@@ -150,18 +167,33 @@ public class IndexController {
         return Pages.blog(treeHoleConfig, Pages.BLOG_THEME_ABOUT);
     }
 
-    @GetMapping("/tag")
+    @GetMapping("/tags")
     @TreeHoleAtcion("打开标签页面")
     public String tags(Map<String, Object> model) throws TreeHoleException {
         Site site = this.getSiteConfig();
         Page pageInfo = new Page();
         pageInfo.setTitle(site.getConfig("name"));
-        pageInfo.setUrl("/about");
+        pageInfo.setUrl("/tags");
         pageInfo.setDescription(site.getConfig("desc"));
         List<Tag> tags = this.pageService.listPostOrderByTags();
         model.put("site", site.bulid());
         model.put("page", pageInfo);
         model.put("tags", tags);
+        return Pages.blog(treeHoleConfig, Pages.BLOG_THEME_TAGS);
+    }
+
+    @GetMapping("/tags/{tag}")
+    @TreeHoleAtcion("获取指定标签的文章")
+    public String getPostByTag(Map<String, Object> model,@PathVariable("tag") String tag) throws TreeHoleException {
+        Site site = this.getSiteConfig();
+        Page pageInfo = new Page();
+        pageInfo.setTitle(site.getConfig("name"));
+        pageInfo.setUrl("/tags");
+        pageInfo.setDescription(site.getConfig("desc"));
+        List<Post> posts = this.pageService.listPostByTag(tag);
+        model.put("site", site.bulid());
+        model.put("page", pageInfo);
+        model.put("posts", posts);
         return Pages.blog(treeHoleConfig, Pages.BLOG_THEME_TAGS);
     }
 
@@ -184,6 +216,8 @@ public class IndexController {
             site.setConfigs(blogConf);
             List<Link> links = this.linkService.listLinks();
             site.setLinks(links);
+            List<String> tags = this.pageService.listTags();
+            site.setTags(tags);
         } catch (FileNotFoundException e) {
             logger.error(e.getLocalizedMessage());
             throw new TreeHoleException("主题配置文件未找到");

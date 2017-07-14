@@ -26,6 +26,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by zhangyw on 2017/4/21.
@@ -51,27 +52,10 @@ public class TreeHoleUtils {
      * 创建数据库
      * @param dbConf
      */
-    public static void makeDatabase(DbConf dbConf) throws TreeHoleException {
-        try {
-            List<String> sqls = readSql(TreeHoleEnum.SQL_CREATE_DB.getValue());
-            if (sqls != null && sqls.size() > 0) {
-                Connection connection = DbUtils.getConnection(dbConf);
-                DbUtils.execute(connection, sqls.get(0));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new TreeHoleException("创建数据库错误", e);
-        }
-    }
-
-    /**
-     * 创建数据库
-     * @param dbConf
-     */
     public static void makeTables(DbConf dbConf) throws TreeHoleException {
         List<String> sqls = null;
         try {
-            sqls = readSql(TreeHoleEnum.SQL_CREATE_TABLE.getValue());
+            sqls = readSql();
             if(sqls!=null && sqls.size()>0){
                 Connection connection = DbUtils.getConnection(dbConf);
                 for (String sql : sqls) {
@@ -89,27 +73,16 @@ public class TreeHoleUtils {
 
     /**
      * 根据注释读取sql语句
-     * @param common
      * @return
      */
-    private static List<String> readSql(String common) throws TreeHoleException {
+    private static List<String> readSql() throws TreeHoleException {
         List<String> sqlList = new ArrayList<String>();
-//        File sqlFile = new File(TreeHoleEnum.CONF_INSTALL_SQL.getValue());
         File sqlFile = new File(TreeHoleEnum.RES_BASEPATH.getValue() + TreeHoleEnum.CONF_INSTALL_SQL.getValue());
-        BufferedReader reader = null;
         try {
-            reader = new BufferedReader(new FileReader(sqlFile));
-            String line = reader.readLine();
-            while(line!=null){
-                if(line.replaceAll("--","").trim().equals(common)){
-                    while ((line = reader.readLine()) != null && (!line.trim().startsWith("--"))) {
-                        if(StringUtils.isNotEmpty(line)){
-                            sqlList.add(line);
-                        }
-                    }
-                }
-                line = reader.readLine();
-            }
+            BufferedReader reader = new BufferedReader(new FileReader(sqlFile));
+            sqlList = reader.lines().filter(line -> {
+                return StringUtils.isNotEmpty(line) && !line.startsWith("--");
+            }).collect(Collectors.toList());
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             throw new TreeHoleException("未找到数据库脚本文件", e);

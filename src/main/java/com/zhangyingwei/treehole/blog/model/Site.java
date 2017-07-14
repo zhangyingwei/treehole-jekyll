@@ -33,6 +33,10 @@ public class Site {
      * 友链
      */
     private List<Link> links;
+    /**
+     * 标签
+     */
+    private List<String> tags;
 
     public String getTime() {
         return time;
@@ -71,6 +75,14 @@ public class Site {
         this.links = links;
     }
 
+    public void setTags(List<String> tags) {
+        this.tags = tags;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
     /**
      * 生成最终结果
      * @return
@@ -80,6 +92,7 @@ public class Site {
         map.put("time", this.getTime());
         map.put("theme", this.getTheme());
         map.put("links", this.getLinks());
+        map.put("tags", this.getTags());
         map.put("baseurl", this.getConfig("url") + "/theme/" + this.getTheme() + "/");
         map.putAll(this.getConfigs());
         return map;

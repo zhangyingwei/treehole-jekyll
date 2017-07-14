@@ -1,0 +1,35 @@
+# Site settings
+title: Another Blog
+# timezone: Asia/Chongqing
+
+# Your information
+email: your_email@example.com
+author: your_name
+profile: One sentence introducing yourself.
+# twitter_username: twitter_username
+# github_username:  github_username
+avatar: //www.gravatar.com/avatar/your_email_md5?d=mm&s=135
+permalink: /archivers/:title
+gems:
+ - jekyll-paginate
+ - jekyll-gist
+ - jemoji
+
+nav:
+  - text: 首页
+    url: /
+  - text: 分类目录
+    url: /categories
+  - text: 友情链接
+    url: /links
+
+# Build settings
+paginate: 5
+paginate_path: "page:num"
+
+highlighter: rouge
+markdown: kramdown
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
