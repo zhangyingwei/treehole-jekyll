@@ -216,7 +216,9 @@ public class IndexController {
             site.setConfigs(blogConf);
             List<Link> links = this.linkService.listLinks();
             site.setLinks(links);
+            List<String> categories = this.pageService.listCategories();
             List<String> tags = this.pageService.listTags();
+            site.setCategories(categories);
             site.setTags(tags);
         } catch (FileNotFoundException e) {
             logger.error(e.getLocalizedMessage());

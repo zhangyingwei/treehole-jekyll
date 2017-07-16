@@ -1,0 +1,39 @@
+# Site settings 配置站点
+title: '张英伟的独立博客'
+description: '专业喝咖啡的咖啡狗，伪前端开发者/java开发/web开发/大数据开发/伪极客/灵魂摄影师，热爱技术&设计。很高兴能在这里与你分享我对技术和生活的思考。'
+keyword: '张英伟, 张英伟的独立博客, 张英伟的博客, 前端, 前端开发, 前端博客, 后台开发, java开发, 程序员, javascript, vuejs, nodejs, 设计'
+header_img: 'assets/img/hero.jpg'
+
+# Navigation links
+nav:
+  home: '/'
+  categories: '/categories'
+
+# Author 配置博主信息
+author: '张英伟'
+nickname: '专业喝咖啡'
+bio: '前端开发者，javaer, web开发者, 大数据开发,热爱技术&设计，简单乐观爱创造'
+avatar: '/assets/img/profile.png'
+
+# Search
+search: true
+
+# Night mode
+nightMode: true
+
+# theme color 主题皮肤
+theme_color: 'default'
+
+# Post header background patterns (when the post no cover): circuitBoard, overlappingCircles, food, glamorous, ticTacToe, seaOfClouds
+postPatterns: 'circuitBoard'
+
+# SNS settings 配置社交网站url: weibo, zhihu, twitter, instagrame, juejin, github, douban, facebook, dribble, uicn, jianshu, medium, linkedin
+sns:
+  weibo: '//weibo.com/zyw8866'
+  juejin: '//juejin.im/user/58368a0461ff4b475bd600bc'
+  instagram: '//www.instagram.com/fengche361'
+  github: '//github.com/zhangyingwei'
+
+# Tags 设置标签
+recommend_tags: true
+recommend_condition-size: 12

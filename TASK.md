@@ -37,3 +37,14 @@
 
 ## 评论管理
 
+
+## 主题收集
+[jekyll默认主题] https://github.com/jekyll/minima.git
+[H2O] https://github.com/kaeyleo/jekyll-theme-H2O.git
+[vno] https://github.com/onevcat/vno-jekyll.git
+
+https://github.com/thien/blueface.git
+
+需要添加每篇文章下边的版权声明插件
+
+tools 里边 对 page。。。.posts 之类的做一下转换

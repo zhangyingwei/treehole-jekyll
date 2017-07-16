@@ -77,6 +77,12 @@ public interface IPageService {
     List<Tag> listPostOrderByTags() throws TreeHoleException;
 
     /**
+     * 列出所有 categories
+     * @return
+     */
+    List<String> listCategories() throws TreeHoleException;
+
+    /**
      * 列出所有 tags
      * @return
      */

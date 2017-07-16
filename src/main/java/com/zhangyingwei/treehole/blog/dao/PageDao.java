@@ -63,10 +63,13 @@ public interface PageDao {
     @Select("select a.id,a.title,a.path,a.subpath,a.tags,a.excerpt,a.excerpthtml,a.content,a.contenthtml,k.name as categories,a.usecommont,a.flag,a.date from article as a left join kind k on a.categories = k.id where a.flag=1 and k.name like #{categories} order by a.date desc limit 6")
     List<Article> listRelatedPosts(String categories) throws Exception;
 
-    @Select("select kind.name from article,kind where article.categories=kind.name")
+    @Select("select kind.name from article,kind where article.flag=1 and article.categories=kind.id")
+    List<String> listCategories() throws Exception;
+
+    @Select("select tags from article where flag=1")
     List<String> listTags() throws Exception;
 
     @Select("select a.id,a.title,a.path,a.subpath,a.tags,a.excerpt,a.excerpthtml,a.content,a.contenthtml,k.name as categories,a.usecommont,a.flag,a.date from article as a left join kind k on a.categories = k.id where a.flag=1 and a.tags like #{tagl} or a.tags like #{tagr} order by a.date desc")
-    List<Article> listPostsByTag(String tagl,String tagr) throws Exception;
+    List<Article> listPostsByTag(@Param("tagl") String tagl,@Param("tagr") String tagr) throws Exception;
 }
 

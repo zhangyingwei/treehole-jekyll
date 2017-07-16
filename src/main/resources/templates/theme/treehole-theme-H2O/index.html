@@ -1,0 +1,84 @@
+<% include("_layouts/default-up.html",{}){}%>
+<% include("_includes/header.html",{}){}%>
+
+<div class="g-banner home-banner ${'banner-theme-' + site.theme_color}" data-theme="${ site.theme_color }">
+    <h2>${ page.title }</h2>
+    <h3>${ page.description }</h3>
+    <% if(site.header_img! !=null){ %>
+    <!-- 这是博客上边最大的图片地址 -->
+    <img class="header-img" src="${ site.baseurl+site.header_img }">
+    <%  }  %>
+</div>
+
+<main class="g-container home-content">
+    <div class="article-list">
+        <% for( post in posts){ %>
+            <article class="article-item">
+                <section class="post-preview">
+                    <a class="post-link" href="${ post.path }" title="${ post.title }"></a>
+                    <h2 class="post-title">${ post.title }</h2>
+                    <p class="post-excerpt">${post.excerpt!}</p>
+                </section>
+                <footer class="post-meta">
+                    <div class="post-tags">
+                        <% if(post.tags.~size > 0!=null){ %>
+                            <% for( tag in post.tags ){ %>
+                        <a href="${ site.url }/tags/${ tag }" class="post-tag">${ tag }</a>
+                            <%  }  %>
+                        <%  }  %>
+                    </div>
+                    <time class="post-date" datetime="${post.date}">${date_to_string(post.date)}</time>
+                </footer>
+            </article>
+        <%  }  %>
+
+        <% if(paginator.total_pages > 1!=null){ %>
+            <% include("_includes/pageNav.html",{}){}%>
+        <%  }  %>
+
+    </div>
+
+    <aside class="g-sidebar-wrapper">
+        <div class="g-sidebar">
+            <section class="author-card">
+                <div class="avatar">
+                    <img src="${ site.baseurl }${ site.avatar }" alt="">
+                </div>
+                <div class="author-name" rel="author">${ site.author }</div>
+                <div class="bio">
+                    <p>${ site.bio }</p>
+                </div>
+                <% if(site.sns.~size > 0!=null){ %>
+                <ul id="sns-links" class="sns-links">
+                    <% for( s in site.sns){ %>
+                    <li>
+                        <a href="${ s.value }" target="_blank">
+                            <i class="iconfont icon-${ s.key }"></i>
+                        </a>
+                    </li>
+                    <%  }  %>
+                </ul>
+                <%  }  %>
+            </section>
+
+            <% if(site.tags.~size>0){ %>
+            <section class="tags-card">
+                <% for( tag in site.tags){ %>
+                <a href="${ site.url }/tags/${ tag }" class="tag">${ tag }</a>
+                <%  }  %>
+            </section>
+            <%  }  %>
+        </div>
+
+        <div class="search-card">
+            <input id="search_input" type="text" placeholder="Search...">
+            <i class="iconfont icon-search"></i>
+            <div class="search_result"></div>
+        </div>
+
+    </aside>
+    
+</main>
+
+<% include("_includes/footer.html",{}){}%>
+<% include("_layouts/default-down.html",{}){}%>

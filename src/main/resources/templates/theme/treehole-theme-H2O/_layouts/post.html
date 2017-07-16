@@ -1,0 +1,59 @@
+<% include("default-up.html",{}){}%>
+<% include("../_includes/header.html",{}){}%>
+
+<header class="g-banner post-header ${'post-pattern-' + site.postPatterns} ${'bgcolor-' + site.theme_color} post-no-cover" data-theme="${ site.theme_color }">
+    <div class="post-wrapper">
+        <div class="post-tags">
+            <% if(post.tags.~size > 0!=null){ %>
+            <% for( tag in post.tags ){ %>
+            <a href="${ site.url }/tags/${ tag }" class="post-tag">${ tag }</a>
+            <%  }  %>
+            <%  }  %>
+        </div>
+        <h1>${ post.title }</h1>
+        <div class="post-meta">
+            <span class="post-meta-item"><i class="iconfont icon-author"></i><a href="${ site.url }" target="_blank" rel="author">${ site.author }</a></></span>
+            <time class="post-meta-item" datetime="${post.date}"><i class="iconfont icon-date"></i>${date_to_string(post.date)}</time>
+        </div>
+    </div>
+</header>
+
+<div class="post-content">
+    <article class="markdown-body">
+        ${ post.content }
+    </article>
+    <div class="social-share-wrapper">
+        <!--<div class="social-share"></div>-->
+        <% include("../../../lib/share.html",{}){} %>
+    </div>
+</div>
+
+<section class="author-detail">
+    <section class="post-footer-item author-card">
+        <div class="avatar">
+            <img src="${ site.baseurl }${ site.avatar }" alt="">
+        </div>
+        <div class="author-name" rel="author">${ site.author }</div>
+        <div class="bio">
+            <p>${ site.bio! }</p>
+        </div>
+        <% if(site.sns.~size > 0!=null){ %>
+        <ul class="sns-links">
+            <% for( s in site.sns){ %>
+            <li>
+                <a href="${ s.value }" target="_blank">
+                    <i class="iconfont icon-${ s.key }"></i>
+                </a>
+            </li>
+            <%  }  %>
+        </ul>
+        <%  }  %>
+    </section>
+    <% if(post.comment! ){ %>
+    <section class="post-footer-item comment">
+        <% include("../../../lib/comments.html",{}){} %>
+    </section>
+    <%  }  %>
+</section>
+<% include("../_includes/footer.html",{}){}%>
+<% include("default-down.html",{}){}%>

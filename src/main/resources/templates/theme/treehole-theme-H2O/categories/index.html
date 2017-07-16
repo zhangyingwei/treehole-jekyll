@@ -1,0 +1,35 @@
+<% include("../_layouts/default-up.html",{}){}%>
+<% include("../_includes/header.html",{}){}%>
+
+<div class="g-banner tags-banner ${'post-pattern-' + site.postPatterns} ${'bgcolor-' + site.theme_color}" data-theme="${ site.theme_color }">
+    <h2>CATEGORIES</h2>
+</div>
+
+<main class="tags-content">
+
+    <ul class="tags-list">
+        <li>
+        <% if(site.recommend_tags && site.categories.~size>0){ %>
+            <% for( category in site.categories){ %>
+            <a href="#${ category }" class="tag">${ category }</a>
+            <%  }  %>
+        <%  }  %>
+        </li>
+        <% for( category in site.categories){ %>
+        <li>
+            <span class="tag-name" id="${ category }">「${ category }」</span>
+            <%
+                for( post in posts){
+                    if(post.categories == category){
+            %>
+            <a class="tag-post" href="${ post.path }" title="${ post.title }">${ post.title }</a>
+            <% } }  %>
+        </li>
+        
+        </div>
+        <%  } %>
+    </ul>
+</main>
+
+<% include("../_includes/footer.html",{}){}%>
+<% include("../_layouts/default-down.html",{}){}%>

@@ -6,12 +6,14 @@ import com.zhangyingwei.treehole.blog.model.Post;
 import com.zhangyingwei.treehole.blog.model.Paginator;
 import com.zhangyingwei.treehole.blog.model.Tag;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by zhangyw on 2017/7/10.
@@ -142,10 +144,23 @@ public class PageService implements IPageService {
     }
 
     @Override
+    public List<String> listCategories() throws TreeHoleException {
+        try {
+            List<String> categories = this.pageDao.listCategories().stream().filter(word -> {
+                return StringUtils.isNotEmpty(word);
+            }).distinct().collect(Collectors.toList());
+            return categories;
+        } catch (Exception e) {
+            throw new TreeHoleException(e);
+        }
+    }
+
+    @Override
     public List<String> listTags() throws TreeHoleException {
         try {
-            List<String> tags = this.pageDao.listTags();
-            return tags;
+            return this.pageDao.listTags().stream().flatMap(word -> Stream.of(word.split(","))).filter(word -> {
+                return StringUtils.isNotEmpty(word);
+            }).distinct().collect(Collectors.toList());
         } catch (Exception e) {
             throw new TreeHoleException(e);
         }

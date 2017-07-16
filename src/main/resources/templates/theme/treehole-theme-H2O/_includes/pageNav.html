@@ -1,0 +1,18 @@
+<nav class="pagination">
+    <input type="hidden" id="total_pages" value="${ paginator.total_pages }">
+    <input type="hidden" id="current_pages" value="${ paginator.page }">
+    <input type="hidden" id="base_url" value="${ site.url }">
+    <div class="page-links">
+        <% if(paginator.previous_page!=null){ %>
+            <% if(paginator.previous_page == 1!=null){ %>
+            <a href="/" class="page-link" title="Previous Page">&laquo;</a>
+            <% } else { %>
+            <a href="/${ paginator.previous_page_path }/" class="page-link" title="Previous Page">&laquo;</a>
+            <%  }  %>
+        <%  }  %>
+        <div id="page-link-container"></div>
+        <% if(paginator.next_page!=null){ %>
+        <a href="${ paginator.next_page_path }" class="page-link">&raquo;</a>
+        <%  }  %>
+    </div>
+</nav>

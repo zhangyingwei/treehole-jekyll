@@ -37,6 +37,7 @@ public class Site {
      * 标签
      */
     private List<String> tags;
+    private List<String> categories;
 
     public String getTime() {
         return time;
@@ -93,8 +94,17 @@ public class Site {
         map.put("theme", this.getTheme());
         map.put("links", this.getLinks());
         map.put("tags", this.getTags());
+        map.put("categories", this.getCategories());
         map.put("baseurl", this.getConfig("url") + "/theme/" + this.getTheme() + "/");
         map.putAll(this.getConfigs());
         return map;
+    }
+
+    public void setCategories(List<String> categories) {
+        this.categories = categories;
+    }
+
+    public List<String> getCategories() {
+        return categories;
     }
 }
