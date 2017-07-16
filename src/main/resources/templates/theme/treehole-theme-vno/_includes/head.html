@@ -1,0 +1,24 @@
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <title><% if(post! !=null){ %>${psot.title}<% } else { %>${site.title}<%  }  %></title>
+  <meta name="description" content="<% if(post! !=null){ %>${post.excerpt}<% } else { %>${ site.description }<%  }  %>">
+  <meta name="author" content="ZYW">
+
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="<% if(post! !=null){ %>${post.title}<% } else { %>${site.title}<%  }  %>">
+  <meta property="og:description" content="<% if(post! !=null){ %>${post.excerpt}<% } else { %>${ site.description }<%  }  %>">
+  
+  <link rel="icon" type="image/png" href="${site.baseurl}/assets/images/favicon.png" />
+  <link href="${site.baseurl}/assets/images/favicon.png" rel="shortcut icon" type="image/png">
+  
+  <link rel="stylesheet" href="${site.baseurl}css/main.css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link rel="alternate" type="application/rss+xml" title="${ site.title }" href="/feed">
+  
+  <meta name="google-site-verification" content="1-1ZlHoRvM0T2FqPbW2S-qLgYXN6rsn52kErlMPd_gw" />
+  
+</head>

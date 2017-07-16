@@ -1,0 +1,18 @@
+<% include("_layouts/default-up.html",{}){}%>
+<div class="main-post-list hidden">
+
+  <ol class="post-list">
+    <% for( post in posts){ %>
+    <li>
+      <h2 class="post-list__post-title post-title"><a href="${ post.url }" title="访问 ${ post.title }">${ post.title }</a></h2>
+      <p class="excerpt">${post.excerpt}&hellip;</p>
+      <div class="post-list__meta"><time datetime="${post.date}" class="post-list__meta--date date">${post.date}</time> &#8226; <span class="post-list__meta--tags tags">${ post.tags }</span><a class="btn-border-small" href=${ post.url }>继续阅读</a></div>
+      <hr class="post-list__divider" />
+    </li>
+    <%  }  %>
+  </ol>
+
+  <% include("_includes/pagination.html",{}){}%>
+
+</div>
+<% include("_layouts/default-down.html",{}){}%>
