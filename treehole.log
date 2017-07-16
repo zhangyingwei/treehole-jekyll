@@ -12124,3 +12124,6 @@ org.ho.yaml.exception.YamlException: Error near line 32: Unterminated inline val
 2017-07-16 21:47:38.176  INFO 21021 --- [http-nio-4000-exec-10] c.z.t.c.c.InterCeptorController2         : IP : 0:0:0:0:0:0:0:1
 2017-07-16 21:47:38.187  INFO 21021 --- [Thread-2] com.zhangyingwei.treehole.log.LogTask    : 记录日志成功
 2017-07-16 21:47:38.255  INFO 21021 --- [Thread-2] com.zhangyingwei.treehole.log.LogTask    : 记录日志成功
+2017-07-16 21:48:47.778  INFO 21021 --- [Thread-4] ationConfigEmbeddedWebApplicationContext : Closing org.springframework.boot.context.embedded.AnnotationConfigEmbeddedWebApplicationContext@c8e4bb0: startup date [Sun Jul 16 21:46:03 CST 2017]; root of context hierarchy
+2017-07-16 21:48:47.782  INFO 21021 --- [Thread-4] o.s.c.support.DefaultLifecycleProcessor  : Stopping beans in phase 0
+2017-07-16 21:48:47.795  INFO 21021 --- [Thread-4] o.s.j.e.a.AnnotationMBeanExporter        : Unregistering JMX-exposed beans on shutdown
