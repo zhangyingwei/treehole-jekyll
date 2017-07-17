@@ -1,8 +1,6 @@
 # Basic
-title: Vno Jekyll
-subtitle: A blog-orientation theme for Jekyll
-welcome_message: <a href="https://github.com/onevcat/vno-jekyll" target="_blank">Download the theme</a>
-description: Vno Jekyll is a port of my Ghost theme vno.
+welcome_message: 欢迎使用 treehole 博客系统，以及 vno 主题
+description: 这个主题来源于 jekyll 的 Vno 主题.
 creator: <a href="http://onev.cat">@onevcat</a>
 
 url: "http://vno.onevcat.com"
@@ -22,28 +20,14 @@ blog_button:
 
 # Navigation buttons in the front page.
 nav:
-    - {title: Projects, description: My Projects, url: 'http://project.onevcat.com'}
+    - {title: about, description: 关于我, url: '/about#blog'}
     # - {title: Another Button, description: A button, url: 'http://example.com'}
 
-# Pagination
-gems: [jekyll-paginate]
-paginate: 10
-paginate_path: "page/:num/"
 
-# Comment
-comment:
-    disqus: vno-jekyll
-    # duoshuo: 
-    
 # Social
 social:
-    weibo: onevcat
-    github: onevcat
-    twitter: onevcat
+    weibo: zyw8866
+    github: zhangyingwei
+    twitter: fengche361
     gplus: 107108267983477358170
-    mail: onev@onevcat.com
-
-# Google Analytics
-ga:
-    # id: your_ga_id
-    # host: your_host
+    mail: zhangyw001@gmail.com

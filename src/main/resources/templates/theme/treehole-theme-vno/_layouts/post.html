@@ -1,19 +1,17 @@
----
-layout: default
----
-
+<% include("default-up.html",{}){}%>
 <article class="post-container post-container--single" itemscope itemtype="http://schema.org/BlogPosting">
   <header class="post-header">
     <div class="post-meta">
-      <time datetime="${page.date}" itemprop="datePublished" class="post-meta__date date">${page.date}</time> &#8226; <span class="post-meta__tags tags">${page.tags}</span>
+      <time datetime="${post.date}" itemprop="datePublished" class="post-meta__date date">${post.date}</time> &#8226; <span class="post-meta__tags tags">${post.tags}</span>
     </div>
-    <h1 class="post-title">${ page.title }</h1>
+    <h1 class="post-title">${ post.title }</h1>
   </header>
 
   <section class="post">
-    ${ content }
+    ${ post.content }
   </section>
 </article>
 
-<% include("read-more.html",{}){}%>
-<% include("comments.html",{}){}%>
+<% include("../_includes/read-more.html",{}){}%>
+<% include("../_includes/comments.html",{}){}%>
+<% include("default-down.html",{}){}%>
