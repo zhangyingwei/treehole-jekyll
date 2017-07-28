@@ -48,3 +48,93 @@ https://github.com/thien/blueface.git
 需要添加每篇文章下边的版权声明插件
 
 tools 里边 对 page。。。.posts 之类的做一下转换
+
+下一步
+集成邮件功能
+
+
+
+sqlite修改字段名
+
+PRAGMA foreign_keys = 0;
+
+CREATE TABLE sqlitestudio_temp_table AS SELECT *
+                                          FROM article;
+
+DROP TABLE article;
+
+CREATE TABLE article (
+    id          INTEGER        PRIMARY KEY AUTOINCREMENT
+                               UNIQUE
+                               NOT NULL,
+    title1      VARCHAR (20)   NOT NULL
+                               UNIQUE,
+    path        VARCHAR,
+    subpath     VARCHAR (100),
+    tags        VARCHAR (200),
+    excerpt     VARCHAR (500),
+    excerpthtml,
+    content     VARCHAR (5000),
+    contenthtml,
+    categories  INTEGER        NOT NULL,
+    usecommont  VARCHAR (10)   NOT NULL
+                               DEFAULT off,
+    flag        INTEGER        NOT NULL
+                               DEFAULT (0),
+    date        VARCHAR (20)   NOT NULL
+                               DEFAULT (datetime() ) 
+);
+
+INSERT INTO article (
+                        id,
+                        title1,
+                        path,
+                        subpath,
+                        tags,
+                        excerpt,
+                        excerpthtml,
+                        content,
+                        contenthtml,
+                        categories,
+                        usecommont,
+                        flag,
+                        date
+                    )
+                    SELECT id,
+                           title,
+                           '',
+                           subpath,
+                           tags,
+                           intro,
+                           introhtml,
+                           article,
+                           articlehtml,
+                           kind,
+                           usecommont,
+                           flag,
+                           date
+                      FROM sqlitestudio_temp_table;
+
+DROP TABLE sqlitestudio_temp_table;
+
+PRAGMA foreign_keys = 1;
+
+
+# 接下来的任务
+
+1. 登录验证还是有问题
+2. 来访统计数据格式验证有问题 日志 地址格式化错误
+3. 基础信息中安装信息获取有问题
+4. 系统设置里边 用户信息设置 还需要把用户信息显示到博客页面中 最好在关于我页面中 需要有个头像设置
+5. md编辑器中，图片的快捷添加
+6. 新建文章中，文章头图片添加
+7. 编辑文章中，评论开关初始化有问题
+8. 文章查询的时候 查询按钮与查询文本框分开了，我很无奈
+9. 历史文章列表中需要添加分页
+10. 表格超长需要变成省略号，然后鼠标滑过显示全部 tip
+11. 分类列表中需要分页
+12. 素材管理也需要分页
+13. 素材预览是个bug
+14. js 文件需要整理，该压缩的压缩
+15. 上边新信息提示需要完善
+16. 博客分页上一页下一页功能完善

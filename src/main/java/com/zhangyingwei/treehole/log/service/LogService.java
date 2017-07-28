@@ -9,6 +9,7 @@ import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import com.zhangyingwei.treehole.common.utils.DateUtils;
 import com.zhangyingwei.treehole.common.utils.CollectionUtils;
 import com.zhangyingwei.treehole.common.utils.TreeHoleUtils;
+import org.parboiled.common.Tuple2;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by zhangyw on 2017/6/15.
@@ -200,7 +202,25 @@ public class LogService {
      */
     public List<PieView> getVisitActions() throws TreeHoleException {
         try {
-            return this.logDao.getVisitBlogActions();
+            List<PieView> actions = this.logDao.getVisitBlogActions();
+            Map<String, Integer> result = actions.parallelStream().map(action ->{
+                String name = action.getName();
+                if (name.contains("[") && name.contains("]")) {
+                    name = name.split("\\[")[0];
+                }
+                action.setName(name);
+                return action;
+            }).collect(Collectors.toMap(
+                    w -> w.getName(), w -> w.getValue(),Integer::sum
+            ));
+            List<PieView> resultList = new ArrayList<PieView>();
+            result.forEach((k,v) -> {
+                PieView pie = new PieView();
+                pie.setName(k);
+                pie.setValue(v);
+                resultList.add(pie);
+            });
+            return resultList;
         } catch (Exception e) {
             throw new TreeHoleException("查询访问动作统计错误");
         }
