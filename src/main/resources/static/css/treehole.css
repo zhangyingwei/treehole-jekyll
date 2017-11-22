@@ -14,3 +14,16 @@
 .label{
     color: #F1F6F7 !important;
 }
+header.comm-header{
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #929191;
+}
+footer.comm-footer{
+    font-size: 14px;
+    font-weight: bold;
+    color: #929191;
+    padding: 20px;
+    background-color: #f7f8fa;
+}

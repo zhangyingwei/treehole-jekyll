@@ -42,7 +42,13 @@
                         <div class="col-md-4">
                             <select id="a-categories" name="categories" type="text" class="kind form-control col-xs-12">
                                 <% for(kind in kinds){%>
-                                    <option value="${kind.id!}">${kind.name!}</option>
+                                    <%
+                                        var optionSelected = "";
+                                        if(kind.id == str_to_int(article.categories)){
+                                            optionSelected = "selected";
+                                        }
+                                    %>
+                                    <option ${optionSelected!} value="${kind.id!}">${kind.name!}</option>
                                 <%}%>
                             </select>
                         </div>
@@ -57,7 +63,15 @@
                         <div class="col-md-8">
                             <div class="">
                                 <label>
-                                    <input id="usecommont" name="usecommont" type="checkbox" value="${article.usecommont!}" class="js-switch" /> 允许评论
+                                    <%
+                                        var canCommont = "";
+                                        if(is("on",article.usecommont)){
+                                            canCommont = "checked";
+                                        }else{
+                                            canCommont = "";
+                                        }
+                                    %>
+                                    <input id="usecommont" name="usecommont" type="checkbox" value="${article.usecommont!}" ${canCommont!} class="js-switch" /> 允许评论
                                 </label>
                             </div>
                         </div>

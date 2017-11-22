@@ -18,11 +18,16 @@
     </div>
 </header>
 
+<% include("../../../lib/comm-head.html",{}){} %>
+
 <div class="post-content">
     <article class="markdown-body">
         ${ post.content }
     </article>
-    <div class="social-share-wrapper">
+    <div class="markdown-body">
+        <% include("../../../lib/comm-foot.html",{}){} %>
+    </div>
+    <div class="social-share-wrapper comm-foot">
         <!--<div class="social-share"></div>-->
         <% include("../../../lib/share.html",{}){} %>
     </div>

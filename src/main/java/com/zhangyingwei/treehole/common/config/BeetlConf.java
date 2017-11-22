@@ -43,6 +43,8 @@ public class BeetlConf {
                 put("markdownify", new MarkDownify());
                 put("replace", new Replace());
                 put("limit", new Limit());
+                put("str_to_int", new StrToInteger());
+                put("is", new ObjectIs());
             }
         });
         //读取配置文件信息
