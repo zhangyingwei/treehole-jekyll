@@ -1,5 +1,6 @@
 #!/bin/bash
 
+TREEHOLE_HOME="/Users/zhangyw/IdeaProjects/zhangyw/Projects/java/treehole-jekyll/treehole-jekyll"
 env_args="-Xms128m -Xmx128m"
 sleeptime=0
 arglen=$#

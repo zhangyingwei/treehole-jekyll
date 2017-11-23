@@ -14,3 +14,6 @@ target/
 *.iws
 *.iml
 *.ipr
+*.log
+treehole.log.1
+.DS_Store

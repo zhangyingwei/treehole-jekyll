@@ -155,4 +155,5 @@ public class ArticleController {
         Integer count = this.articleService.getPostCount();
         return Ajax.success(count);
     }
+
 }
