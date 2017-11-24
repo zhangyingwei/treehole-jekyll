@@ -21,7 +21,13 @@ $(function(){
         make:function(){
             this.model = new SimpleMDE({
                 element: $("#editor")[0],
-                hideIcons: ["guide", "heading"]
+                hideIcons: ["guide", "heading"],
+                autofocus: true,
+                autosave: {
+                    enabled: true,
+                    uniqueId: "MyUniqueID",
+                    delay: 1000
+                },
             });
             return this;
         },
