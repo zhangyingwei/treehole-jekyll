@@ -6,6 +6,7 @@ import com.zhangyingwei.treehole.admin.service.ArticleService;
 import com.zhangyingwei.treehole.admin.service.KindService;
 import com.zhangyingwei.treehole.common.Ajax;
 import com.zhangyingwei.treehole.common.Pages;
+import com.zhangyingwei.treehole.common.annotation.Auth;
 import com.zhangyingwei.treehole.common.annotation.TreeHoleAtcion;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import org.slf4j.Logger;
@@ -24,6 +25,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/admin/articles")
+@Auth
 public class ArticleController {
 
     private Logger logger = LoggerFactory.getLogger(ArticleController.class);

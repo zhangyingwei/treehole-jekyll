@@ -24,16 +24,18 @@ $(function(){
         submit()
     })
 
+    $("#blogurl").val(getUrl());
+
     function addValieListener(){
         $(".not-empty").blur(function(){
-            const text = $(this).val()
+            const text = $(this).val();
             if(!$(this).hasClass("hidden")){
                 if(is.empty(text)){
-                    layer.tips("必填哦",$(this))
-                    $(this).parent().addClass("has-error")
+                    layer.tips("必填哦", $(this));
+                    $(this).parent().addClass("has-error");
                     canNext = false
                 }else{
-                    $(this).parent().removeClass("has-error")
+                    $(this).parent().removeClass("has-error");
                     canNext = true
                 }
             }
@@ -383,5 +385,14 @@ $(function(){
             canNext = false
             layer.msg("两次密码不相同")
         }
+    }
+
+    /**
+     * 获取当前地址
+     * @returns {*}
+     */
+    function getUrl(){
+        const url = window.location.href;
+        return url.replace("/install","")
     }
 })

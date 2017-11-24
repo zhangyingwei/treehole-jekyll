@@ -29,9 +29,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         final HandlerMethod handlerMethod = (HandlerMethod) handler;
         final Method method = handlerMethod.getMethod();
         final Class<?> clazz = method.getDeclaringClass();
-
-        if(clazz.isAnnotationPresent(Auth.class) || method.isAnnotationPresent(Auth.class)){
-            return this.doHandle(request,response,handler);
+        if (TreeHoleUtils.isInstalled()) {
+            if (clazz.isAnnotationPresent(Auth.class) || method.isAnnotationPresent(Auth.class)) {
+                return this.doHandle(request, response, handler);
+            }
+        } else {
+            return this.doHandle(request, response, handler);
         }
         return true;
     }
@@ -54,7 +57,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
                 if (session.getAttribute(TreeHoleEnum.STATE_DIC_KEY.getValue()) == null) {
                     session.setAttribute(TreeHoleEnum.STATE_DIC_KEY.getValue(),TreeHoleUtils.getGolbleStateDic());
                 }
-                if(uri.equals("/admin") && !TreeHoleUtils.isLogin(session)){
+                if(uri.startsWith("/admin") && !uri.equals("/admin/login") && !TreeHoleUtils.isLogin(session)){
                     response.sendRedirect("/admin/login");
                     return false;
                 }

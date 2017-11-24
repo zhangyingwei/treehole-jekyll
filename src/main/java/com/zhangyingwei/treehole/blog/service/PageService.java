@@ -60,9 +60,9 @@ public class PageService implements IPageService {
     @Override
     public List<Post> listPostByTag(String tag) throws TreeHoleException {
         String tagl = "%," + tag + "%";
-        String tagr = "%" + tag + "，%";
+        String tagr = "%" + tag + ",%";
         try {
-            List<Article> posts = this.pageDao.listPostsByTag(tagl, tagr);
+            List<Article> posts = this.pageDao.listPostsByTag(tagl, tagr, tag);
             return posts.stream().map(article -> article.toPage()).collect(Collectors.toList());
         } catch (Exception e) {
             throw new TreeHoleException(e);

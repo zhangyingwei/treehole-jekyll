@@ -42,7 +42,13 @@ $(function () {
         }, function () {
             deleteArticle(id, "state");
         });
-    })
+    });
+
+    $(".btn-show").click(function () {
+        const id = $(this).val();
+        const url = "/articles/" + id;
+        layer.msg(url)
+    });
 
     var deleteArticle = function (id, state) {
         var index = layer.load(1);

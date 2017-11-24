@@ -40,5 +40,4 @@ CREATE TABLE log (id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE NOT NULL, ip VARCH
 COMMIT TRANSACTION;
 
 INSERT INTO kind (id, name, flag) VALUES (1, '默认分类', 0);
-INSERT INTO article(id, title, path, subpath, tags, excerpt, excerpthtml, content, contenthtml, categories, usecommont, flag, date) VALUES (1, '第一篇文章', '', '', '123,4', '这里是文章简介', '<p>这里是文章简介 </p>', '这里是文章简介<!-- more -->这里是文章内容', '<p>这里是文章简介 </p><!-- more --><p>这里是文章内容</p>', 1, 'on', 1, '2016-05-01 07:32:01');
-
+INSERT INTO article(id, title, path, subpath, tags, excerpt, excerpthtml, content, contenthtml, categories, usecommont, flag, date) VALUES (1, '第一篇文章', '/articles/1', '', '示例标签', '这里是来自TreeHole的问候', '<p>这里是来自TreeHole的问候</p>', '这里是来自TreeHole的问候<!-- more -->亲爱的用户你好，感谢你选择了treehole博客系统，这是我的荣幸。在使用的过程中如果有任何疑问，请联系我 zhangyw001@gmail.com。', '<p>这里是来自TreeHole的问候</p><!-- more --><p>亲爱用户你好，感谢你选择了treehole博客系统，这是我的荣幸。在使用的过程中如果有任何疑问，请联系我 zhangyw001@gmail.com。</p>', 1, 'on', 1, '2016-05-01 07:32:01');
