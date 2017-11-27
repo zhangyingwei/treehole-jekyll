@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"/>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" />
+<head>
+    <% include("/templates/lib/head-meta.html",{title:'素材管理'}){} %>
+    <% include("/templates/lib/head-style.html"){} %>
+    <link href="/dist/fancygrid/fancy.min.css" rel="stylesheet" />
+    <!-- Dropzone.js -->
+    <link href="/dist/vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet">
+    <link href="/dist/viewer/viewer.min.css" rel="stylesheet" />
+</head>
+
+<body class="nav-md footer_fixed">
+<div class="container body">
+    <div class="main_container">
+        <% include("/templates/admin/file/inner-file-content.html"){} %>
+    </div>
+</div>
+<% include("/templates/lib/foot-script.html"){} %>
+<script src="/dist/vendors/dropzone/dist/min/dropzone.min.js"></script>
+<script src="/js/admin/file/inner-file-index.js"></script>
+</body>
+</html>

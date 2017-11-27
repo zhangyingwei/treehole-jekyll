@@ -15,6 +15,7 @@ public enum TreeHoleEnum {
     LOGIN_MENU_KEY("menus"),
     THEME_BASEPATH("theme"),
     STATE_DIC_KEY("stateDic"),
+    STATE_URL_BEFORE("from_uri"),
     UPLOAD_FILE_BASEPATH("upload/"),
     RES_IMG_DEFAULT(RES_BASEPATH.getValue()+"static/images/default.jpg"),
     THEME_CONFIG("_config.yml"),

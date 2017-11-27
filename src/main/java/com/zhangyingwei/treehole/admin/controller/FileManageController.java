@@ -5,6 +5,7 @@ import com.zhangyingwei.treehole.admin.service.FileManagerService;
 import com.zhangyingwei.treehole.common.Ajax;
 import com.zhangyingwei.treehole.common.Pages;
 import com.zhangyingwei.treehole.common.TreeHoleEnum;
+import com.zhangyingwei.treehole.common.annotation.Auth;
 import com.zhangyingwei.treehole.common.annotation.TreeHoleAtcion;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import org.apache.commons.lang3.StringUtils;
@@ -27,6 +28,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/admin/files")
+@Auth
 public class FileManageController {
     private Logger logger = Logger.getLogger(FileManageController.class);
     @Autowired
@@ -35,6 +37,12 @@ public class FileManageController {
     @TreeHoleAtcion("打开附件管理页面")
     public String fileManageIndex(){
         return Pages.ADMIN_FILEMANAGE;
+    }
+
+    @GetMapping("/inner")
+    @TreeHoleAtcion("编辑器内打开文件管理")
+    public String innerFileManegeIndes(){
+        return Pages.INNER_ADMIN_FILEMANAGE;
     }
 
     @PostMapping("/upload")

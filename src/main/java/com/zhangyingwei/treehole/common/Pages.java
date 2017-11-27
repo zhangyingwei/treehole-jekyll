@@ -20,6 +20,7 @@ public class Pages {
     public static final String ADMIN_ARTICLES_HISTORY = "admin/article/history-index";
     public static final String ADMIN_KIND = "admin/article/kind-index";
     public static final String ADMIN_FILEMANAGE = "admin/file/file-index";
+    public static final String INNER_ADMIN_FILEMANAGE = "admin/file/inner-file-index";
     public static final String BLOG_THEME_INDEX = "index";
     public static final String BLOG_THEME_ARTICLE = "_layouts/post";
     public static final String BLOG_THEME_CATEGORIES = "categories/index";

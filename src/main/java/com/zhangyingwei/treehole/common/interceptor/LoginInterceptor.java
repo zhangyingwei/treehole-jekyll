@@ -3,6 +3,7 @@ package com.zhangyingwei.treehole.common.interceptor;
 import com.zhangyingwei.treehole.common.TreeHoleEnum;
 import com.zhangyingwei.treehole.common.annotation.Auth;
 import com.zhangyingwei.treehole.common.utils.TreeHoleUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -57,9 +58,16 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
                 if (session.getAttribute(TreeHoleEnum.STATE_DIC_KEY.getValue()) == null) {
                     session.setAttribute(TreeHoleEnum.STATE_DIC_KEY.getValue(),TreeHoleUtils.getGolbleStateDic());
                 }
-                if(uri.startsWith("/admin") && !uri.equals("/admin/login") && !TreeHoleUtils.isLogin(session)){
+                if (!TreeHoleUtils.isLogin(session) && uri.startsWith("/admin") && !"/admin/login".equals(uri)) {
+                    session.setAttribute(TreeHoleEnum.STATE_URL_BEFORE.getValue(), uri);
                     response.sendRedirect("/admin/login");
                     return false;
+                } else if (TreeHoleUtils.isLogin(session)){
+                    String fromUri = (String) session.getAttribute(TreeHoleEnum.STATE_URL_BEFORE.getValue());
+                    if (StringUtils.isNotEmpty(fromUri)) {
+                        response.sendRedirect(fromUri);
+                    }
+                    session.removeAttribute(TreeHoleEnum.STATE_URL_BEFORE.getValue());
                 }
             }
         }

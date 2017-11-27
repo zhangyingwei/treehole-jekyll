@@ -5,6 +5,7 @@ $(function () {
     var refreshBtn = fileContainer.find(".refresh-link");
 
     $("#fileUpload").dropzone({
+        acceptedFiles: ".jpg,.jpeg,.png,.gif,.pdf",
         success: function() {
             getFileInfos();
         }
