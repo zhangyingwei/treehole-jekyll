@@ -1,13 +1,13 @@
 <div id="inner_file_container">
     <div id="file_upload">
         <button type="button" class="layui-btn" id="file_upload_button">多图片上传</button>
-        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px; background-color: #fff">
             预览图：
             <div class="layui-upload-list" id="file_show"></div>
         </blockquote>
     </div>
     <div id="file_table">
-        <table id="file_content_table" lay-filter="test"></table>
+        <table id="file_content_table" style="background-color: #fff" lay-filter="test"></table>
     </div>
 </div>
 <style>
@@ -20,3 +20,6 @@
         padding: 10px 5px;
     }
 </style>
+<script type="text/html" id="showTemplate">
+    <img src="{{d.path}}" style="max-width: 100px;max-height: 100px" />
+</script>

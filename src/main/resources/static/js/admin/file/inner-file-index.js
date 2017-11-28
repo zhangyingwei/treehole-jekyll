@@ -1,7 +1,8 @@
-layui.use(['upload','table'],function () {
+layui.use(['upload','table','layer'],function () {
     var $ = layui.jquery;
     var upload = layui.upload;
     var table = layui.table;
+    var layer = layui.layer
     var fileContainer = $("#inner_file_container");
     //多图片上传
     upload.render({
@@ -17,6 +18,7 @@ layui.use(['upload','table'],function () {
         ,done: function(res){
             //上传完毕
             layer.msg("上传完毕")
+            loadImageTable();
         }
     });
 
@@ -26,23 +28,38 @@ layui.use(['upload','table'],function () {
         ,height: 315
         ,page: true //开启分页
         ,cols: [[ //表头
-            {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'}
-            ,{field: 'name', title: '用户名', width:80}
-            ,{field: 'sex', title: '性别', width:80, sort: true}
-            ,{field: 'city', title: '城市'}
+            {field: 'id', title: 'ID', width:50, sort: true, fixed: 'left'}
+            ,{title: "预览",templet: "#showTemplate",width: 120}
+            ,{field: 'name', title: '名称', width:200}
+            // ,{field: 'contentType',title: "类型",width: 120}
+            ,{field: 'path', title: '地址', width:300}
+            // ,{field: "alias", title: "别名",width: 200}
         ]]
     });
 
-    $.ajax({
-        url: '/admin/files/list',
-        type: 'GET',
-        success: function (data) {
-            table.reload('file_upload_button',{
-                data: data.result.data
-            })
-        },
-        error: function (res) {
-            console.log(res)
-        }
-    })
+    function loadImageTable(){
+        $.ajax({
+            url: '/admin/files/list',
+            type: 'GET',
+            success: function (data) {
+                var data = data.result.data;
+                var url = window.location.origin;
+                data = data.map(function (item) {
+                    var path = item.path;
+                    var alias = item.alias;
+                    path = url+'/files/' + alias;
+                    item.path = path
+                    return item
+                });
+                table.reload('file_upload_button', {
+                    data: data
+                })
+            },
+            error: function (res) {
+                console.log(res)
+            }
+        });
+    }
+
+    loadImageTable()
 });
