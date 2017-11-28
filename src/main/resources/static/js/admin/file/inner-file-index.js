@@ -4,6 +4,7 @@ layui.use(['upload','table','layer'],function () {
     var table = layui.table;
     var layer = layui.layer
     var fileContainer = $("#inner_file_container");
+    const frameIndex = parent.layer.getFrameIndex(window.name);
     //多图片上传
     upload.render({
         elem: '#file_upload_button'
@@ -17,7 +18,7 @@ layui.use(['upload','table','layer'],function () {
         }
         ,done: function(res){
             //上传完毕
-            layer.msg("上传完毕")
+            layer.msg("上传完毕");
             loadImageTable();
         }
     });
@@ -29,12 +30,20 @@ layui.use(['upload','table','layer'],function () {
         ,page: true //开启分页
         ,cols: [[ //表头
             {field: 'id', title: 'ID', width:50, sort: true, fixed: 'left'}
-            ,{title: "预览",templet: "#showTemplate",width: 120}
-            ,{field: 'name', title: '名称', width:200}
+            ,{title: "预览",templet: "#showTemplate",width: 80}
+            ,{title: "操作",templet: "#actionTemplate"}
+            // ,{field: 'name', title: '名称', width:200}
             // ,{field: 'contentType',title: "类型",width: 120}
-            ,{field: 'path', title: '地址', width:300}
+            // ,{field: 'path', title: '地址', width:300}
             // ,{field: "alias", title: "别名",width: 200}
-        ]]
+        ]],
+        done: function () {
+            $(".imageAction").click(function () {
+                var id = $(this).val();
+                parent.layer.notifyImage(id);
+                parent.layer.close(frameIndex);
+            })
+        }
     });
 
     function loadImageTable(){
@@ -61,5 +70,5 @@ layui.use(['upload','table','layer'],function () {
         });
     }
 
-    loadImageTable()
+    loadImageTable();
 });

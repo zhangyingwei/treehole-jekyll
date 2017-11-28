@@ -91,9 +91,9 @@ $(function(){
             return true;
         },
         showImages: function (editor) {
-            layer.notifyImage = function(text){
+            layer.notifyImage = function (text) {
                 editor.drawImage(text);
-            }
+            };
             layer.open({
                 type: 2,
                 area: ['700px', '560px'],
