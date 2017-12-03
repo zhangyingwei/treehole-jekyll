@@ -1,6 +1,7 @@
 package com.zhangyingwei.treehole.admin.controller;
 
 import com.zhangyingwei.treehole.common.Pages;
+import com.zhangyingwei.treehole.common.annotation.Auth;
 import com.zhangyingwei.treehole.common.annotation.TreeHoleAtcion;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 @RequestMapping("admin/blog")
+@Auth
 public class StatisticController {
     @GetMapping("statistic")
     @TreeHoleAtcion("打开统计信息页面")

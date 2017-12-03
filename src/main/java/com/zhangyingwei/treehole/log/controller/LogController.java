@@ -1,5 +1,6 @@
 package com.zhangyingwei.treehole.log.controller;
 
+import com.zhangyingwei.treehole.common.annotation.Auth;
 import com.zhangyingwei.treehole.log.model.PageVisitView;
 import com.zhangyingwei.treehole.log.model.PieView;
 import com.zhangyingwei.treehole.log.service.LogService;
@@ -22,6 +23,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/log")
+@Auth
 public class LogController {
 
     @Autowired

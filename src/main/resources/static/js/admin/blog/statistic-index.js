@@ -3,7 +3,51 @@ $(function () {
     getVisitLocations(charts);
     getVisitExplore(charts);
     getVisitAction(charts);
-    getVisitPage();
+    // getVisitPage();
+});
+layui.use(['layer','table','jquery'], function () {
+    var table = layui.table;
+    var layer = layui.layer;
+    table.render({
+        elem: '#visit-table',
+        id: '#visit-table',
+        height: 500
+        ,cols: [[ //表头
+            {field: 'id', title: 'ID', width:80, sort: true, fixed: 'left'},
+            {field: 'ip', title: 'IP', width:200},
+            {field: 'uri', title: 'URI', width:400, sort: true},
+            {field: 'datetime', title: '时间'}
+        ]]
+    });
+
+    var load = layer.load(1);
+    $.ajax({
+        url: "/log/visits/actions",
+        data: {
+            pageSize: 10,
+            current: 0
+        },
+        type: "GET",
+        success: function (data) {
+            if (data.code === 200) {
+                layer.close(load);
+                var data = data.result.data.data;
+                table.reload("#visit-table",{
+                    data: data,
+                    page: {
+                        limit: 5
+                    }
+                })
+            } else {
+                layer.msg(data.message);
+            }
+            layer.close(load);
+        },
+        error: function () {
+            layer.msg("加载页面访问信息错误");
+            layer.close(load);
+        }
+    });
 });
 function echartsInit(){
     var charts = {
@@ -247,30 +291,34 @@ function bulidPages(page){
         // next: '<li class="next"><a href="javascript:;">下一页</a></li>',
         // page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
         onPageChange: function (index, type) {
-            var load = layer.load(1);
-            $.ajax({
-                url:"/log/visits/actions",
-                data: {
-                    pageSize:10,
-                    current: index
-                },
-                type: "GET",
-                success: function (data) {
-                    if(data.code === 200){
-                        var tableHtml = bulidTableHtml(data.result.data.data);
-                        $(".uri-table").find("table").find("tbody").remove();
-                        $(".uri-table").find("table").append(tableHtml);
-                        // bulidPages(data.result.data.page);
-                    }else{
-                        layer.msg(data.message);
-                    }
-                    layer.close(load);
-                },
-                error: function () {
-                    layer.msg("加载页面访问信息错误");
-                    layer.close(load);
-                }
-            })
+            /**
+             * 创建表格
+             */
+            // var load = layer.load(1);
+            // $.ajax({
+            //     url:"/log/visits/actions",
+            //     data: {
+            //         pageSize:10,
+            //         current: index
+            //     },
+            //     type: "GET",
+            //     success: function (data) {
+            //         if(data.code === 200){
+            //             // var tableHtml = bulidTableHtml(data.result.data.data);
+            //             // $(".uri-table").find("table").find("tbody").remove();
+            //             // $(".uri-table").find("table").append(tableHtml);
+            //             // bulidPages(data.result.data.page);
+            //             bulidTable(data.result.data.data)
+            //         }else{
+            //             layer.msg(data.message);
+            //         }
+            //         layer.close(load);
+            //     },
+            //     error: function () {
+            //         layer.msg("加载页面访问信息错误");
+            //         layer.close(load);
+            //     }
+            // })
         }
     });
     // new PageInfo({
