@@ -35,7 +35,9 @@ layui.use(['layer','table','jquery'], function () {
                 table.reload("#visit-table",{
                     data: data,
                     page: {
-                        limit: 5
+                        limit: 10,
+                        curr: 5,
+                        count: 100
                     }
                 })
             } else {
