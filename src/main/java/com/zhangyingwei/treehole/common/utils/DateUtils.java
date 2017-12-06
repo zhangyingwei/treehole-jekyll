@@ -19,7 +19,7 @@ public class DateUtils {
      * @return
      */
     public static Long getTimeStamp(){
-        return new Date().getTime();
+        return System.currentTimeMillis();
     }
 
     /**
