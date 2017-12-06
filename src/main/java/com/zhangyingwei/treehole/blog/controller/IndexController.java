@@ -6,6 +6,7 @@ import com.zhangyingwei.treehole.admin.service.LinkService;
 import com.zhangyingwei.treehole.blog.model.*;
 import com.zhangyingwei.treehole.blog.service.IPageService;
 import com.zhangyingwei.treehole.common.Pages;
+import com.zhangyingwei.treehole.common.annotation.Auth;
 import com.zhangyingwei.treehole.common.annotation.TreeHoleAtcion;
 import com.zhangyingwei.treehole.common.config.TreeHoleConfig;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
@@ -65,6 +66,7 @@ public class IndexController {
         model.put("paginator", paginator.bulid());
         return Pages.blog(treeHoleConfig, Pages.BLOG_THEME_INDEX);
     }
+
     @GetMapping("/articles")
     @TreeHoleAtcion("打开博客首页(全部文章)")
     public String indexArticles(Map<String, Object> model) throws TreeHoleException {
@@ -97,6 +99,26 @@ public class IndexController {
         //加载page信息
         model.put("page", pageInfo);
         model.put("related", relatedPosts);
+        //加载page信息
+        model.put("post", post);
+        return Pages.blog(treeHoleConfig, Pages.BLOG_THEME_ARTICLE);
+    }
+
+    @GetMapping("/articles/preview/{id}")
+    @TreeHoleAtcion("预览文章)")
+    @Auth
+    public String previewArticle(Map<String,Object> model , @PathVariable("id") Integer id) throws TreeHoleException {
+        Site site = this.getSiteConfig();
+        Page pageInfo = new Page();
+        pageInfo.setTitle(site.getConfig("name"));
+        pageInfo.setUrl("/articles/preview/"+id);
+        pageInfo.setDescription(site.getConfig("desc"));
+        //查询文章信息
+        Post post = this.pageService.getArticleById(id);
+        //加载配置信息
+        model.put("site", site.bulid());
+        //加载page信息
+        model.put("page", pageInfo);
         //加载page信息
         model.put("post", post);
         return Pages.blog(treeHoleConfig, Pages.BLOG_THEME_ARTICLE);

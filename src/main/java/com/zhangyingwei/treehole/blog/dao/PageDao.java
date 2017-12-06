@@ -42,7 +42,7 @@ public interface PageDao {
      * @param id
      * @return
      */
-    @Select("select a.id,a.title,a.path,a.subpath,a.tags,a.excerpt,a.excerpthtml,a.content,a.contenthtml,k.name as categories,a.usecommont,a.flag,a.date from article as a left join kind k on a.categories = k.id where a.id=#{id} and a.flag=1")
+    @Select("select a.id,a.title,a.path,a.subpath,a.tags,a.excerpt,a.excerpthtml,a.content,a.contenthtml,k.name as categories,a.usecommont,a.flag,a.date from article as a left join kind k on a.categories = k.id where a.id=#{id}")
     Article getArticleById(@Param("id") Integer id) throws Exception;
 
     /**

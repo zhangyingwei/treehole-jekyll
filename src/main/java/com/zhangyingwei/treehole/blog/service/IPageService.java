@@ -53,6 +53,8 @@ public interface IPageService {
      */
     Post getPageById(Integer id) throws TreeHoleException;
 
+    Post getArticleById(Integer id) throws TreeHoleException;
+
     /**
      * 根据 subpath 获取文章
      * @return

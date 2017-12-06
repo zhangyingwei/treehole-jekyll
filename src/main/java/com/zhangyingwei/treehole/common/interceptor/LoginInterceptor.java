@@ -58,7 +58,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
                 if (session.getAttribute(TreeHoleEnum.STATE_DIC_KEY.getValue()) == null) {
                     session.setAttribute(TreeHoleEnum.STATE_DIC_KEY.getValue(),TreeHoleUtils.getGolbleStateDic());
                 }
-                if (!TreeHoleUtils.isLogin(session) && uri.startsWith("/admin") && !"/admin/login".equals(uri)) {
+                if (!TreeHoleUtils.isLogin(session) && !"/admin/login".equals(uri)) {
                     session.setAttribute(TreeHoleEnum.STATE_URL_BEFORE.getValue(), uri);
                     response.sendRedirect("/admin/login");
                     return false;

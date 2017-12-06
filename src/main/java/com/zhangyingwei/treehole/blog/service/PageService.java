@@ -11,6 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.validation.constraints.Null;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -82,6 +84,19 @@ public class PageService implements IPageService {
 
     @Override
     public Post getPageById(Integer id) throws TreeHoleException {
+        try {
+            Article article = this.pageDao.getArticleById(id);
+            if (article.getFlag().equals(1)) {
+                return article.toPage();
+            }
+            throw new NullPointerException("article is not found");
+        } catch (Exception e) {
+            throw new TreeHoleException(e);
+        }
+    }
+
+    @Override
+    public Post getArticleById(Integer id) throws TreeHoleException {
         try {
             Article article = this.pageDao.getArticleById(id);
             return article.toPage();
