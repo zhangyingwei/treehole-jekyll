@@ -52,7 +52,6 @@ public class ExceptionController2 {
             message = ex.getMessage();
         }
         logger.info("hello exception: "+message);
-//        ex.printStackTrace();
         return Ajax.error(message);
     }
 
