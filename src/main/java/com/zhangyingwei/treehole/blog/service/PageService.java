@@ -6,6 +6,7 @@ import com.zhangyingwei.treehole.blog.model.Post;
 import com.zhangyingwei.treehole.blog.model.Paginator;
 import com.zhangyingwei.treehole.blog.model.Tag;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
+import com.zhangyingwei.treehole.common.exception.TreeHoleOutOfPageException;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,16 +38,21 @@ public class PageService implements IPageService {
     }
 
     @Override
-    public List<Post> listPostsOrderByDate(Paginator paginator) throws TreeHoleException {
+    public List<Post> listPostsOrderByDate(Paginator paginator) throws TreeHoleException, TreeHoleOutOfPageException {
+        List<Article> posts = new ArrayList<Article>();
         try {
             Integer count = this.pageDao.count();
-            List<Article> posts = this.pageDao.listPostsOrderByDateWithPaginator(paginator);
             paginator.setTotalPosts(count);
-            List<Post> resultPost = posts.stream().map(post -> post.toPage()).collect(Collectors.toList());
-            return resultPost;
+            posts = this.pageDao.listPostsOrderByDateWithPaginator(paginator);
         } catch (Exception e) {
             throw new TreeHoleException(e);
         }
+        if (posts.size() == 0) {
+            throw new TreeHoleOutOfPageException();
+        }
+        List<Post> resultPost = posts.stream().map(post -> post.toPage()).collect(Collectors.toList());
+        return resultPost;
+
     }
 
     @Override
@@ -89,9 +95,9 @@ public class PageService implements IPageService {
             if (article.getFlag().equals(1)) {
                 return article.toPage();
             }
-            throw new NullPointerException("article is not found");
+            throw new NullPointerException("article:"+ id +"  is not found");
         } catch (Exception e) {
-            throw new TreeHoleException(e);
+            throw new NullPointerException(e.getMessage());
         }
     }
 

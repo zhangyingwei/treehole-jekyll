@@ -13,6 +13,8 @@ public class TreeHoleConfig {
     private String theme = "deafult";
     @Value("${treehole.mainpage.page}")
     private Boolean page = true;
+    @Value("${app.dev}")
+    private Boolean env = false;
 
     public String getTheme() {
         return theme;
@@ -28,5 +30,13 @@ public class TreeHoleConfig {
 
     public void setPage(Boolean page) {
         this.page = page;
+    }
+
+    public Boolean getEnv() {
+        return env;
+    }
+
+    public void setEnv(Boolean env) {
+        this.env = env;
     }
 }

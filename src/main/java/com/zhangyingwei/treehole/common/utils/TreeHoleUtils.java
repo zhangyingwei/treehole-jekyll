@@ -1,5 +1,11 @@
 package com.zhangyingwei.treehole.common.utils;
 
+import com.zhangyingwei.treehole.admin.model.Link;
+import com.zhangyingwei.treehole.admin.service.BlogManagerService;
+import com.zhangyingwei.treehole.admin.service.LinkService;
+import com.zhangyingwei.treehole.blog.model.Site;
+import com.zhangyingwei.treehole.blog.service.IPageService;
+import com.zhangyingwei.treehole.common.config.TreeHoleConfig;
 import com.zhangyingwei.treehole.log.filter.LogFilter;
 import com.zhangyingwei.treehole.log.model.Agent;
 import com.zhangyingwei.treehole.log.model.LogModel;
@@ -52,10 +58,10 @@ public class TreeHoleUtils {
      * 创建数据库
      * @param dbConf
      */
-    public static void makeTables(DbConf dbConf) throws TreeHoleException {
+    public static void makeTables(DbConf dbConf,TreeHoleConfig treeHoleConfig) throws TreeHoleException {
         List<String> sqls = null;
         try {
-            sqls = readSql();
+            sqls = readSql(treeHoleConfig);
             if(sqls!=null && sqls.size()>0){
                 Connection connection = DbUtils.getConnection(dbConf);
                 for (String sql : sqls) {
@@ -75,9 +81,9 @@ public class TreeHoleUtils {
      * 根据注释读取sql语句
      * @return
      */
-    private static List<String> readSql() throws TreeHoleException {
+    private static List<String> readSql(TreeHoleConfig treeHoleConfig) throws TreeHoleException {
         List<String> sqlList = new ArrayList<String>();
-        File sqlFile = new File(TreeHoleEnum.RES_BASEPATH.getValue() + TreeHoleEnum.CONF_INSTALL_SQL.getValue());
+        File sqlFile = new File(TreeHoleEnum.RES_BASEPATH.getResValue(treeHoleConfig.getEnv()) + TreeHoleEnum.CONF_INSTALL_SQL.getValue());
         try {
             BufferedReader reader = new BufferedReader(new FileReader(sqlFile));
             sqlList = reader.lines().filter(line -> {
@@ -224,11 +230,11 @@ public class TreeHoleUtils {
      * @param ip
      * @return
      */
-    public static String ipLocal(String ip){
+    public static String ipLocal(String ip,TreeHoleConfig treeHoleConfig){
         if(!isIpv4(ip)){
             return "";
         }
-        IPUtils.load(TreeHoleEnum.RES_BASEPATH.getValue() + "17monipdb.dat");
+        IPUtils.load(TreeHoleEnum.RES_BASEPATH.getResValue(treeHoleConfig.getEnv()) + "17monipdb.dat");
         String[] res = IPUtils.find(ip);
         String result = "";
         for (String re : res) {
@@ -496,5 +502,39 @@ public class TreeHoleUtils {
      */
     public static String markdown(String markdown){
         return pegDownProcessor.markdownToHtml(markdown);
+    }
+
+    /**
+     * 获取主题配置文件中的信息
+     * @return
+     * @throws TreeHoleException
+     */
+    public static Site getSiteConfig(
+            TreeHoleConfig treeHoleConfig,
+            BlogManagerService blogManagerService,
+            LinkService linkService,
+            IPageService pageService
+    ) throws TreeHoleException {
+        Site site = new Site();
+        try {
+            site.setTime(DateUtils.now());
+            site.setTheme(treeHoleConfig.getTheme());
+            //从 yml 配置文件中读取配置文件
+            Map siteConfig = TreeHoleConfigUtils.readThremeYmlConfig(treeHoleConfig);
+            site.setConfigs(siteConfig);
+            //读取界面中配置的博客信息
+            Map blogConf = blogManagerService.getBlogConf().bulid();
+            site.setConfigs(blogConf);
+            List<Link> links = linkService.listLinks();
+            site.setLinks(links);
+            List<String> categories = pageService.listCategories();
+            List<String> tags = pageService.listTags();
+            site.setCategories(categories);
+            site.setTags(tags);
+        } catch (FileNotFoundException e) {
+            logger.error(e.getLocalizedMessage());
+            throw new TreeHoleException("主题配置文件未找到");
+        }
+        return site;
     }
 }

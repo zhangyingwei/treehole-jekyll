@@ -18,7 +18,7 @@ public class TreeHoleConfigUtils {
      * @return
      */
     public static Map<String,Object> readThremeYmlConfig(TreeHoleConfig treeHoleConfig) throws FileNotFoundException {
-        String path = TreeHoleEnum.RES_BASEPATH.getValue() + "templates/" + TreeHoleEnum.THEME_BASEPATH.getValue() + "/" + treeHoleConfig.getTheme() + "/" + TreeHoleEnum.THEME_CONFIG.getValue();
+        String path = TreeHoleEnum.RES_BASEPATH.getResValue(treeHoleConfig.getEnv()) + "templates/" + TreeHoleEnum.THEME_BASEPATH.getValue() + "/" + treeHoleConfig.getTheme() + "/" + TreeHoleEnum.THEME_CONFIG.getValue();
         return YamlUtils.read(path);
     }
 }

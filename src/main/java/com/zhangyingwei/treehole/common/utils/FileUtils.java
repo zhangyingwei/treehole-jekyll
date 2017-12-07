@@ -48,7 +48,7 @@ public class FileUtils {
 
     public static void main(String[] args) {
 //        FileUtils.formatFileType("templates/theme/default", ".ejs", ".html");
-        FileUtils.formatFileType(TreeHoleEnum.RES_BASEPATH.getValue()+"templates/theme/default", ".ejs", ".html");
+        FileUtils.formatFileType(TreeHoleEnum.RES_BASEPATH.getResValue(false)+"templates/theme/default", ".ejs", ".html");
     }
 
     /**

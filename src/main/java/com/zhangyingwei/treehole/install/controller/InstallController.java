@@ -2,6 +2,7 @@ package com.zhangyingwei.treehole.install.controller;
 
 import com.zhangyingwei.treehole.common.Ajax;
 import com.zhangyingwei.treehole.common.annotation.Auth;
+import com.zhangyingwei.treehole.common.config.TreeHoleConfig;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import com.zhangyingwei.treehole.common.utils.DbUtils;
 import com.zhangyingwei.treehole.common.utils.TreeHoleUtils;
@@ -34,6 +35,8 @@ public class InstallController {
     private Logger logger = LoggerFactory.getLogger(InstallController.class);
     @Autowired
     private AdminInitService adminInitService;
+    @Autowired
+    private TreeHoleConfig treeHoleConfig;
     @Value("${spring.datasource.url}")
     private String url;
     @GetMapping
@@ -70,7 +73,7 @@ public class InstallController {
     public Map makeDatabase(@Valid DbConf dbConf) throws TreeHoleException {
         dbConf.setUrl(this.url);
         //创建数据库表
-        TreeHoleUtils.makeTables(dbConf);
+        TreeHoleUtils.makeTables(dbConf,treeHoleConfig);
         return Ajax.success("数据库初始化成功");
     }
 
@@ -80,7 +83,7 @@ public class InstallController {
         this.adminInitService.blogInfoInit(blogConf);
         //获取安装信息
         Map<String, String> sysInfo = TreeHoleUtils.systemInfo();
-        String ipLocal = TreeHoleUtils.ipLocal(request.getRemoteAddr());
+        String ipLocal = TreeHoleUtils.ipLocal(request.getRemoteAddr(),treeHoleConfig);
         InstallConf installConf = new InstallConf();
         installConf.setIdate(TreeHoleUtils.getCurrentDateTime());
         installConf.setIbower(TreeHoleUtils.getBorwe(request));

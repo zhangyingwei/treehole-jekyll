@@ -1,5 +1,6 @@
 package com.zhangyingwei.treehole.common.controller;
 
+import com.zhangyingwei.treehole.common.Pages;
 import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class HttpErrorController2 implements ErrorController {
 
-    private final static String ERROR_PATH = "/error";
+    private final static String ERROR_PATH = Pages.ERROR;
 
     /**
      * Supports the HTML Error View
@@ -20,7 +21,7 @@ public class HttpErrorController2 implements ErrorController {
      * @return
      */
     @RequestMapping(value = ERROR_PATH, produces = "text/html")
-    public String errorHtml(HttpServletRequest request) {
+    public Object errorHtml(HttpServletRequest request) {
         return "404";
     }
 
