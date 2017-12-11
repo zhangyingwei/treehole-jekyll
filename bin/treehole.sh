@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TREEHOLE_HOME="/home/zhangyingwei/java/treehole-jekyll-0.0.1-SNAPSHOT"
+TREEHOLE_HOME="/home/treehole/treehole-jekyll-0.0.1-SNAPSHOT"
 LOG_NAME="treehole.out"
 
 env_args="-Xms128m -Xmx128m"
