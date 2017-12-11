@@ -21,3 +21,8 @@ TreeHole 或者叫 THole ，是一个简易安装的博客系统。
 
 ### 安装程序
 [安装使用指南](https://treeholeb.github.io/#)
+
+### 如果脚本在linux系统中出现 /r 的错误
+
+* 安装 dos2unix
+* 执行 dos2unix treehole.sh
