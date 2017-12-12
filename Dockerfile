@@ -18,4 +18,4 @@ RUN cd /home/treehole && wget http://orgr5bpmh.bkt.clouddn.com//treehole/treehol
 RUN cd /home/treehole && unzip treehole-jekyll-0.0.1-SNAPSHOT.zip
 RUN chmod 777 /home/treehole/treehole-jekyll-0.0.1-SNAPSHOT/bin/treehole.sh
 RUN dos2unix /home/treehole/treehole-jekyll-0.0.1-SNAPSHOT/bin/treehole.sh
-CMD ["cd","/home/treehole/treehole-jekyll-0.0.1-SNAPSHOT","&&","./bin/treehole.sh","start"]
+CMD ["/home/treehole/treehole-jekyll-0.0.1-SNAPSHOT/bin/treehole.sh","start"]

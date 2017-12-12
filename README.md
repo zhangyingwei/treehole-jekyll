@@ -26,3 +26,13 @@ TreeHole 或者叫 THole ，是一个简易安装的博客系统。
 
 * 安装 dos2unix
 * 执行 dos2unix treehole.sh
+
+## 添加了 docker 支持
+
+```shell
+docker pull zhangyw/treehole-jekyll
+```
+
+```shell
+docker run docker run -p 5000:5000 -d --name treehole zhangyw/treehole-jekyll:0.0.1
+```
