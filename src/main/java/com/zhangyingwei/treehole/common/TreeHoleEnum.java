@@ -19,7 +19,8 @@ public enum TreeHoleEnum {
     UPLOAD_FILE_BASEPATH("upload/"),
     RES_IMG_DEFAULT(RES_BASEPATH.getValue()+"static/images/default.jpg"),
     THEME_CONFIG("_config.yml"),
-    FEED_ENCODING("UTF-8");
+    FEED_ENCODING("UTF-8"),
+    LOGIN_USER_TOKEN("user_token");
 
     private String value;
 

@@ -1,6 +1,7 @@
 package com.zhangyingwei.treehole.admin.controller;
 
 import com.zhangyingwei.treehole.admin.model.User;
+import com.zhangyingwei.treehole.common.Ajax;
 import com.zhangyingwei.treehole.common.Pages;
 import com.zhangyingwei.treehole.common.TreeHoleEnum;
 import com.zhangyingwei.treehole.common.annotation.Auth;
@@ -13,9 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -30,10 +29,11 @@ import java.util.Map;
  * @time: 上午10:23
  * @desc: 登录
  */
-@Controller
+@RestController
 @Scope("prototype")
 @RequestMapping("/admin")
-@Auth
+@CrossOrigin
+//@Auth
 public class LoginController {
     private Logger logger = LoggerFactory.getLogger(LoginController.class);
     @Autowired
@@ -51,16 +51,9 @@ public class LoginController {
         }
     }
 
-    @GetMapping("/login")
-    @TreeHoleAtcion("打开登录页面")
-    public String loginIndex(HttpServletRequest request) {
-        Cookie[] cookie = request.getCookies();
-        return Pages.ADMIN_LOGIN;
-    }
-
     @PostMapping("/login")
     @TreeHoleAtcion("登录")
-    public String login(HttpSession session, @Valid User user) throws TreeHoleException {
+    public Map login(HttpSession session, @Valid User user) throws TreeHoleException {
         logger.info(user.toString());
         //记录登录用户信息到session
         try {
@@ -73,8 +66,9 @@ public class LoginController {
         Boolean login = this.adminInitService.login(user);
         if(login){
             TreeHoleUtils.markAsLogin(session,user);
+            return Ajax.success("login success");
         }
-        return "redirect:/admin";
+        return Ajax.error("login error");
     }
 
     @GetMapping("/logout")

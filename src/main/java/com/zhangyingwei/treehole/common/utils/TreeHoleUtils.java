@@ -124,8 +124,17 @@ public class TreeHoleUtils {
      * @param user
      */
     public static void markAsLogin(HttpSession session, User user) {
+        session.setAttribute(TreeHoleEnum.LOGIN_USER_TOKEN.getValue(),getNewToken());
         session.setAttribute(TreeHoleEnum.LOGIN_USER_KEY.getValue(), user);
         session.setMaxInactiveInterval(LOGIN_TIMEOUT);
+    }
+
+    /**
+     * 生成新的签名信息
+     * @return
+     */
+    private static String getNewToken() {
+        return UUID.randomUUID().toString();
     }
 
     /**
