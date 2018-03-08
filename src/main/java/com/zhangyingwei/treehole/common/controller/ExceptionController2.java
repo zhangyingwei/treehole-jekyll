@@ -7,6 +7,7 @@ import com.zhangyingwei.treehole.blog.service.IPageService;
 import com.zhangyingwei.treehole.common.Ajax;
 import com.zhangyingwei.treehole.common.Pages;
 import com.zhangyingwei.treehole.common.config.TreeHoleConfig;
+import com.zhangyingwei.treehole.common.exception.TreeHoleApiException;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import com.zhangyingwei.treehole.common.exception.TreeHoleOutOfPageException;
 import com.zhangyingwei.treehole.common.utils.TreeHoleUtils;
@@ -44,6 +45,20 @@ public class ExceptionController2 {
     @ResponseBody
     @ExceptionHandler(value = {BindException.class, TreeHoleException.class})
     public Object bindExceptionHandler(Exception ex) throws TreeHoleOutOfPageException {
+        String message = "";
+        if(ex instanceof BindException){
+            BindException bex = (BindException) ex;
+            message = bex.getFieldError().getDefaultMessage();
+        } else{
+            message = ex.getMessage();
+        }
+        logger.info("hello exception: "+message);
+        return Ajax.error(message);
+    }
+
+    @ResponseBody
+    @ExceptionHandler(value = {TreeHoleApiException.class})
+    public Object bindApiExceptionHandler(Exception ex) {
         String message = "";
         if(ex instanceof BindException){
             BindException bex = (BindException) ex;

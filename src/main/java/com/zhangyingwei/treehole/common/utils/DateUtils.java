@@ -90,6 +90,14 @@ public class DateUtils {
     }
 
     /**
+     * 格式化日期字符串为 date
+     * @return
+     */
+    public static Date formateData(String date) throws ParseException {
+        return new SimpleDateFormat("yyyy-MM-dd").parse(date);
+    }
+
+    /**
      * 日期转化为 XML 模式 将日期转化为 XML 模式 (ISO 8601) 的格式。
      * @return
      */

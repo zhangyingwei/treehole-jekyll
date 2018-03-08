@@ -26,6 +26,14 @@ public class BlogConf {
      */
     private String desc;
 
+    private String nickname;
+    private String email;
+    private String weibo;
+    private String weixin;
+    private String zhihu;
+    private String facebook;
+    private String twitter;
+
     public String getName() {
         return name;
     }
@@ -50,12 +58,75 @@ public class BlogConf {
         this.desc = desc;
     }
 
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getWeibo() {
+        return weibo;
+    }
+
+    public void setWeibo(String weibo) {
+        this.weibo = weibo;
+    }
+
+    public String getWeixin() {
+        return weixin;
+    }
+
+    public void setWeixin(String weixin) {
+        this.weixin = weixin;
+    }
+
+    public String getZhihu() {
+        return zhihu;
+    }
+
+    public void setZhihu(String zhihu) {
+        this.zhihu = zhihu;
+    }
+
+    public String getFacebook() {
+        return facebook;
+    }
+
+    public void setFacebook(String facebook) {
+        this.facebook = facebook;
+    }
+
+    public String getTwitter() {
+        return twitter;
+    }
+
+    public void setTwitter(String twitter) {
+        this.twitter = twitter;
+    }
+
     @Override
     public String toString() {
         return "BlogConf{" +
                 "name='" + name + '\'' +
                 ", url='" + url + '\'' +
                 ", desc='" + desc + '\'' +
+                ", nickname='" + nickname + '\'' +
+                ", email='" + email + '\'' +
+                ", weibo='" + weibo + '\'' +
+                ", weixin='" + weixin + '\'' +
+                ", zhihu='" + zhihu + '\'' +
+                ", facebook='" + facebook + '\'' +
+                ", twitter='" + twitter + '\'' +
                 '}';
     }
 

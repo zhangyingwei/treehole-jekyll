@@ -69,7 +69,7 @@ public class InterCeptorController2 {
         log.setAgent(request.getHeader("User-Agent"));
         log.setReferer(request.getHeader("Referer"));
         log.setTimestamp(DateUtils.getTimeStamp());
-        log.setReqType(request.getMethod());
+        log.setReqtype(request.getMethod());
         log.setAction(this.getAction(joinPoint));
         this.logHandler.produceLog(log);
     }

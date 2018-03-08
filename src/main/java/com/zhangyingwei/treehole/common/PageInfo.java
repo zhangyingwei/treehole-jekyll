@@ -44,10 +44,6 @@ public class PageInfo {
         return this.pageSize * this.current;
     }
 
-    public void setEnd(Integer end) {
-        this.end = end;
-    }
-
     public Integer getTotalPages() {
         if(this.total%this.pageSize==0){
             return this.total / this.pageSize;
