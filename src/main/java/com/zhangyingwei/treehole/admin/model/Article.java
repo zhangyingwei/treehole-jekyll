@@ -1,11 +1,13 @@
 package com.zhangyingwei.treehole.admin.model;
 
 import com.zhangyingwei.treehole.blog.model.Post;
+import com.zhangyingwei.treehole.common.utils.TreeHoleUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.UUID;
 
 /**
  * @author: zhangyw
@@ -34,6 +36,9 @@ public class Article {
      * 1 发布
      * 9 删除
      */
+    public static final Integer FLAG_SAVE = 0;
+    public static final Integer FLAG_PUBLISH = 1;
+    public static final Integer FLAG_DEL = 9;
     private Integer flag = 0;
     private String type;
 
@@ -184,6 +189,7 @@ public class Article {
     }
 
     public void setContentHtml(String contentHtml) {
+        this.contentHtml = TreeHoleUtils.markdown(this.content);
         this.contentHtml = contentHtml;
     }
 

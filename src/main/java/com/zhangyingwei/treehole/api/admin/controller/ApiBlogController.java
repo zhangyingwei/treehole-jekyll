@@ -36,6 +36,4 @@ public class ApiBlogController {
         InstallConf install = this.blogManagerService.getInstallinfo();
         return Ajax.success(install);
     }
-
-
 }

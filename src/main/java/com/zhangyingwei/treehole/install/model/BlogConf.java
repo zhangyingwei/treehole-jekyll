@@ -1,5 +1,6 @@
 package com.zhangyingwei.treehole.install.model;
 
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import java.util.HashMap;
@@ -140,5 +141,15 @@ public class BlogConf {
         map.put("url", url);
         map.put("desc", desc);
         return map;
+    }
+
+    public boolean isUserInfoEmpty() {
+        return StringUtils.isEmpty(this.nickname)
+                || StringUtils.isEmpty(this.email)
+                || StringUtils.isEmpty(this.weibo)
+                || StringUtils.isEmpty(this.weixin)
+                || StringUtils.isEmpty(this.zhihu)
+                || StringUtils.isEmpty(this.facebook)
+                || StringUtils.isEmpty(this.twitter);
     }
 }
