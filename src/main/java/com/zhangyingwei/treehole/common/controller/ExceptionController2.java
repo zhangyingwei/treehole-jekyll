@@ -52,6 +52,9 @@ public class ExceptionController2 {
         } else{
             message = ex.getMessage();
         }
+        if (ex.getLocalizedMessage().contains("NullPointerException")) {
+            throw new TreeHoleOutOfPageException(ex);
+        }
         logger.info("hello exception: "+message);
         return Ajax.error(message);
     }

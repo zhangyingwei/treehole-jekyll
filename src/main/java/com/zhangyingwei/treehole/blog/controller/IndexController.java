@@ -96,7 +96,7 @@ public class IndexController {
 
     @GetMapping("/articles/{id}")
     @TreeHoleAtcion("打开文章")
-    public String getArticle(Map<String,Object> model , @PathVariable("id") Integer id) throws TreeHoleException {
+    public String getArticle(Map<String,Object> model , @PathVariable("id") String id) throws TreeHoleException {
         Site site = TreeHoleUtils.getSiteConfig(
                 this.treeHoleConfig,
                 this.blogManagerService,
@@ -124,7 +124,7 @@ public class IndexController {
     @GetMapping("/articles/preview/{id}")
     @TreeHoleAtcion("预览文章)")
     @Auth
-    public String previewArticle(Map<String,Object> model , @PathVariable("id") Integer id) throws TreeHoleException {
+    public String previewArticle(Map<String,Object> model , @PathVariable("id") String id) throws TreeHoleException {
         Site site = TreeHoleUtils.getSiteConfig(
                 this.treeHoleConfig,
                 this.blogManagerService,
@@ -148,7 +148,7 @@ public class IndexController {
 
     @GetMapping("/articles/alias/{alias}")
     @TreeHoleAtcion("通过别名打开文章")
-    public String getArticle(Map<String,Object> model , @PathVariable("alias") String alias) throws TreeHoleException {
+    public String getArticleByAlias(Map<String,Object> model , @PathVariable("alias") String alias) throws TreeHoleException {
         Site site = TreeHoleUtils.getSiteConfig(
                 this.treeHoleConfig,
                 this.blogManagerService,

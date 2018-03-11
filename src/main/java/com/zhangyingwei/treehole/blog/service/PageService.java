@@ -89,7 +89,7 @@ public class PageService implements IPageService {
     }
 
     @Override
-    public Post getPageById(Integer id) throws TreeHoleException {
+    public Post getPageById(String id) throws TreeHoleException {
         try {
             Article article = this.pageDao.getArticleById(id);
             if (article.getFlag().equals(1)) {
@@ -102,7 +102,7 @@ public class PageService implements IPageService {
     }
 
     @Override
-    public Post getArticleById(Integer id) throws TreeHoleException {
+    public Post getArticleById(String id) throws TreeHoleException {
         try {
             Article article = this.pageDao.getArticleById(id);
             return article.toPage();

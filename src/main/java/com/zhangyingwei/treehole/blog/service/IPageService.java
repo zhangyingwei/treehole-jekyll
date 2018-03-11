@@ -52,9 +52,9 @@ public interface IPageService {
      * @return
      * @throws TreeHoleException
      */
-    Post getPageById(Integer id) throws TreeHoleException;
+    Post getPageById(String id) throws TreeHoleException;
 
-    Post getArticleById(Integer id) throws TreeHoleException;
+    Post getArticleById(String id) throws TreeHoleException;
 
     /**
      * 根据 subpath 获取文章

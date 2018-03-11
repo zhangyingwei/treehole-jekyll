@@ -1,17 +1,20 @@
 package com.zhangyingwei.treehole.api.admin.controller;
 
 import com.zhangyingwei.treehole.admin.model.Article;
+import com.zhangyingwei.treehole.admin.model.Kind;
+import com.zhangyingwei.treehole.admin.service.KindService;
 import com.zhangyingwei.treehole.api.admin.service.ApiArticleService;
 import com.zhangyingwei.treehole.common.Ajax;
+import com.zhangyingwei.treehole.common.PageInfo;
 import com.zhangyingwei.treehole.common.exception.TreeHoleApiException;
+import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -29,6 +32,19 @@ public class ApiArticleController {
     @Autowired
     private ApiArticleService apiArticleService;
 
+    @Autowired
+    private KindService kindService;
+
+    @GetMapping("/kinds")
+    public Map listKinds() throws TreeHoleApiException {
+        try {
+            List<Kind> kinds = this.kindService.getKinds();
+            return Ajax.success(kinds);
+        } catch (TreeHoleException e) {
+            throw new TreeHoleApiException(e);
+        }
+    }
+
     @PostMapping("/save")
     public Map saveArticle(Article article) throws TreeHoleApiException {
         String id = this.apiArticleService.saveArticle(article);
@@ -39,5 +55,26 @@ public class ApiArticleController {
     public Map publishArticle(Article article) throws TreeHoleApiException {
         String id = this.apiArticleService.publishArticle(article);
         return Ajax.success("发布文章成功",id);
+    }
+
+    @PostMapping("/{id}")
+    public Map publishOne(@PathVariable("id") String id) throws TreeHoleApiException {
+        this.apiArticleService.publishOne(id);
+        return Ajax.success("发布成功");
+    }
+
+    @DeleteMapping("/{id}")
+    public Map deleteOne(@PathVariable("id") String id) throws TreeHoleApiException {
+        this.apiArticleService.deleteOne(id);
+        return Ajax.success("删除成功");
+    }
+
+    @GetMapping
+    public Map listArticles(PageInfo pageInfo,Article article) throws TreeHoleApiException {
+        List<Article> articles = this.apiArticleService.listArticlesWithPage(pageInfo, article);
+        Map<String,Object> result = new HashMap<String,Object>();
+        result.put("articles", articles);
+        result.put("page", pageInfo);
+        return Ajax.success(result);
     }
 }

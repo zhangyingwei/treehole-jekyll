@@ -24,6 +24,7 @@ public class Article {
     private String tags;
     @NotNull(message = "文章类别不能为空")
     private String categories;
+    private String categoriesText;
     @NotNull(message = "文章内容不能为空")
     private String content;
     private String contentHtml;
@@ -39,7 +40,7 @@ public class Article {
     public static final Integer FLAG_SAVE = 0;
     public static final Integer FLAG_PUBLISH = 1;
     public static final Integer FLAG_DEL = 9;
-    private Integer flag = 0;
+    private Integer flag;
     private String type;
 
     public String getType() {
@@ -84,6 +85,14 @@ public class Article {
 
     public String getContent() {
         return content;
+    }
+
+    public String getCategoriesText() {
+        return categoriesText;
+    }
+
+    public void setCategoriesText(String categoriesText) {
+        this.categoriesText = categoriesText;
     }
 
     public void setContent(String content) {
@@ -189,7 +198,6 @@ public class Article {
     }
 
     public void setContentHtml(String contentHtml) {
-        this.contentHtml = TreeHoleUtils.markdown(this.content);
         this.contentHtml = contentHtml;
     }
 
@@ -218,6 +226,13 @@ public class Article {
                 ", flag=" + flag +
                 ", type='" + type + '\'' +
                 '}';
+    }
+
+    public Article bulid(){
+        this.contentHtml = TreeHoleUtils.markdown(this.content);
+        this.bulidIntro();
+        this.bulidIntroHtml();
+        return this;
     }
 
     /**

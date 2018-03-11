@@ -43,7 +43,7 @@ public interface PageDao {
      * @return
      */
     @Select("select a.id,a.title,a.path,a.subpath,a.tags,a.excerpt,a.excerpthtml,a.content,a.contenthtml,k.name as categories,a.usecommont,a.flag,a.date from article as a left join kind k on a.categories = k.id where a.id=#{id}")
-    Article getArticleById(@Param("id") Integer id) throws Exception;
+    Article getArticleById(@Param("id") String id) throws Exception;
 
     /**
      * 根据 subpath 查询文章

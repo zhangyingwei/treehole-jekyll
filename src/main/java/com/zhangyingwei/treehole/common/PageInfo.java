@@ -37,7 +37,7 @@ public class PageInfo {
     }
 
     public Integer getStart() {
-        return (this.current - 1) * this.pageSize + 1;
+        return (this.current - 1) * this.pageSize;
     }
 
     public Integer getEnd() {
