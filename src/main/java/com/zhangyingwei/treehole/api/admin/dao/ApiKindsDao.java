@@ -18,6 +18,9 @@ public interface ApiKindsDao {
     @Select("select * from kind order by id desc limit #{page.start},#{page.pageSize}")
     List<Kind> listKindsWithPage(@Param("page") PageInfo pageInfo) throws Exception;
 
+    @Select("select * from kind where flag=0 order by id desc")
+    List<Kind> listActiceKinds() throws Exception;
+
     @Select("select count(*) from kind")
     Integer count();
 

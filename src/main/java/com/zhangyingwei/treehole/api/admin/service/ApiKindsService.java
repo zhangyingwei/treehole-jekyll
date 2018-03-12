@@ -34,6 +34,15 @@ public class ApiKindsService {
         }
     }
 
+    public List<Kind> listActiveKinds() throws TreeHoleApiException{
+        try {
+            List<Kind> kinds = this.apiKindsDao.listActiceKinds();
+            return kinds;
+        } catch (Exception e) {
+            throw new TreeHoleApiException(e.getLocalizedMessage());
+        }
+    }
+
     public void addKind(Kind kind) throws TreeHoleApiException {
         try {
             Kind old = this.apiKindsDao.findByName(kind);

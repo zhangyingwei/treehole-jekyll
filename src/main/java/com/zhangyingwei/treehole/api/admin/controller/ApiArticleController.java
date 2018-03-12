@@ -4,6 +4,7 @@ import com.zhangyingwei.treehole.admin.model.Article;
 import com.zhangyingwei.treehole.admin.model.Kind;
 import com.zhangyingwei.treehole.admin.service.KindService;
 import com.zhangyingwei.treehole.api.admin.service.ApiArticleService;
+import com.zhangyingwei.treehole.api.admin.service.ApiKindsService;
 import com.zhangyingwei.treehole.common.Ajax;
 import com.zhangyingwei.treehole.common.PageInfo;
 import com.zhangyingwei.treehole.common.exception.TreeHoleApiException;
@@ -32,17 +33,15 @@ public class ApiArticleController {
     @Autowired
     private ApiArticleService apiArticleService;
 
+    //    @Autowired
+//    private KindService kindService;
     @Autowired
-    private KindService kindService;
+    private ApiKindsService apiKindsService;
 
     @GetMapping("/kinds")
     public Map listKinds() throws TreeHoleApiException {
-        try {
-            List<Kind> kinds = this.kindService.getKinds();
-            return Ajax.success(kinds);
-        } catch (TreeHoleException e) {
-            throw new TreeHoleApiException(e);
-        }
+        List<Kind> kinds = this.apiKindsService.listActiveKinds();
+        return Ajax.success(kinds);
     }
 
     @PostMapping("/save")
