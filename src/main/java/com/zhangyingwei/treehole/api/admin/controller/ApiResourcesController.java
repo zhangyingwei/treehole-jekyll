@@ -4,6 +4,7 @@ import com.zhangyingwei.treehole.admin.model.FileRes;
 import com.zhangyingwei.treehole.api.admin.service.ApiResourcesService;
 import com.zhangyingwei.treehole.common.Ajax;
 import com.zhangyingwei.treehole.common.PageInfo;
+import com.zhangyingwei.treehole.common.annotation.Auth;
 import com.zhangyingwei.treehole.common.exception.TreeHoleApiException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/admin/resources")
 @CrossOrigin
+@Auth
 public class ApiResourcesController {
 
     private Logger logger = LoggerFactory.getLogger(ApiResourcesController.class);

@@ -3,6 +3,7 @@ package com.zhangyingwei.treehole.api.admin.controller;
 import com.zhangyingwei.treehole.admin.service.BlogManagerService;
 import com.zhangyingwei.treehole.api.admin.service.ApiBlogInfoService;
 import com.zhangyingwei.treehole.common.Ajax;
+import com.zhangyingwei.treehole.common.annotation.Auth;
 import com.zhangyingwei.treehole.common.exception.TreeHoleApiException;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import com.zhangyingwei.treehole.install.model.BlogConf;
@@ -20,6 +21,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/admin/settings")
 @CrossOrigin
+@Auth
 public class ApiSettingsController {
     private Logger logger = LoggerFactory.getLogger(ApiSettingsController.class);
 

@@ -7,6 +7,7 @@ import com.zhangyingwei.treehole.api.admin.service.ApiArticleService;
 import com.zhangyingwei.treehole.api.admin.service.ApiKindsService;
 import com.zhangyingwei.treehole.common.Ajax;
 import com.zhangyingwei.treehole.common.PageInfo;
+import com.zhangyingwei.treehole.common.annotation.Auth;
 import com.zhangyingwei.treehole.common.exception.TreeHoleApiException;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import org.slf4j.Logger;
@@ -27,6 +28,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/admin/articles")
 @CrossOrigin
+@Auth
 public class ApiArticleController {
     private Logger logger = LoggerFactory.getLogger(ApiArticleController.class);
 

@@ -3,6 +3,7 @@ package com.zhangyingwei.treehole.api.admin.controller;
 import com.zhangyingwei.treehole.api.admin.service.ApiLogService;
 import com.zhangyingwei.treehole.common.Ajax;
 import com.zhangyingwei.treehole.common.PageInfo;
+import com.zhangyingwei.treehole.common.annotation.Auth;
 import com.zhangyingwei.treehole.common.exception.TreeHoleApiException;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import com.zhangyingwei.treehole.common.utils.DateUtils;
@@ -27,6 +28,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/admin")
 @CrossOrigin
+@Auth
 public class ApiLogController {
     @Autowired
     private ApiLogService apiLogService;

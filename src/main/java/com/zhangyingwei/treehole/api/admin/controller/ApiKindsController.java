@@ -4,6 +4,7 @@ import com.zhangyingwei.treehole.admin.model.Kind;
 import com.zhangyingwei.treehole.api.admin.service.ApiKindsService;
 import com.zhangyingwei.treehole.common.Ajax;
 import com.zhangyingwei.treehole.common.PageInfo;
+import com.zhangyingwei.treehole.common.annotation.Auth;
 import com.zhangyingwei.treehole.common.exception.TreeHoleApiException;
 import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
@@ -25,6 +26,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/admin/kinds")
 @CrossOrigin
+@Auth
 public class ApiKindsController {
 
     private Logger logger = LoggerFactory.getLogger(ApiKindsController.class);
