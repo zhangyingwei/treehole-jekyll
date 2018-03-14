@@ -44,6 +44,12 @@ public class ApiArticleController {
         return Ajax.success(kinds);
     }
 
+    @GetMapping("/count")
+    public Map count() throws TreeHoleApiException {
+        Integer count = this.apiArticleService.count();
+        return Ajax.success(count);
+    }
+
     @PostMapping("/save")
     public Map saveArticle(Article article) throws TreeHoleApiException {
         String id = this.apiArticleService.saveArticle(article);

@@ -50,4 +50,10 @@ public class ApiLogController {
         }
     }
 
+    @GetMapping("/visits/count")
+    public Map visitCount() throws TreeHoleApiException {
+        Integer count = this.apiLogService.visitCount();
+        return Ajax.success(count);
+    }
+
 }

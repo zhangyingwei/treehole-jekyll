@@ -96,4 +96,12 @@ public class ApiArticleService {
             throw new TreeHoleApiException(e);
         }
     }
+
+    public Integer count() throws TreeHoleApiException {
+        try {
+            return this.apiArticleDao.count(new Article());
+        } catch (Exception e) {
+            throw new TreeHoleApiException(e.getLocalizedMessage());
+        }
+    }
 }

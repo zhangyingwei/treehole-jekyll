@@ -28,7 +28,8 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/admin/files")
-@Auth
+//@Auth
+@CrossOrigin
 public class FileManageController {
     private Logger logger = Logger.getLogger(FileManageController.class);
     @Autowired

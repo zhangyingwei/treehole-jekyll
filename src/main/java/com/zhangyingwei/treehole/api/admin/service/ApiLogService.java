@@ -2,6 +2,7 @@ package com.zhangyingwei.treehole.api.admin.service;
 
 import com.zhangyingwei.treehole.api.admin.dao.ApiLogDao;
 import com.zhangyingwei.treehole.common.PageInfo;
+import com.zhangyingwei.treehole.common.exception.TreeHoleApiException;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import com.zhangyingwei.treehole.log.model.LogModel;
 import org.slf4j.Logger;
@@ -27,6 +28,14 @@ public class ApiLogService {
             return this.apiLogDao.listLogsWithPage(pageInfo, logModel, start, end);
         } catch (Exception e) {
             throw new TreeHoleException(e);
+        }
+    }
+
+    public Integer visitCount() throws TreeHoleApiException {
+        try {
+            return this.apiLogDao.visitCount();
+        } catch (Exception e) {
+            throw new TreeHoleApiException(e.getLocalizedMessage());
         }
     }
 }

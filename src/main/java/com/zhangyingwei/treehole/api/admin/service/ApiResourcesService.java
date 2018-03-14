@@ -41,4 +41,12 @@ public class ApiResourcesService {
             throw new TreeHoleApiException(e.getLocalizedMessage());
         }
     }
+
+    public Integer count() throws TreeHoleApiException {
+        try {
+            return this.apiResourcesDao.count(new FileRes());
+        } catch (Exception e) {
+            throw new TreeHoleApiException(e.getLocalizedMessage());
+        }
+    }
 }

@@ -44,4 +44,9 @@ public class ApiResourcesController {
         return Ajax.success("删除成功");
     }
 
+    @GetMapping("/count")
+    public Map count() throws TreeHoleApiException {
+        Integer count = this.apiResourcesService.count();
+        return Ajax.success(count);
+    }
 }

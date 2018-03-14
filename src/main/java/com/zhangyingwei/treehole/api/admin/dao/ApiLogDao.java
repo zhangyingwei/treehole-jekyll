@@ -26,6 +26,9 @@ public interface ApiLogDao {
     @SelectProvider(type = ListLogsProvider.class,method = "countLogs")
     Integer total(@Param("log") LogModel logModel,@Param("start") String start,@Param("end") String end) throws Exception;
 
+    @Select("select count(*) from (select count(*) from log where uri like '/articles%' group by ip)")
+    Integer visitCount() throws Exception;
+
     class ListLogsProvider {
         public String listLogs(@Param("page") PageInfo pageInfo,@Param("log") LogModel logModel,@Param("start") String start,@Param("end") String end){
             StringBuffer sql = new StringBuffer("select * from log where 1=1 and ");
