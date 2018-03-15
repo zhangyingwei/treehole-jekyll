@@ -91,6 +91,7 @@ public class ExceptionController2 {
         ModelAndView view = new ModelAndView();
         view.addObject("site", site);
         view.setViewName(Pages.ERROR);
-        return view;
+//        return view;
+        return null;
     }
 }

@@ -25,7 +25,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/admin/kinds")
-@CrossOrigin
+@CrossOrigin(allowCredentials="true",origins = "*")
 @Auth
 public class ApiKindsController {
 

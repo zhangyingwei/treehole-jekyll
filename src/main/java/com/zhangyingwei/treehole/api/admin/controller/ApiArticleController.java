@@ -27,7 +27,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/admin/articles")
-@CrossOrigin
+@CrossOrigin(allowCredentials="true",origins = "*")
 @Auth
 public class ApiArticleController {
     private Logger logger = LoggerFactory.getLogger(ApiArticleController.class);
@@ -47,6 +47,7 @@ public class ApiArticleController {
     }
 
     @GetMapping("/count")
+    @CrossOrigin(origins = "*")
     public Map count() throws TreeHoleApiException {
         Integer count = this.apiArticleService.count();
         return Ajax.success(count);

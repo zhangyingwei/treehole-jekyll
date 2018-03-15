@@ -42,7 +42,8 @@ public class LoginController {
     @GetMapping
     @TreeHoleAtcion("打开管理端首页")
     public String index(Map<String, Object> model, HttpSession session, HttpServletRequest request) {
-        if (TreeHoleUtils.isLogin(session)) {
+        String tocken = request.getHeader(TreeHoleEnum.TOCKEN_HEADER_KEY.getValue());
+        if (TreeHoleUtils.isLogin(session,tocken)) {
             session.setAttribute(TreeHoleEnum.LOGIN_MENU_KEY.getValue(),TreeHoleUtils.getMenu());
             return Pages.ADMIN_INDEX;
         } else {
@@ -63,13 +64,6 @@ public class LoginController {
     public String login(HttpSession session, @Valid User user) throws TreeHoleException {
         logger.info(user.toString());
         //记录登录用户信息到session
-        try {
-            user.setPassword(TreeHoleUtils.encodePasswordByMD5(user.getPassword()));
-            logger.info(user.toString());
-        } catch (NoSuchAlgorithmException e) {
-            logger.error(e.getLocalizedMessage());
-            throw new TreeHoleException("密码加密错误");
-        }
         Boolean login = this.adminInitService.login(user);
         if(login){
             TreeHoleUtils.markAsLogin(session,user);

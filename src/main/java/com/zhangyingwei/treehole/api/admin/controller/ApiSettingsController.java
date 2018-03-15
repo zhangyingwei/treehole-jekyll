@@ -20,7 +20,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/admin/settings")
-@CrossOrigin
+@CrossOrigin(allowCredentials = "true",origins = "*")
 @Auth
 public class ApiSettingsController {
     private Logger logger = LoggerFactory.getLogger(ApiSettingsController.class);

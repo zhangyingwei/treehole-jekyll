@@ -27,7 +27,7 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/api/admin")
-@CrossOrigin
+@CrossOrigin(allowCredentials="true",origins = "*")
 @Auth
 public class ApiLogController {
     @Autowired

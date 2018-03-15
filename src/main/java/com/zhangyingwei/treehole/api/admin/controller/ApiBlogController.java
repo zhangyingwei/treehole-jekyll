@@ -20,7 +20,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/admin/blog")
-@CrossOrigin
+@CrossOrigin(allowCredentials="true",origins = "*")
 @Auth
 public class ApiBlogController {
 

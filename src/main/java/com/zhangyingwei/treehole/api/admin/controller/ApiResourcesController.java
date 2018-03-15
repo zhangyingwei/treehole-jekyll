@@ -23,7 +23,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/api/admin/resources")
-@CrossOrigin
+@CrossOrigin(allowCredentials="true",origins = "*")
 @Auth
 public class ApiResourcesController {
 

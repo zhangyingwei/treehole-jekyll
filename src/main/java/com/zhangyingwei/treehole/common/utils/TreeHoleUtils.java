@@ -114,13 +114,17 @@ public class TreeHoleUtils {
      * @param session
      * @return
      */
-    public static boolean isLogin(HttpSession session) {
+    public static boolean isLogin(HttpSession session,String tocken) {
         Object loginUser = session.getAttribute(TreeHoleEnum.LOGIN_USER_KEY.getValue());
+        Object oldTocken = session.getAttribute(TreeHoleEnum.LOGIN_TOCKEN_KEY.getValue());
         if (loginUser == null) {
             return false;
         }else {
             User user = (User) loginUser;
-            return StringUtils.isNotEmpty(user.getUsername()) && StringUtils.isNotEmpty(user.getPassword());
+            return StringUtils.isNotEmpty(user.getUsername())
+                    && StringUtils.isNotEmpty(user.getPassword())
+                    && tocken!=null
+                    && tocken.equals(oldTocken);
         }
     }
 
@@ -129,9 +133,14 @@ public class TreeHoleUtils {
      * @param session
      * @param user
      */
-    public static void markAsLogin(HttpSession session, User user) {
+    public static String markAsLogin(HttpSession session, User user) {
+        String tocken = UUID.randomUUID().toString();
+        session.removeAttribute(TreeHoleEnum.LOGIN_USER_KEY.getValue());
+        session.removeAttribute(TreeHoleEnum.LOGIN_TOCKEN_KEY.getValue());
         session.setAttribute(TreeHoleEnum.LOGIN_USER_KEY.getValue(), user);
+        session.setAttribute(TreeHoleEnum.LOGIN_TOCKEN_KEY.getValue(),tocken);
         session.setMaxInactiveInterval(LOGIN_TIMEOUT);
+        return tocken;
     }
 
     /**
@@ -176,6 +185,7 @@ public class TreeHoleUtils {
     public static void logout(HttpSession session) {
         session.removeAttribute(TreeHoleEnum.LOGIN_MENU_KEY.getValue());
         session.removeAttribute(TreeHoleEnum.LOGIN_USER_KEY.getValue());
+        session.removeAttribute(TreeHoleEnum.LOGIN_TOCKEN_KEY.getValue());
     }
 
     /**
@@ -189,8 +199,12 @@ public class TreeHoleUtils {
         user.setUsername("张英伟");
         user.setPassword("123456");
         Menu menu = TreeHoleUtils.getMenu();
+        String tocken = UUID.randomUUID().toString();
         session.setAttribute(TreeHoleEnum.LOGIN_USER_KEY.getValue(), user);
         session.setAttribute(TreeHoleEnum.LOGIN_MENU_KEY.getValue(), menu);
+        session.setAttribute(TreeHoleEnum.LOGIN_MENU_KEY.getValue(), tocken);
+        logger.info("模拟登陆" + user);
+        logger.info("tocken" + tocken);
     }
 
     /**

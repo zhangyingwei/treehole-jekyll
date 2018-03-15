@@ -22,7 +22,10 @@ public enum TreeHoleEnum {
     UPLOAD_FILE_BASEPATH("upload/"),
     RES_IMG_DEFAULT("static/images/default.jpg"),
     THEME_CONFIG("_config.yml"),
-    FEED_ENCODING("UTF-8");
+    FEED_ENCODING("UTF-8"),
+    LOGIN_TOCKEN_KEY("login_tocken"),
+    TOCKEN_HEADER_KEY("treehole-tocken"),
+    LOGIN_MESSAGE("login_message");
 
     private String value;
 
