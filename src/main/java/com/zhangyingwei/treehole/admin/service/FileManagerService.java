@@ -2,6 +2,7 @@ package com.zhangyingwei.treehole.admin.service;
 
 import com.zhangyingwei.treehole.admin.dao.FileResDao;
 import com.zhangyingwei.treehole.admin.model.FileRes;
+import com.zhangyingwei.treehole.common.exception.TreeHoleApiException;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import com.zhangyingwei.treehole.common.utils.TreeHoleUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -38,7 +39,7 @@ public class FileManagerService implements IFileManagerService {
      * @throws TreeHoleException
      */
     @Override
-    public void saveFile(MultipartFile file) throws TreeHoleException {
+    public String saveFile(MultipartFile file) throws TreeHoleException {
         try {
             String fileName = file.getOriginalFilename();
             boolean exits = TreeHoleUtils.fileExits(file.getOriginalFilename());
@@ -52,6 +53,7 @@ public class FileManagerService implements IFileManagerService {
             //保存文件信息到数据库
             this.saveFileInfo(new FileRes(fileName,TreeHoleUtils.getFilePath(fileName),uuid,file.getContentType()));
             logger.info(StringUtils.join("upload file:",fileName));
+            return this.fileResDao.findAliasByName(fileName);
         } catch (Exception e) {
             logger.error(e.getLocalizedMessage());
             throw new TreeHoleException("保存文件错误");

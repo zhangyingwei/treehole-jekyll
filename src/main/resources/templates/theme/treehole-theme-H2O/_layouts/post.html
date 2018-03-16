@@ -16,6 +16,8 @@
             <time class="post-meta-item" datetime="${post.date}"><i class="iconfont icon-date"></i>${date_to_string(post.date)}</time>
         </div>
     </div>
+    <div class="filter"></div>
+    <div class="post-cover" style="background: url('${ post.preview }') center no-repeat; background-size: cover;"></div>
 </header>
 
 <% include("../../../lib/comm-head.html",{}){} %>

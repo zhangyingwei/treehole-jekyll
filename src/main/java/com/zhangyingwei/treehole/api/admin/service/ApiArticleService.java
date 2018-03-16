@@ -78,7 +78,6 @@ public class ApiArticleService {
         Article article = new Article();
         article.setId(id);
         article.setFlag(Article.FLAG_PUBLISH);
-        article.bulid();
         try {
             this.apiArticleDao.changeFlag(article);
         } catch (Exception e) {

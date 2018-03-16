@@ -14,6 +14,10 @@
     <div class="article-list">
         <% for( post in posts){ %>
             <article class="article-item">
+                <div class="post-cover">
+                    <a class="post-link" href="${ post.path }" title="${ post.title }"></a>
+                    <img src="${ post.preview }" alt="${ post.title }">
+                </div>
                 <section class="post-preview">
                     <a class="post-link" href="${ post.path }" title="${ post.title }"></a>
                     <h2 class="post-title">${ post.title }</h2>
@@ -70,11 +74,11 @@
             <%  }  %>
         </div>
 
-        <div class="search-card">
-            <input id="search_input" type="text" placeholder="Search...">
-            <i class="iconfont icon-search"></i>
-            <div class="search_result"></div>
-        </div>
+        <!--<div class="search-card">-->
+            <!--<input id="search_input" type="text" placeholder="Search...">-->
+            <!--<i class="iconfont icon-search"></i>-->
+            <!--<div class="search_result"></div>-->
+        <!--</div>-->
 
     </aside>
     

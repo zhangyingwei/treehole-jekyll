@@ -29,7 +29,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/admin/files")
 //@Auth
-@CrossOrigin
+@CrossOrigin(allowCredentials = "true",origins = "*")
 public class FileManageController {
     private Logger logger = Logger.getLogger(FileManageController.class);
     @Autowired
@@ -50,8 +50,8 @@ public class FileManageController {
     @ResponseBody
     @TreeHoleAtcion("上传文件")
     public Map<String, Object> upload(MultipartFile file) throws TreeHoleException {
-        this.fileManagerService.saveFile(file);
-        return Ajax.success("success");
+        String alias = this.fileManagerService.saveFile(file);
+        return Ajax.success("success", alias);
     }
 
 

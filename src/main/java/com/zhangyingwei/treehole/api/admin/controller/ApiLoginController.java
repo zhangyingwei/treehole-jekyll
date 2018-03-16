@@ -47,6 +47,6 @@ public class ApiLoginController {
 
     @GetMapping("/vue/admin/**")
     public String doEmpty(){
-        return Pages.ADMIN_LOGIN;
+        return Pages.ADMIN_INDEX;
     }
 }

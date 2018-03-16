@@ -24,7 +24,7 @@ public interface ApiArticleDao {
     @Select("select * from article where id=#{id}")
     Article queryArticle(@Param("id") String id) throws Exception;
 
-    @Update("update article set title=#{article.title},subpath=#{article.subpath},tags=#{article.tags},excerpt=#{article.excerpt},excerpthtml=#{article.excerptHtml},content=#{article.content},contenthtml=#{article.contentHtml},categories=#{article.categories},usecommont=#{article.usecommont},flag=#{article.flag},date=#{article.date} where id=#{article.id}")
+    @Update("update article set title=#{article.title},subpath=#{article.subpath},tags=#{article.tags},excerpt=#{article.excerpt},excerpthtml=#{article.excerptHtml},content=#{article.content},contenthtml=#{article.contentHtml},categories=#{article.categories},usecommont=#{article.usecommont},flag=#{article.flag},date=#{article.date},preview=#{article.preview} where id=#{article.id}")
     void updateArticle(@Param("article") Article article) throws Exception;
 
     @Update("update article set flag=#{article.flag} where id=#{article.id}")
@@ -38,7 +38,7 @@ public interface ApiArticleDao {
 
     class ArticleProvider{
         public String save(){
-            String sql = "insert into article (id,title,path,subpath,tags,excerpt,excerpthtml,content,contenthtml,categories,usecommont,flag,date) values (#{article.id},#{article.title},#{article.path},#{article.subpath},#{article.tags},#{article.excerpt},#{article.excerptHtml},#{article.content},#{article.contentHtml},#{article.categories},#{article.usecommont},#{article.flag},#{article.date})";
+            String sql = "insert into article (id,title,path,subpath,tags,excerpt,excerpthtml,content,contenthtml,categories,usecommont,flag,date,preview) values (#{article.id},#{article.title},#{article.path},#{article.subpath},#{article.tags},#{article.excerpt},#{article.excerptHtml},#{article.content},#{article.contentHtml},#{article.categories},#{article.usecommont},#{article.flag},#{article.date},#{article.preview})";
             return sql;
         }
         public String count(Article article){
@@ -53,7 +53,7 @@ public interface ApiArticleDao {
             return sql.toString();
         }
         public String listArticles(PageInfo pageInfo,Article article){
-            StringBuffer sql = new StringBuffer("select a.id,a.title,a.path,a.subpath,a.tags,a.excerpt,a.excerpthtml,a.content,a.contenthtml,a.categories,k.name as categoriesText,a.usecommont,a.flag,a.date from article as a left join kind as k  on k.id=a.categories where 1=1 and ");
+            StringBuffer sql = new StringBuffer("select a.id,a.title,a.path,a.subpath,a.tags,a.excerpt,a.excerpthtml,a.content,a.contenthtml,a.categories,k.name as categoriesText,a.usecommont,a.flag,a.date,a.preview from article as a left join kind as k  on k.id=a.categories where 1=1 and ");
             if (StringUtils.isNotEmpty(article.getTitle())) {
                 sql.append(" a.title like '%"+article.getTitle()+"%' and ");
             }

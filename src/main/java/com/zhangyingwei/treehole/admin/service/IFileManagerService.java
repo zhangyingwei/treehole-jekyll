@@ -2,6 +2,7 @@ package com.zhangyingwei.treehole.admin.service;
 
 import com.zhangyingwei.treehole.admin.dao.FileResDao;
 import com.zhangyingwei.treehole.admin.model.FileRes;
+import com.zhangyingwei.treehole.common.exception.TreeHoleApiException;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
 import com.zhangyingwei.treehole.common.utils.TreeHoleUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -22,7 +23,7 @@ import java.util.UUID;
  * @desc: 素材管理
  */
 public interface IFileManagerService {
-    void saveFile(MultipartFile file) throws TreeHoleException;
+    String saveFile(MultipartFile file) throws TreeHoleException;
     /**
      * 保存文件信息到数据库
      * @param fileRes

@@ -21,6 +21,7 @@ public class Article {
     private String title;
     private String subpath;
     private String path;
+    private String preview;
     private String tags;
     @NotNull(message = "文章类别不能为空")
     private String categories;
@@ -133,6 +134,14 @@ public class Article {
         }
     }
 
+    public String getPreview() {
+        return preview;
+    }
+
+    public void setPreview(String preview) {
+        this.preview = preview;
+    }
+
     /**
      * 经测试 如果不勾选的话，表单提交不会有这个字段
      * 如果勾选的话就会有这个字段
@@ -217,10 +226,14 @@ public class Article {
                 ", title='" + title + '\'' +
                 ", subpath='" + subpath + '\'' +
                 ", path='" + path + '\'' +
+                ", preview='" + preview + '\'' +
                 ", tags='" + tags + '\'' +
                 ", categories='" + categories + '\'' +
+                ", categoriesText='" + categoriesText + '\'' +
                 ", content='" + content + '\'' +
-                ", intro='" + excerpt + '\'' +
+                ", contentHtml='" + contentHtml + '\'' +
+                ", excerpt='" + excerpt + '\'' +
+                ", excerptHtml='" + excerptHtml + '\'' +
                 ", usecommont='" + usecommont + '\'' +
                 ", date='" + date + '\'' +
                 ", flag=" + flag +
@@ -243,6 +256,7 @@ public class Article {
         Post page = new Post();
         page.setId(this.getId());
         page.setTitle(this.getTitle());
+        page.setPreview(this.getPreview());
         page.setPath(this.getPath());
         page.setCategories(this.getCategories());
         page.setTags(this.getTags() == null?new ArrayList(): Arrays.asList(this.getTags().split(",")));

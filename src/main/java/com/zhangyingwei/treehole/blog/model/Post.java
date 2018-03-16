@@ -20,6 +20,11 @@ public class Post {
     private String title;
 
     /**
+     * 缩略图
+     */
+    private String preview;
+
+    /**
      * 页面摘要的源码
      */
     private String excerpt;
@@ -144,18 +149,28 @@ public class Post {
         this.comment = comment;
     }
 
+    public String getPreview() {
+        return preview;
+    }
+
+    public void setPreview(String preview) {
+        this.preview = preview;
+    }
+
     @Override
     public String toString() {
-        return "Page{" +
+        return "Post{" +
                 "content='" + content + '\'' +
                 ", title='" + title + '\'' +
+                ", preview='" + preview + '\'' +
                 ", excerpt='" + excerpt + '\'' +
                 ", url='" + url + '\'' +
                 ", date='" + date + '\'' +
                 ", id='" + id + '\'' +
-                ", categories=" + categories +
+                ", categories='" + categories + '\'' +
                 ", tags=" + tags +
                 ", path='" + path + '\'' +
+                ", comment=" + comment +
                 '}';
     }
 

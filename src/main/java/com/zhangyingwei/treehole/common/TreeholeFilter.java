@@ -33,7 +33,7 @@ public class TreeholeFilter implements Filter{
         if (path.startsWith("/vue/")) {
             System.out.println(path);
             filterChain.doFilter(req, resp);
-        } else if (path.startsWith("/admin")) {
+        } else if (path.startsWith("/admin") && !path.startsWith("/admin/files")) {
             resp.sendRedirect("/vue" + path);
         } else {
             filterChain.doFilter(req, resp);
