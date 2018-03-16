@@ -15,8 +15,9 @@ public class DbUtilsTest {
     @Test
     public void execute() throws Exception {
 //        DbConf dbConf = new DbConf();
-//        dbConf.setUrl("jdbc:sqlite:treehole.db");
+//        dbConf.setUrl("jdbc:sqlite:treehole-demo.db");
 //        Connection connection = DbUtils.getConnection(dbConf);
+//        DbUtils.execute(connection, "tables");
 //        Assert.assertNotNull(connection);
     }
 

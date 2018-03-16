@@ -11,7 +11,8 @@ public enum TreeHoleEnum {
     RES_BASEPATH("resources/"),
     RES_BASEPATH_ENV("src/main/resources/"),
     INSTALL_LOCK("install.lock"),//安装检测文件
-    CONF_INSTALL_SQL("install.sql"),
+//    CONF_INSTALL_SQL("install.sql"),
+    CONF_INSTALL_SQL("treehole-jekyll.sql"),
     DB_MYSQL_CLASS("com.mysql.jdbc.Driver"),
     DB_SQLITE_CLASS("org.sqlite.JDBC"),
     LOGIN_USER_KEY("login_user"),

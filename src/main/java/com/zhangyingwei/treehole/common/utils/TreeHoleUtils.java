@@ -68,10 +68,10 @@ public class TreeHoleUtils {
                     DbUtils.execute(connection,sql);
                 }
             }
-        } catch (TreeHoleException e) {
+        }catch (TreeHoleException e) {
             e.printStackTrace();
             throw new TreeHoleException("初始化数据表错误", e);
-        } catch (SQLException e) {
+        }catch (SQLException e) {
             e.printStackTrace();
             throw new TreeHoleException(e);
         }
@@ -82,13 +82,17 @@ public class TreeHoleUtils {
      * @return
      */
     private static List<String> readSql(TreeHoleConfig treeHoleConfig) throws TreeHoleException {
+        StringBuffer result = new StringBuffer();
         List<String> sqlList = new ArrayList<String>();
         File sqlFile = new File(TreeHoleEnum.RES_BASEPATH.getResValue(treeHoleConfig.getEnv()) + TreeHoleEnum.CONF_INSTALL_SQL.getValue());
         try {
             BufferedReader reader = new BufferedReader(new FileReader(sqlFile));
-            sqlList = reader.lines().filter(line -> {
-                return StringUtils.isNotEmpty(line) && !line.startsWith("--");
-            }).collect(Collectors.toList());
+//            sqlList = reader.lines().filter(line -> {
+//                return StringUtils.isNotEmpty(line) && !line.startsWith("--");
+//            }).collect(Collectors.toList());
+            reader.lines().forEach(line -> {
+                result.append(line);
+            });
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             throw new TreeHoleException("未找到数据库脚本文件", e);
@@ -96,7 +100,8 @@ public class TreeHoleUtils {
             e.printStackTrace();
             throw new TreeHoleException("打开数据库脚本文件错误", e);
         }
-        return sqlList;
+//        return sqlList;
+        return Arrays.asList(result.toString().split(";"));
     }
 
     /**

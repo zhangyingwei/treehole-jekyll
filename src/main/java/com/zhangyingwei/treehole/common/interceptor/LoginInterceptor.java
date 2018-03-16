@@ -1,18 +1,12 @@
 package com.zhangyingwei.treehole.common.interceptor;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.zhangyingwei.treehole.common.Ajax;
 import com.zhangyingwei.treehole.common.TreeHoleEnum;
 import com.zhangyingwei.treehole.common.annotation.Auth;
 import com.zhangyingwei.treehole.common.utils.TreeHoleUtils;
-import jdk.nashorn.internal.ir.debug.JSONWriter;
-import net.sf.json.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.json.GsonJsonParser;
-import org.springframework.http.converter.json.GsonBuilderUtils;
-import org.springframework.http.converter.json.GsonFactoryBean;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
