@@ -140,6 +140,13 @@ public class BlogConf {
         map.put("name", name);
         map.put("url", url);
         map.put("desc", desc);
+        map.put("nickname", this.nickname);
+        map.put("email", this.email);
+        map.put("weibo", this.weibo);
+        map.put("weixin", this.weixin);
+        map.put("zhihu", this.zhihu);
+        map.put("facebook", this.facebook);
+        map.put("twitter", this.twitter);
         return map;
     }
 
