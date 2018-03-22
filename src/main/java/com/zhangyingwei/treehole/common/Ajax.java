@@ -1,5 +1,7 @@
 package com.zhangyingwei.treehole.common;
 
+import net.sf.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,6 +28,8 @@ public class Ajax {
      * message of ajax error
      */
     public static final String MSG_ERROR = "error";
+
+    private static final int CODE_NO_LOGIN = 999;
 
     /**
      * ajax result data
@@ -91,5 +95,13 @@ public class Ajax {
      */
     public static Map error(String message) {
         return message(CODE_ERROR, message);
+    }
+
+    public static String noLogin(String message) {
+        return jsonMessage(CODE_NO_LOGIN,message);
+    }
+
+    private static String jsonMessage(int code, String message) {
+        return JSONObject.fromObject(message(code, message)).toString();
     }
 }

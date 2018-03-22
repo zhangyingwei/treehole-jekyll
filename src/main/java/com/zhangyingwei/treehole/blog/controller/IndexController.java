@@ -6,11 +6,14 @@ import com.zhangyingwei.treehole.admin.service.LinkService;
 import com.zhangyingwei.treehole.blog.model.*;
 import com.zhangyingwei.treehole.blog.service.IPageService;
 import com.zhangyingwei.treehole.common.Pages;
+import com.zhangyingwei.treehole.common.annotation.Auth;
 import com.zhangyingwei.treehole.common.annotation.TreeHoleAtcion;
 import com.zhangyingwei.treehole.common.config.TreeHoleConfig;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
+import com.zhangyingwei.treehole.common.exception.TreeHoleOutOfPageException;
 import com.zhangyingwei.treehole.common.utils.DateUtils;
 import com.zhangyingwei.treehole.common.utils.TreeHoleConfigUtils;
+import com.zhangyingwei.treehole.common.utils.TreeHoleUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,8 +54,13 @@ public class IndexController {
 
     @GetMapping("/articles/pages/{page}")
     @TreeHoleAtcion("打开博客首页(分页)")
-    public String indexArticlesWithPage(Map<String, Object> model,@PathVariable("page")Integer page) throws TreeHoleException {
-        Site site = this.getSiteConfig();
+    public String indexArticlesWithPage(Map<String, Object> model,@PathVariable("page")Integer page) throws TreeHoleException, TreeHoleOutOfPageException {
+        Site site = TreeHoleUtils.getSiteConfig(
+                this.treeHoleConfig,
+                this.blogManagerService,
+                this.linkService,
+                this.pageService
+        );
         Paginator paginator = new Paginator().setPage(page);
         List<Post> posts = this.pageService.listPostsOrderByDate(paginator);
         Page pageInfo = new Page();
@@ -65,10 +73,16 @@ public class IndexController {
         model.put("paginator", paginator.bulid());
         return Pages.blog(treeHoleConfig, Pages.BLOG_THEME_INDEX);
     }
+
     @GetMapping("/articles")
     @TreeHoleAtcion("打开博客首页(全部文章)")
     public String indexArticles(Map<String, Object> model) throws TreeHoleException {
-        Site site = this.getSiteConfig();
+        Site site = TreeHoleUtils.getSiteConfig(
+                this.treeHoleConfig,
+                this.blogManagerService,
+                this.linkService,
+                this.pageService
+        );
         List<Post> posts = this.pageService.listPostsOrderByDate();
         Page pageInfo = new Page();
         pageInfo.setTitle(site.getConfig("name"));
@@ -82,8 +96,13 @@ public class IndexController {
 
     @GetMapping("/articles/{id}")
     @TreeHoleAtcion("打开文章")
-    public String getArticle(Map<String,Object> model , @PathVariable("id") Integer id) throws TreeHoleException {
-        Site site = this.getSiteConfig();
+    public String getArticle(Map<String,Object> model , @PathVariable("id") String id) throws TreeHoleException {
+        Site site = TreeHoleUtils.getSiteConfig(
+                this.treeHoleConfig,
+                this.blogManagerService,
+                this.linkService,
+                this.pageService
+        );
         Page pageInfo = new Page();
         pageInfo.setTitle(site.getConfig("name"));
         pageInfo.setUrl("/articles/"+id);
@@ -102,10 +121,40 @@ public class IndexController {
         return Pages.blog(treeHoleConfig, Pages.BLOG_THEME_ARTICLE);
     }
 
+    @GetMapping("/articles/preview/{id}")
+    @TreeHoleAtcion("预览文章)")
+    @Auth
+    public String previewArticle(Map<String,Object> model , @PathVariable("id") String id) throws TreeHoleException {
+        Site site = TreeHoleUtils.getSiteConfig(
+                this.treeHoleConfig,
+                this.blogManagerService,
+                this.linkService,
+                this.pageService
+        );
+        Page pageInfo = new Page();
+        pageInfo.setTitle(site.getConfig("name"));
+        pageInfo.setUrl("/articles/preview/"+id);
+        pageInfo.setDescription(site.getConfig("desc"));
+        //查询文章信息
+        Post post = this.pageService.getArticleById(id);
+        //加载配置信息
+        model.put("site", site.bulid());
+        //加载page信息
+        model.put("page", pageInfo);
+        //加载page信息
+        model.put("post", post);
+        return Pages.blog(treeHoleConfig, Pages.BLOG_THEME_ARTICLE);
+    }
+
     @GetMapping("/articles/alias/{alias}")
     @TreeHoleAtcion("通过别名打开文章")
-    public String getArticle(Map<String,Object> model , @PathVariable("alias") String alias) throws TreeHoleException {
-        Site site = this.getSiteConfig();
+    public String getArticleByAlias(Map<String,Object> model , @PathVariable("alias") String alias) throws TreeHoleException {
+        Site site = TreeHoleUtils.getSiteConfig(
+                this.treeHoleConfig,
+                this.blogManagerService,
+                this.linkService,
+                this.pageService
+        );
         Page pageInfo = new Page();
         pageInfo.setTitle(site.getConfig("name"));
         pageInfo.setUrl("/articles/alias/"+alias);
@@ -127,7 +176,12 @@ public class IndexController {
     @GetMapping("/categories")
     @TreeHoleAtcion("按分类打开文章")
     public String categories(Map<String, Object> model) throws TreeHoleException {
-        Site site = this.getSiteConfig();
+        Site site = TreeHoleUtils.getSiteConfig(
+                this.treeHoleConfig,
+                this.blogManagerService,
+                this.linkService,
+                this.pageService
+        );
         List<Post> posts = this.pageService.listPostOrderByCategorie();
         Page pageInfo = new Page();
         pageInfo.setTitle(site.getConfig("name"));
@@ -142,7 +196,12 @@ public class IndexController {
     @GetMapping("/categories/{categories}")
     @TreeHoleAtcion("按分类打开文章")
     public String getPostByCategories(Map<String, Object> model, @PathVariable("categories") String categories) throws TreeHoleException {
-        Site site = this.getSiteConfig();
+        Site site = TreeHoleUtils.getSiteConfig(
+                this.treeHoleConfig,
+                this.blogManagerService,
+                this.linkService,
+                this.pageService
+        );
         List<Post> posts = this.pageService.listPostsByCategories(categories);
         Page pageInfo = new Page();
         pageInfo.setTitle(site.getConfig("name"));
@@ -157,7 +216,12 @@ public class IndexController {
     @GetMapping("/about")
     @TreeHoleAtcion("打开关于我页面")
     public String indexAbout(Map<String, Object> model) throws TreeHoleException {
-        Site site = this.getSiteConfig();
+        Site site = TreeHoleUtils.getSiteConfig(
+                this.treeHoleConfig,
+                this.blogManagerService,
+                this.linkService,
+                this.pageService
+        );
         Page pageInfo = new Page();
         pageInfo.setTitle(site.getConfig("name"));
         pageInfo.setUrl("/about");
@@ -170,7 +234,12 @@ public class IndexController {
     @GetMapping("/tags")
     @TreeHoleAtcion("打开标签页面")
     public String tags(Map<String, Object> model) throws TreeHoleException {
-        Site site = this.getSiteConfig();
+        Site site = TreeHoleUtils.getSiteConfig(
+                this.treeHoleConfig,
+                this.blogManagerService,
+                this.linkService,
+                this.pageService
+        );
         Page pageInfo = new Page();
         pageInfo.setTitle(site.getConfig("name"));
         pageInfo.setUrl("/tags");
@@ -185,7 +254,7 @@ public class IndexController {
     @GetMapping("/tags/{tag}")
     @TreeHoleAtcion("获取指定标签的文章")
     public String getPostByTag(Map<String, Object> model,@PathVariable("tag") String tag) throws TreeHoleException {
-        Site site = this.getSiteConfig();
+        Site site = TreeHoleUtils.getSiteConfig(this.treeHoleConfig, this.blogManagerService, this.linkService, this.pageService);
         Page pageInfo = new Page();
         pageInfo.setTitle(site.getConfig("name"));
         pageInfo.setUrl("/tags");
@@ -196,35 +265,4 @@ public class IndexController {
         model.put("posts", posts);
         return Pages.blog(treeHoleConfig, Pages.BLOG_THEME_TAGS);
     }
-
-
-    /**
-     * 获取主题配置文件中的信息
-     * @return
-     * @throws TreeHoleException
-     */
-    public Site getSiteConfig() throws TreeHoleException {
-        Site site = new Site();
-        try {
-            site.setTime(DateUtils.now());
-            site.setTheme(treeHoleConfig.getTheme());
-            //从 yml 配置文件中读取配置文件
-            Map siteConfig = TreeHoleConfigUtils.readThremeYmlConfig(treeHoleConfig);
-            site.setConfigs(siteConfig);
-            //读取界面中配置的博客信息
-            Map blogConf = this.blogManagerService.getBlogConf().bulid();
-            site.setConfigs(blogConf);
-            List<Link> links = this.linkService.listLinks();
-            site.setLinks(links);
-            List<String> categories = this.pageService.listCategories();
-            List<String> tags = this.pageService.listTags();
-            site.setCategories(categories);
-            site.setTags(tags);
-        } catch (FileNotFoundException e) {
-            logger.error(e.getLocalizedMessage());
-            throw new TreeHoleException("主题配置文件未找到");
-        }
-        return site;
-    }
-
 }

@@ -1,5 +1,11 @@
 package com.zhangyingwei.treehole.common.utils;
 
+import com.zhangyingwei.treehole.admin.model.Link;
+import com.zhangyingwei.treehole.admin.service.BlogManagerService;
+import com.zhangyingwei.treehole.admin.service.LinkService;
+import com.zhangyingwei.treehole.blog.model.Site;
+import com.zhangyingwei.treehole.blog.service.IPageService;
+import com.zhangyingwei.treehole.common.config.TreeHoleConfig;
 import com.zhangyingwei.treehole.log.filter.LogFilter;
 import com.zhangyingwei.treehole.log.model.Agent;
 import com.zhangyingwei.treehole.log.model.LogModel;
@@ -52,20 +58,20 @@ public class TreeHoleUtils {
      * 创建数据库
      * @param dbConf
      */
-    public static void makeTables(DbConf dbConf) throws TreeHoleException {
+    public static void makeTables(DbConf dbConf,TreeHoleConfig treeHoleConfig) throws TreeHoleException {
         List<String> sqls = null;
         try {
-            sqls = readSql();
+            sqls = readSql(treeHoleConfig);
             if(sqls!=null && sqls.size()>0){
                 Connection connection = DbUtils.getConnection(dbConf);
                 for (String sql : sqls) {
                     DbUtils.execute(connection,sql);
                 }
             }
-        } catch (TreeHoleException e) {
+        }catch (TreeHoleException e) {
             e.printStackTrace();
             throw new TreeHoleException("初始化数据表错误", e);
-        } catch (SQLException e) {
+        }catch (SQLException e) {
             e.printStackTrace();
             throw new TreeHoleException(e);
         }
@@ -75,14 +81,18 @@ public class TreeHoleUtils {
      * 根据注释读取sql语句
      * @return
      */
-    private static List<String> readSql() throws TreeHoleException {
+    private static List<String> readSql(TreeHoleConfig treeHoleConfig) throws TreeHoleException {
+        StringBuffer result = new StringBuffer();
         List<String> sqlList = new ArrayList<String>();
-        File sqlFile = new File(TreeHoleEnum.RES_BASEPATH.getValue() + TreeHoleEnum.CONF_INSTALL_SQL.getValue());
+        File sqlFile = new File(TreeHoleEnum.RES_BASEPATH.getResValue(treeHoleConfig.getEnv()) + TreeHoleEnum.CONF_INSTALL_SQL.getValue());
         try {
             BufferedReader reader = new BufferedReader(new FileReader(sqlFile));
-            sqlList = reader.lines().filter(line -> {
-                return StringUtils.isNotEmpty(line) && !line.startsWith("--");
-            }).collect(Collectors.toList());
+//            sqlList = reader.lines().filter(line -> {
+//                return StringUtils.isNotEmpty(line) && !line.startsWith("--");
+//            }).collect(Collectors.toList());
+            reader.lines().forEach(line -> {
+                result.append(line);
+            });
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             throw new TreeHoleException("未找到数据库脚本文件", e);
@@ -90,7 +100,8 @@ public class TreeHoleUtils {
             e.printStackTrace();
             throw new TreeHoleException("打开数据库脚本文件错误", e);
         }
-        return sqlList;
+//        return sqlList;
+        return Arrays.asList(result.toString().split(";"));
     }
 
     /**
@@ -108,13 +119,17 @@ public class TreeHoleUtils {
      * @param session
      * @return
      */
-    public static boolean isLogin(HttpSession session) {
+    public static boolean isLogin(HttpSession session,String tocken) {
         Object loginUser = session.getAttribute(TreeHoleEnum.LOGIN_USER_KEY.getValue());
+        Object oldTocken = session.getAttribute(TreeHoleEnum.LOGIN_TOCKEN_KEY.getValue());
         if (loginUser == null) {
             return false;
         }else {
             User user = (User) loginUser;
-            return StringUtils.isNotEmpty(user.getUsername()) && StringUtils.isNotEmpty(user.getPassword());
+            return StringUtils.isNotEmpty(user.getUsername())
+                    && StringUtils.isNotEmpty(user.getPassword())
+                    && tocken!=null
+                    && tocken.equals(oldTocken);
         }
     }
 
@@ -123,9 +138,14 @@ public class TreeHoleUtils {
      * @param session
      * @param user
      */
-    public static void markAsLogin(HttpSession session, User user) {
+    public static String markAsLogin(HttpSession session, User user) {
+        String tocken = UUID.randomUUID().toString();
+        session.removeAttribute(TreeHoleEnum.LOGIN_USER_KEY.getValue());
+        session.removeAttribute(TreeHoleEnum.LOGIN_TOCKEN_KEY.getValue());
         session.setAttribute(TreeHoleEnum.LOGIN_USER_KEY.getValue(), user);
+        session.setAttribute(TreeHoleEnum.LOGIN_TOCKEN_KEY.getValue(),tocken);
         session.setMaxInactiveInterval(LOGIN_TIMEOUT);
+        return tocken;
     }
 
     /**
@@ -170,6 +190,7 @@ public class TreeHoleUtils {
     public static void logout(HttpSession session) {
         session.removeAttribute(TreeHoleEnum.LOGIN_MENU_KEY.getValue());
         session.removeAttribute(TreeHoleEnum.LOGIN_USER_KEY.getValue());
+        session.removeAttribute(TreeHoleEnum.LOGIN_TOCKEN_KEY.getValue());
     }
 
     /**
@@ -183,8 +204,12 @@ public class TreeHoleUtils {
         user.setUsername("张英伟");
         user.setPassword("123456");
         Menu menu = TreeHoleUtils.getMenu();
+        String tocken = UUID.randomUUID().toString();
         session.setAttribute(TreeHoleEnum.LOGIN_USER_KEY.getValue(), user);
         session.setAttribute(TreeHoleEnum.LOGIN_MENU_KEY.getValue(), menu);
+        session.setAttribute(TreeHoleEnum.LOGIN_MENU_KEY.getValue(), tocken);
+        logger.info("模拟登陆" + user);
+        logger.info("tocken" + tocken);
     }
 
     /**
@@ -224,11 +249,11 @@ public class TreeHoleUtils {
      * @param ip
      * @return
      */
-    public static String ipLocal(String ip){
+    public static String ipLocal(String ip,TreeHoleConfig treeHoleConfig){
         if(!isIpv4(ip)){
             return "";
         }
-        IPUtils.load(TreeHoleEnum.RES_BASEPATH.getValue() + "17monipdb.dat");
+        IPUtils.load(TreeHoleEnum.RES_BASEPATH.getResValue(treeHoleConfig.getEnv()) + "17monipdb.dat");
         String[] res = IPUtils.find(ip);
         String result = "";
         for (String re : res) {
@@ -496,5 +521,39 @@ public class TreeHoleUtils {
      */
     public static String markdown(String markdown){
         return pegDownProcessor.markdownToHtml(markdown);
+    }
+
+    /**
+     * 获取主题配置文件中的信息
+     * @return
+     * @throws TreeHoleException
+     */
+    public static Site getSiteConfig(
+            TreeHoleConfig treeHoleConfig,
+            BlogManagerService blogManagerService,
+            LinkService linkService,
+            IPageService pageService
+    ) throws TreeHoleException {
+        Site site = new Site();
+        try {
+            site.setTime(DateUtils.now());
+            site.setTheme(treeHoleConfig.getTheme());
+            //从 yml 配置文件中读取配置文件
+            Map siteConfig = TreeHoleConfigUtils.readThremeYmlConfig(treeHoleConfig);
+            site.setConfigs(siteConfig);
+            //读取界面中配置的博客信息
+            Map blogConf = blogManagerService.getBlogConf().bulid();
+            site.setConfigs(blogConf);
+            List<Link> links = linkService.listLinks();
+            site.setLinks(links);
+            List<String> categories = pageService.listCategories();
+            List<String> tags = pageService.listTags();
+            site.setCategories(categories);
+            site.setTags(tags);
+        } catch (FileNotFoundException e) {
+            logger.error(e.getLocalizedMessage());
+            throw new TreeHoleException("主题配置文件未找到");
+        }
+        return site;
     }
 }

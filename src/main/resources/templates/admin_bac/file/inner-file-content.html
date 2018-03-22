@@ -1,0 +1,29 @@
+<div id="inner_file_container">
+    <div id="file_upload">
+        <button type="button" class="layui-btn" id="file_upload_button">多图片上传</button>
+        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px; background-color: #fff">
+            预览图：
+            <div class="layui-upload-list" id="file_show"></div>
+        </blockquote>
+    </div>
+    <div id="file_table">
+        <table id="file_content_table" style="background-color: #fff" lay-filter="test"></table>
+    </div>
+</div>
+<style>
+    .layui-upload-img {
+        width: 100px;
+        height: 100px;
+        padding: 5px;
+    }
+    #file_upload {
+        padding: 10px 5px;
+    }
+</style>
+<script type="text/html" id="showTemplate">
+    <img src="{{d.path}}" style="max-height: 35px;" />
+</script>
+
+<script type="text/html" id="actionTemplate">
+    <button class="layui-btn layui-btn-sm imageAction" value="{{d.path}}" >确定</button>
+</script>

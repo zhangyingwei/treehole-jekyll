@@ -24,6 +24,9 @@ public interface FileResDao {
     @Select("select * from files where id=#{id}")
     FileRes selectById(@Param("id") String id);
 
+    @Select("select alias from files where name=#{name}")
+    String findAliasByName(@Param("name") String name) throws Exception;
+
     @Select("select * from files order by id desc")
     List<FileRes> selectFiles() throws Exception;
 

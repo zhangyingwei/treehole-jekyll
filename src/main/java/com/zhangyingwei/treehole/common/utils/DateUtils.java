@@ -19,7 +19,7 @@ public class DateUtils {
      * @return
      */
     public static Long getTimeStamp(){
-        return new Date().getTime();
+        return System.currentTimeMillis();
     }
 
     /**
@@ -87,6 +87,14 @@ public class DateUtils {
      */
     public static Date formate(String date) throws ParseException {
         return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(date);
+    }
+
+    /**
+     * 格式化日期字符串为 date
+     * @return
+     */
+    public static Date formateData(String date) throws ParseException {
+        return new SimpleDateFormat("yyyy-MM-dd").parse(date);
     }
 
     /**

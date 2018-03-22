@@ -15,7 +15,7 @@ public class LogModel {
     /**
      * 请求类型
      */
-    private String reqType;
+    private String reqtype;
     /**
      * IP 所在位置
      * 中国,北京,北京
@@ -119,12 +119,12 @@ public class LogModel {
         this.uri = uri;
     }
 
-    public String getReqType() {
-        return reqType;
+    public String getReqtype() {
+        return reqtype;
     }
 
-    public void setReqType(String reqType) {
-        this.reqType = reqType;
+    public void setReqtype(String reqtype) {
+        this.reqtype = reqtype;
     }
 
     @Override
@@ -132,7 +132,7 @@ public class LogModel {
         return "LogModel{" +
                 "id=" + id +
                 ", ip='" + ip + '\'' +
-                ", reqType='" + reqType + '\'' +
+                ", reqType='" + reqtype + '\'' +
                 ", ip_location='" + ip_location + '\'' +
                 ", referer='" + referer + '\'' +
                 ", url='" + url + '\'' +

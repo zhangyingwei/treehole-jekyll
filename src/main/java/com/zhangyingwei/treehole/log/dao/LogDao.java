@@ -15,7 +15,7 @@ import java.util.List;
  */
 @Mapper
 public interface LogDao {
-    @Insert("insert into log (ip,reqtype,ip_location,referer,url,uri,agent,action,timestamp) values (#{log.ip},#{log.reqType},#{log.ip_location},#{log.referer},#{log.url},#{log.uri},#{log.agent},#{log.action},#{log.timestamp})")
+    @Insert("insert into log (ip,reqtype,ip_location,referer,url,uri,agent,action,timestamp) values (#{log.ip},#{log.reqtype},#{log.ip_location},#{log.referer},#{log.url},#{log.uri},#{log.agent},#{log.action},#{log.timestamp})")
     void insert(@Param("log") LogModel log) throws Exception;
     @Select("select count(*) from (select * from log group by ip)")
     Integer getVisitCount() throws Exception;

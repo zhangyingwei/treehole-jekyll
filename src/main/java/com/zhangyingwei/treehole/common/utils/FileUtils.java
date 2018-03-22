@@ -31,6 +31,11 @@ public class FileUtils {
         new File(path).createNewFile();
     }
 
+    public static void renameTo(String path,String newName){
+        File file = new File(path);
+        file.renameTo(new File(TreeHoleEnum.UPLOAD_FILE_BASEPATH.getValue() + newName));
+    }
+
     public static void formatFileType(String path,String oldSuffix,String newSuffix){
         File file = new File(path);
         String[] listFile = file.list();
@@ -48,7 +53,7 @@ public class FileUtils {
 
     public static void main(String[] args) {
 //        FileUtils.formatFileType("templates/theme/default", ".ejs", ".html");
-        FileUtils.formatFileType(TreeHoleEnum.RES_BASEPATH.getValue()+"templates/theme/default", ".ejs", ".html");
+        FileUtils.formatFileType(TreeHoleEnum.RES_BASEPATH.getResValue(false)+"templates/theme/default", ".ejs", ".html");
     }
 
     /**

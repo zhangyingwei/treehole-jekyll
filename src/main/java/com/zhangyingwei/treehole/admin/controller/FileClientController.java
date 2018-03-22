@@ -4,6 +4,7 @@ import com.zhangyingwei.treehole.admin.model.FileRes;
 import com.zhangyingwei.treehole.admin.service.FileManagerService;
 import com.zhangyingwei.treehole.common.TreeHoleEnum;
 import com.zhangyingwei.treehole.common.annotation.TreeHoleAtcion;
+import com.zhangyingwei.treehole.common.config.TreeHoleConfig;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ public class FileClientController {
     private Logger logger = Logger.getLogger(FileClientController.class);
     @Autowired
     private FileManagerService fileManagerService;
+    @Autowired
+    private TreeHoleConfig treeHoleConfig;
     @GetMapping("/{fileAlias}")
     @TreeHoleAtcion("获取文件")
     public void downLoad(@PathVariable("fileAlias") String fileAlias, HttpServletResponse response){
@@ -36,7 +39,7 @@ public class FileClientController {
             response.setHeader("content-type", fileRes.getContentType());
             response.setHeader("Content-Disposition", "attachment;filename=" + file.getName());
         } catch (Exception e) {
-            file = new File(TreeHoleEnum.RES_IMG_DEFAULT.getValue());
+            file = new File(TreeHoleEnum.RES_BASEPATH.getResValue(this.treeHoleConfig.getEnv())+TreeHoleEnum.RES_IMG_DEFAULT.getValue());
             logger.info("file not found show the defalue image");
         }
         byte[] buff = new byte[1024];

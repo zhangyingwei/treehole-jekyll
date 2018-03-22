@@ -1,5 +1,6 @@
 package com.zhangyingwei.treehole.common.interceptor;
 
+import com.zhangyingwei.treehole.common.Ajax;
 import com.zhangyingwei.treehole.common.TreeHoleEnum;
 import com.zhangyingwei.treehole.common.annotation.Auth;
 import com.zhangyingwei.treehole.common.utils.TreeHoleUtils;
@@ -43,6 +44,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     private boolean doHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
         HttpSession session = request.getSession();
         String uri = request.getRequestURI();
+        String tocken = request.getHeader(TreeHoleEnum.TOCKEN_HEADER_KEY.getValue());
+        if (StringUtils.isEmpty(tocken)) {
+            tocken = request.getParameter("token");
+        }
         if(uri.startsWith("/install")){
             if(TreeHoleUtils.isInstalled()){
                 logger.info("已经安装，不能再次安装");
@@ -50,6 +55,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
                 return false;
             }
         }else{
+//            TreeHoleUtils.login(session);//test
             if(!TreeHoleUtils.isInstalled()){
                 logger.info("没有安装");
                 response.sendRedirect("/install");
@@ -58,16 +64,22 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
                 if (session.getAttribute(TreeHoleEnum.STATE_DIC_KEY.getValue()) == null) {
                     session.setAttribute(TreeHoleEnum.STATE_DIC_KEY.getValue(),TreeHoleUtils.getGolbleStateDic());
                 }
-                if (!TreeHoleUtils.isLogin(session) && uri.startsWith("/admin") && !"/admin/login".equals(uri)) {
-                    session.setAttribute(TreeHoleEnum.STATE_URL_BEFORE.getValue(), uri);
-                    response.sendRedirect("/admin/login");
+                if (!TreeHoleUtils.isLogin(session, tocken)
+                        && !uri.contains("/admin/login")
+                        && !"/admin/login".equals(uri)) {
+                    session.setAttribute(TreeHoleEnum.STATE_URL_BEFORE.getValue(), request.getHeader("Referer"));
+//                    response.sendRedirect("/admin/login");
+                    response.getWriter().append(Ajax.noLogin("please login...")).close();
                     return false;
-                } else if (TreeHoleUtils.isLogin(session)){
-                    String fromUri = (String) session.getAttribute(TreeHoleEnum.STATE_URL_BEFORE.getValue());
-                    if (StringUtils.isNotEmpty(fromUri)) {
-                        response.sendRedirect(fromUri);
+                } else {
+                    if (TreeHoleUtils.isLogin(session, tocken)) {
+                        String fromUri = (String) session.getAttribute(TreeHoleEnum.STATE_URL_BEFORE.getValue());
+                        if (StringUtils.isNotEmpty(fromUri)) {
+//                            response.sendRedirect(fromUri);
+                            response.setHeader("from_url", fromUri);
+                        }
+                        session.removeAttribute(TreeHoleEnum.STATE_URL_BEFORE.getValue());
                     }
-                    session.removeAttribute(TreeHoleEnum.STATE_URL_BEFORE.getValue());
                 }
             }
         }

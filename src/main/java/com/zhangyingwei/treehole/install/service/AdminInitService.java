@@ -12,6 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.security.NoSuchAlgorithmException;
+
 /**
  * Created by zhangyw on 2017/4/26.
  */
@@ -24,15 +26,28 @@ public class AdminInitService implements IAdminInitService {
     @Override
     public Boolean login(User user) throws TreeHoleException{
         try {
-            User login = this.adminInitDao.selectOne(user);
-            if (login != null && login.getUsername() != null && login.getPassword() != null) {
-                return true;
-            }else{
-                return false;
+            try {
+                user.setPassword(TreeHoleUtils.encodePasswordByMD5(user.getPassword()));
+                logger.info(user.toString());
+            } catch (NoSuchAlgorithmException e) {
+                logger.error(e.getLocalizedMessage());
+                throw new TreeHoleException("密码加密错误");
             }
+            User login = this.adminInitDao.selectOne(user);
+            if (login == null) {
+                throw new TreeHoleException("用户名或密码错误");
+            } else if (login.getUsername() == null || login.getPassword() == null) {
+                throw new TreeHoleException("用户名或密码为空");
+            }
+            return true;
+//            if (login != null && login.getUsername() != null && login.getPassword() != null) {
+//                return true;
+//            }else{
+//                return false;
+//            }
         } catch (Exception e) {
             logger.error(e.getLocalizedMessage());
-            throw new TreeHoleException("用户名或密码错误", e);
+            throw new TreeHoleException(e.getLocalizedMessage());
         }
     }
 

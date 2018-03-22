@@ -1,0 +1,2 @@
+docker bulid -t zhangyw/treehole-jekyll:0.0.1
+docker run -p 5000:5000 -d zhangyw/treehole-jekyll:0.0.1

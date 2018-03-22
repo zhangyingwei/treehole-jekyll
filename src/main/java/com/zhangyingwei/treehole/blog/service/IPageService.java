@@ -4,6 +4,7 @@ import com.zhangyingwei.treehole.blog.model.Post;
 import com.zhangyingwei.treehole.blog.model.Paginator;
 import com.zhangyingwei.treehole.blog.model.Tag;
 import com.zhangyingwei.treehole.common.exception.TreeHoleException;
+import com.zhangyingwei.treehole.common.exception.TreeHoleOutOfPageException;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public interface IPageService {
      * 通过日期排序
      * @return
      */
-    List<Post> listPostsOrderByDate(Paginator paginator) throws TreeHoleException;
+    List<Post> listPostsOrderByDate(Paginator paginator) throws TreeHoleException, TreeHoleOutOfPageException;
 
     /**
      * 查询 post
@@ -51,7 +52,9 @@ public interface IPageService {
      * @return
      * @throws TreeHoleException
      */
-    Post getPageById(Integer id) throws TreeHoleException;
+    Post getPageById(String id) throws TreeHoleException;
+
+    Post getArticleById(String id) throws TreeHoleException;
 
     /**
      * 根据 subpath 获取文章

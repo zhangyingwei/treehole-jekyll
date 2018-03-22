@@ -1,11 +1,13 @@
 package com.zhangyingwei.treehole.admin.model;
 
 import com.zhangyingwei.treehole.blog.model.Post;
+import com.zhangyingwei.treehole.common.utils.TreeHoleUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.UUID;
 
 /**
  * @author: zhangyw
@@ -19,9 +21,11 @@ public class Article {
     private String title;
     private String subpath;
     private String path;
+    private String preview;
     private String tags;
     @NotNull(message = "文章类别不能为空")
     private String categories;
+    private String categoriesText;
     @NotNull(message = "文章内容不能为空")
     private String content;
     private String contentHtml;
@@ -34,7 +38,10 @@ public class Article {
      * 1 发布
      * 9 删除
      */
-    private Integer flag = 0;
+    public static final Integer FLAG_SAVE = 0;
+    public static final Integer FLAG_PUBLISH = 1;
+    public static final Integer FLAG_DEL = 9;
+    private Integer flag;
     private String type;
 
     public String getType() {
@@ -81,6 +88,14 @@ public class Article {
         return content;
     }
 
+    public String getCategoriesText() {
+        return categoriesText;
+    }
+
+    public void setCategoriesText(String categoriesText) {
+        this.categoriesText = categoriesText;
+    }
+
     public void setContent(String content) {
         this.content = content;
     }
@@ -117,6 +132,14 @@ public class Article {
                 this.excerptHtml = this.contentHtml.split("<!-- more -->")[0].trim();
             }
         }
+    }
+
+    public String getPreview() {
+        return preview;
+    }
+
+    public void setPreview(String preview) {
+        this.preview = preview;
     }
 
     /**
@@ -203,15 +226,26 @@ public class Article {
                 ", title='" + title + '\'' +
                 ", subpath='" + subpath + '\'' +
                 ", path='" + path + '\'' +
+                ", preview='" + preview + '\'' +
                 ", tags='" + tags + '\'' +
                 ", categories='" + categories + '\'' +
+                ", categoriesText='" + categoriesText + '\'' +
                 ", content='" + content + '\'' +
-                ", intro='" + excerpt + '\'' +
+                ", contentHtml='" + contentHtml + '\'' +
+                ", excerpt='" + excerpt + '\'' +
+                ", excerptHtml='" + excerptHtml + '\'' +
                 ", usecommont='" + usecommont + '\'' +
                 ", date='" + date + '\'' +
                 ", flag=" + flag +
                 ", type='" + type + '\'' +
                 '}';
+    }
+
+    public Article bulid(){
+        this.contentHtml = TreeHoleUtils.markdown(this.content);
+        this.bulidIntro();
+        this.bulidIntroHtml();
+        return this;
     }
 
     /**
@@ -222,6 +256,7 @@ public class Article {
         Post page = new Post();
         page.setId(this.getId());
         page.setTitle(this.getTitle());
+        page.setPreview(this.getPreview());
         page.setPath(this.getPath());
         page.setCategories(this.getCategories());
         page.setTags(this.getTags() == null?new ArrayList(): Arrays.asList(this.getTags().split(",")));
